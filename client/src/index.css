@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --swiper-theme-color: #fff !important;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+
+    font-family: 'Poppins', sans-serif; /* Apply Poppins directly */
+    background-color: #FDFCF9;
+
+}
+
+
+/* Hide Default Navigation Buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  display: none; /* Hide default arrows */
+}
+
+/* Custom Navigation Button Styles */
+.custom-prev,
+.custom-next {
+  border-radius: 50%; /* Circular shape */
+  width: 40px; /* Button size */
+  height: 40px; /* Button size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white; /* Background color */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Center the buttons vertically */
+  z-index: 10;
+}
+
+
+
+.swiper-button-prev {
+  background-image: url(./assets/svg/left-arrow.svg) !important;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  }
+  
+  .swiper-button-next {
+  background-image: url(./assets/svg/right-arrow.svg) !important;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  }
+  
+  .swiper-button-next::after {
+  display: none;
+  }
+  
+  .swiper-button-prev::after {
+  display: none;
+  }
