@@ -5,6 +5,7 @@ import Tour from "./Tour";
 import Footer from "../Components/Nav/Footer";
 import { useParams } from "react-router-dom";
 import Sidebar from "../Components/Nav/Sidebar";
+import NavigationError from "./NavigationError";
 
 const Layout = ({ sidebarOpen, toggleSidebar }) => {
   const { section } = useParams();
@@ -16,7 +17,7 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
       case "tour":
         return <Tour />;
       default:
-        return <Home />;
+        return <NavigationError/>;
         
     }
   };

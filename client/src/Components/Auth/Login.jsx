@@ -78,10 +78,10 @@ const Login = () => {
         const start = Date.now(); // Start time to calculate the delay
     
         try {
-            const serverUrl =
-                process.env.NODE_ENV === 'development'
-                    ? 'http://localhost:5000/api/gauth/google-login'
-                    : 'https://deshdekho.onrender.com/api/gauth/google-login';
+                
+          const serverUrl = process.env.NODE_ENV === 'development'                   
+          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/gauth/google-login`
+          : `${import.meta.env.VITE_API_PRODUCTION_URL}/gauth/google-login`
     
             const res = await fetch(serverUrl, {
                 method: "POST",

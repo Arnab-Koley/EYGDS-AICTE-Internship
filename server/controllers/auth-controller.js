@@ -21,13 +21,13 @@ const signup = async (req,res,next) => {
         let profileImg = '';
         switch (gender) {
             case 'Male':
-                profileImg = 'https://cdn.vectorstock.com/i/1000v/54/69/male-user-icon-vector-8865469.jpg';
+                profileImg = 'https://github.com/Arnab-Koley/EYGDS-AICTE-Internship/blob/main/client/src/assets/icon/male-profile.png?raw=true';
                 break;
             case 'Female':
-                profileImg = 'https://cdn.vectorstock.com/i/1000v/23/70/default-avatar-profile-icon-vector-18942370.jpg';
+                profileImg = 'https://github.com/Arnab-Koley/EYGDS-AICTE-Internship/blob/main/client/src/assets/icon/female-profile.png?raw=true';
                 break;
             case 'Other':
-                profileImg = 'https://cdn.vectorstock.com/i/1000v/53/14/transgender-symbol-isolated-on-white-trans-gender-vector-39695314.jpg';
+                profileImg = 'https://github.com/Arnab-Koley/EYGDS-AICTE-Internship/blob/main/client/src/assets/icon/profile.png?raw=true';
                 break;
             default:
                 profileImg = '';

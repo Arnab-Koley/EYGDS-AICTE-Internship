@@ -5,7 +5,7 @@ import Feature from '../Components/Home/Feature'
 
 const Home = () => {
   return (
-    <div className='px-5'>
+    <div>
       <Intro/>
       <Service/>
       <Feature/>

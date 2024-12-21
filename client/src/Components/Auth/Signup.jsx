@@ -1,9 +1,9 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RxEyeOpen, RxEyeClosed } from "react-icons/rx";
 import toast from "react-hot-toast";
-import { AuthContext } from '../../Context/AuthContext';
-import { GoogleLogin } from '@react-oauth/google'; // Import GoogleLogin component
+import { AuthContext } from "../../Context/AuthContext";
+import { GoogleLogin } from "@react-oauth/google"; // Import GoogleLogin component
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -60,8 +60,8 @@ const Signup = () => {
     try {
       const serverUrl =
         process.env.NODE_ENV === "development"
-          ? "http://localhost:5000/api/auth/signup"
-          : "https://deshdekho.onrender.com/api/auth/signup";
+          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/auth/signup`
+          : `${import.meta.env.VITE_API_PRODUCTION_URL}/auth/signup`;
       const response = await fetch(serverUrl, {
         method: "POST",
         headers: {
@@ -115,45 +115,45 @@ const Signup = () => {
     setShowPassword(!showPassword);
   };
 
-
   const handleGoogleLogin = async (response) => {
     const loadingToastId = toast.loading("Loading..."); // Define the toast
     const start = Date.now(); // Start time to calculate the delay
 
     try {
-        const serverUrl =
-            process.env.NODE_ENV === 'development'
-                ? 'http://localhost:5000/api/gauth/google-login'
-                : 'https://deshdekho.onrender.com/api/gauth/google-login';
 
-        const res = await fetch(serverUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ token: response.credential }),
-        });
 
-        const responseData = await res.json();
+          const serverUrl = process.env.NODE_ENV === 'development'                   
+          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/gauth/google-login`
+          : `${import.meta.env.VITE_API_PRODUCTION_URL}/gauth/google-login`
 
-        if (res.ok) {
-            toast.success(responseData.msg, { id: loadingToastId });
-            login(responseData.token, responseData.userId, responseData.verified);
-        } else {
-            throw new Error(responseData.message || 'Something went wrong');
-        }
+      const res = await fetch(serverUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token: response.credential }),
+      });
+
+      const responseData = await res.json();
+
+      if (res.ok) {
+        toast.success(responseData.msg, { id: loadingToastId });
+        login(responseData.token, responseData.userId, responseData.verified);
+      } else {
+        throw new Error(responseData.message || "Something went wrong");
+      }
     } catch (error) {
-        toast.error(error.message, { id: loadingToastId });
+      toast.error(error.message, { id: loadingToastId });
     } finally {
-        const elapsed = Date.now() - start;
-        // Ensure at least 2 seconds of loading
-        if (elapsed < 2000) {
-            await new Promise(resolve => setTimeout(resolve, 2000 - elapsed));
-        }
-        toast.dismiss(loadingToastId); // Dismiss the toast after 2 seconds
-        setIsLoading(false); // If applicable
+      const elapsed = Date.now() - start;
+      // Ensure at least 2 seconds of loading
+      if (elapsed < 2000) {
+        await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
+      }
+      toast.dismiss(loadingToastId); // Dismiss the toast after 2 seconds
+      setIsLoading(false); // If applicable
     }
-};
+  };
 
   return (
     <div className="flex justify-center w-full ">
@@ -283,16 +283,15 @@ const Signup = () => {
           </button>
         </form>
         <div className="w-full mb-4 flex flex-col items-center">
-                <h3>Or</h3>
-                    <div className="w-full">
-                    <GoogleLogin
-                        onSuccess={handleGoogleLogin}
-                        onError={() => toast.error("Google login failed")}
-                        clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID} 
-                       
-                    />
-                    </div>
-                </div>
+          <h3>Or</h3>
+          <div className="w-full">
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={() => toast.error("Google login failed")}
+              clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}
+            />
+          </div>
+        </div>
 
         <div>
           Already have an account?{" "}

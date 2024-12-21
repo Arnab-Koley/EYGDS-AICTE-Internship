@@ -32,7 +32,7 @@ const Intro = () => {
         <button className="bg-primarycolor px-5 py-3 space-x-2 rounded-full flex items-center justify-center text-white mt-5"><MdOutlineTravelExplore size={20}/><span>Explore</span></button>
       </div>
 
-      <div className=" md:w-1/3 max-md:mt-10 overflow-hidden w-full " >
+      <div className=" md:w-1/3 max-md:mt-10  w-full " >
         <Swiper
          centeredSlides={true}
          grabCursor={true}
@@ -40,7 +40,7 @@ const Intro = () => {
          slidesPerView={'auto'}
           effect={"cards"}
           modules={[EffectCards, Pagination, Navigation]}
-          className=" flex  w-48 "
+          className=" flex  w-48 z-5"
         >
           <SwiperSlide className="flex items-center justify-center">
               <img src={img1} alt="Destination 1" className="rounded-lg"/>

@@ -113,9 +113,11 @@ const ResetPassword = () => {
     setIsLoading(true);
     const start = Date.now();
     try {
-      const serverUrl = process.env.NODE_ENV === 'development' 
-        ? 'http://localhost:5000/api/auth/resetpassword' 
-        : 'https://deshdekho.onrender.com/api/auth/resetpassword';
+        
+        const serverUrl = process.env.NODE_ENV === 'development'                   
+        ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/auth/resetpassword`
+        : `${import.meta.env.VITE_API_PRODUCTION_URL}/auth/resetpassword`
+
       const otpString = otp.join("");
 
       const response = await fetch(serverUrl, {
@@ -160,9 +162,11 @@ const ResetPassword = () => {
     const start = Date.now();
 
     try {
-      const serverUrl = process.env.NODE_ENV === 'development' 
-        ? 'http://localhost:5000/api/auth/forgotpassword' 
-        : 'https://deshdekho.onrender.com/api/auth/forgotpassword';
+
+        const serverUrl =
+        process.env.NODE_ENV === "development"
+          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/auth/forgotpassword`
+          : `${import.meta.env.VITE_API_PRODUCTION_URL}/auth/forgotpassword`;
       const response = await fetch(serverUrl, {
         method: "POST",
         headers: {

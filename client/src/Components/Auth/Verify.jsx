@@ -18,9 +18,10 @@ const Verify = () => {
     const loadingToastId = toast.loading("Verifying...");
 
     try {
-      const serverUrl = process.env.NODE_ENV === 'development' 
-        ? 'http://localhost:5000/api/auth/verifyotp' 
-        : 'https://deshdekho.onrender.com/api/auth/verifyotp';
+        const serverUrl =
+        process.env.NODE_ENV === "development"
+          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/auth/verifyotp`
+          : `${import.meta.env.VITE_API_PRODUCTION_URL}/auth/verifyotp`;
         
       const response = await fetch(serverUrl, {
         method: "POST",
