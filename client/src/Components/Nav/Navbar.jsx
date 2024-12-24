@@ -96,8 +96,16 @@ import { GoArrowSwitch } from "react-icons/go";
 import { IoIosMenu } from "react-icons/io";
 import { AuthContext } from "../../Context/AuthContext";
 import ProfilePopup from "../Popup/ProfilePopup";
+import fallbackimg from "../../assets/icon/profile.png"
 
-const Navbar = ({ toggleSidebar }) => {
+import { FaHeart } from "react-icons/fa";
+import { IoIosNotifications } from "react-icons/io";
+import HostPopup from "../Popup/HostPopup";
+
+const Navbar = (props) => {
+  const toggleSidebar = props.toggleSidebar;
+  const user = props.user;
+
   const { auth } = useContext(AuthContext);
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
@@ -108,10 +116,30 @@ const Navbar = ({ toggleSidebar }) => {
   const profileButtonRef = useRef(null);
 
   const [profileImg, setProfileImg] = useState(auth.profileImg);
+  const [showHostPopup, setShowHostPopup] = useState(false);
+  const [popupMsg, setPopupMsg] = useState("");
+
   const handleImageError = () => {
-    setProfileImg("/assets/icon/profile.png");
+    setProfileImg(fallbackimg);
   };
 
+  const handleHostClick = () => {
+    let msg = "";
+
+    if (!user.isMailVerified) {
+      msg += "Your email is not verified. ";
+    }
+    if (!user.isPhoneVerified) {
+      msg += "Your phone number is not verified.";
+    }
+
+    if (msg) {
+      setPopupMsg(msg);
+      setShowHostPopup(true);
+    } else {
+      navigate('/host')
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -139,6 +167,9 @@ const Navbar = ({ toggleSidebar }) => {
 
   return (
     <div className="h-16 shadow-md flex items-center justify-between w-full px-5 bg-white top-0 sticky z-20">
+      {showHostPopup && (
+        <HostPopup msg={popupMsg} onClose={() => setShowHostPopup(false)} />
+      )}
       <IoIosMenu size={30} className="md:hidden" onClick={toggleSidebar} />
       <div className="w-1/3 justify-start flex max-md:hidden">
         <img src={logo} className="h-10" />
@@ -157,13 +188,16 @@ const Navbar = ({ toggleSidebar }) => {
           Tour
         </Link>
       </div>
-      <div className="w-1/3 flex items-center justify-end space-x-6 max-md:hidden">
-        <button className="flex items-center space-x-1 text-dark-1 font-semibold">
+      <div className="w-1/3 flex items-center justify-end max-md:hidden">
+       
+        {auth.isLoggedIn ? (
+          <div className="flex items-center justify-center space-x-5">
+             <button className="flex items-center space-x-1 text-dark-1 font-semibold" onClick={handleHostClick}>
           <GoArrowSwitch size={18} />
           <span className="text-sm">Switch to Host</span>
         </button>
-        {auth.isLoggedIn ? (
-          <div className="relative">
+            <FaHeart size={25} className="text-red-600" onClick={() => navigate('/wishlist')} />
+            <div className="relative">
             <div
               ref={profileButtonRef} 
               className="flex items-center justify-center border-2 px-2 py-1 rounded-full space-x-2 cursor-pointer"
@@ -180,10 +214,12 @@ const Navbar = ({ toggleSidebar }) => {
 
             {showProfileMenu && (
               <div ref={profileMenuRef}>
-                <ProfilePopup />
+                <ProfilePopup showProfileMenu={showProfileMenu} setShowProfileMenu={setShowProfileMenu} />
               </div>
             )}
           </div>
+          </div>
+          
         ) : (
           <button
             className="bg-primarycolor px-4 py-2 rounded-full text-sm text-white"
@@ -195,6 +231,7 @@ const Navbar = ({ toggleSidebar }) => {
           </button>
         )}
       </div>
+      <IoIosNotifications size={30} className="md:hidden" onClick={() => navigate('/notification')} />
     </div>
   );
 };

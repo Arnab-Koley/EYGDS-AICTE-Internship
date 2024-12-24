@@ -8,7 +8,6 @@ const AuthContextProvider = ({ children }) => {
     token: localStorage.getItem('token'),
     userId: localStorage.getItem('userId'),
     profileImg: localStorage.getItem('profileImg'),
-    verified: localStorage.getItem('verified'),
     completed: localStorage.getItem('completed'),
     account: localStorage.getItem('account'),
     isLoggedIn: !!localStorage.getItem('token'),
@@ -20,13 +19,12 @@ const AuthContextProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
     const profileImg = localStorage.getItem('profileImg');
-    const verified = localStorage.getItem('verified');
     const completed = localStorage.getItem('completed');
     const account = localStorage.getItem('account');
   
     // Update the auth state if valid
-    if (token && userId && verified) {
-      setAuth({ token, userId,profileImg, verified, completed, account, isLoggedIn: true });
+    if (token && userId) {
+      setAuth({ token, userId,profileImg, completed, account, isLoggedIn: true });
   
       // Redirect to home if the user is already on the login page
       if (window.location.pathname === '/auth/login') {
@@ -44,14 +42,13 @@ const AuthContextProvider = ({ children }) => {
   }, [navigate]);
   
 
-  const login = (token, userId,profileImg,verified,completed,account) => {
+  const login = (token, userId,profileImg,completed,account) => {
     localStorage.setItem('token', token);
     localStorage.setItem('userId', userId);
     localStorage.setItem('profileImg',profileImg),
-    localStorage.setItem('verified', verified);
     localStorage.setItem('completed',completed);
     localStorage.setItem('account',account),
-    setAuth({ token, userId,profileImg,verified,completed,account, isLoggedIn: true });
+    setAuth({ token, userId,profileImg,completed,account, isLoggedIn: true });
     navigate(`/home`);
   };
 
@@ -59,10 +56,9 @@ const AuthContextProvider = ({ children }) => {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('profileImg');
-    localStorage.removeItem('verified');
     localStorage.removeItem('completed');
     localStorage.removeItem('account');
-    setAuth({ token: null, userId: null,profileImg: null,verified: null,completed:null,account:null, isLoggedIn: false });
+    setAuth({ token: null, userId: null,profileImg: null,completed:null,account:null, isLoggedIn: false });
     navigate('/auth/login');
   };
 

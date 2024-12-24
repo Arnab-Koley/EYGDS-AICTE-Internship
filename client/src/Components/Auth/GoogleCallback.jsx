@@ -10,7 +10,7 @@ const GoogleCallback = () => {
   const { search } = useLocation();
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
-  console.log("entering glogin...")
+
 
   useEffect(() => {
     const queryParams = new URLSearchParams(search);

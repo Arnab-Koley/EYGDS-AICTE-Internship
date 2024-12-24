@@ -53,7 +53,7 @@ const Login = () => {
                     await new Promise(resolve => setTimeout(resolve, 2000 - elapsed));
                 }
                 toast.success(responseData.msg);
-                login(responseData.token, responseData.userId, responseData.profileImg, responseData.verified, responseData.completed,responseData.account);
+                login(responseData.token, responseData.userId, responseData.profileImg, responseData.completed,responseData.account);
             } else {
                 throw new Error(responseData.message || 'Something went wrong');
             }
@@ -95,8 +95,8 @@ const Login = () => {
     
             if (res.ok) {
                 toast.success(responseData.msg, { id: loadingToastId });
-                console.log(responseData)
-                login(responseData.token, responseData.userId,responseData.profileImg, responseData.verified,responseData.completed,responseData.account);
+        
+                login(responseData.token, responseData.userId,responseData.profileImg,responseData.completed,responseData.account);
             } else {
                 throw new Error(responseData.message || 'Something went wrong');
             }

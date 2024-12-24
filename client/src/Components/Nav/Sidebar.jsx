@@ -48,6 +48,32 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
             Tour
         </Link>
         </li>
+        <div className="my-5 w-[90%] relative">
+          <div className="overflow-hidden h-[10px]">
+            <div className="block -mt-[25px] mx-auto w-full h-[25px] rounded-[125px/12px] shadow-md shadow-[rgb(161,157,157)]"></div>
+          </div>
+        </div>
+        <li>
+        <Link 
+            to="/account" 
+            onClick={toggleSidebar}
+            className={`${location.pathname === '/account' ? 'font-semibold text-dark-1 ' : ''} `}>
+            Account
+        </Link>
+        </li>
+        <div className="my-5 w-[90%] relative">
+          <div className="overflow-hidden h-[10px]">
+            <div className="block -mt-[25px] mx-auto w-full h-[25px] rounded-[125px/12px] shadow-md shadow-[rgb(161,157,157)]"></div>
+          </div>
+        </div>
+        <li>
+        <Link 
+            to="/wishlist" 
+            onClick={toggleSidebar}
+            className={`${location.pathname === '/wishlist' ? 'font-semibold text-dark-1 ' : ''} `}>
+            Wishlist
+        </Link>
+        </li>
  
  
 
