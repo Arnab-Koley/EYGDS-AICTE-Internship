@@ -37,19 +37,19 @@ const googleLogin = async (req, res) => {
                 password: '', // Set empty password for Google-authenticated users
                 gender: 'Other', // Default gender
                 profileImg: picture || '', // Store Google profile image if available
-                isVerified:true,
+                isMailVerified:true,
                 account: 'google',
             });
         }
 
         // Generate JWT token for authentication
-        const jwtToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
+        const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: "15d" });
+
 
         return res.status(200).json({
             token: jwtToken,
             userId: user._id,
             profileImg: picture,
-            verified: true,
             completed: false,
             account: 'google',
             msg: "Login successful",

@@ -7,6 +7,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import Auth from './Pages/Auth';
 import AuthContextProvider from './Context/AuthContext';
 import ProtectedRoute from './Routes/ProtectedRoute';
+import { HostProvider } from './Context/HostContext';
 
 
 
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <HostProvider>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <AuthContextProvider>
       <Routes>
@@ -30,6 +32,7 @@ function App() {
       </AuthContextProvider>
       </GoogleOAuthProvider>
       <Toaster/>
+      </HostProvider>
     </BrowserRouter>
   );
 }

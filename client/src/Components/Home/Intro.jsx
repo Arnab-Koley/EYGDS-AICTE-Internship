@@ -2,7 +2,7 @@ import React from "react";
 import img1 from "../../assets/img/img1.png";
 import img2 from "../../assets/img/img2.png";
 import img3 from '../../assets/img/img3.png'
-import vid1 from "../../assets/video/vid1.mp4";
+import {useNavigate} from "react-router-dom"
 
 import { MdOutlineTravelExplore } from "react-icons/md";
 
@@ -16,7 +16,9 @@ import "swiper/css/effect-cards"
 
 import { EffectCards, Autoplay, Pagination, Navigation } from "swiper/modules";
 
+
 const Intro = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex justify-center mt-20 max-md:flex-col max-md:items-center ">
       
@@ -29,7 +31,7 @@ const Intro = () => {
           unforgettable moments. Start your journey today and cherish memories
           that last a lifetime.
         </h3>
-        <button className="bg-primarycolor px-5 py-3 space-x-2 rounded-full flex items-center justify-center text-white mt-5"><MdOutlineTravelExplore size={20}/><span>Explore</span></button>
+        <button onClick={()=> navigate('/tour')} className="bg-primarycolor px-5 py-3 space-x-2 rounded-full flex items-center justify-center text-white mt-5"><MdOutlineTravelExplore size={20}/><span>Explore</span></button>
       </div>
 
       <div className=" md:w-1/3 max-md:mt-10  w-full " >
