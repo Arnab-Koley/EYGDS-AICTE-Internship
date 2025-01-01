@@ -59,12 +59,30 @@ const createListing = async (req, res, next) => {
 };
 
 
-const getAllListings = async (req, res, next) => {
+const getMyListings = async (req, res, next) => {
     try {
       const userId = req.userId; 
-  
       const listings = await Listing.find({ owner: userId });
   
+      if (!listings.length) {
+        return res.status(404).json({ success: false, msg: 'No listings found for this user.' });
+      }
+  
+      res.status(200).json({
+        success: true,
+        listings,
+      });
+    } catch (error) {
+      console.error('Error fetching user-specific listings:', error.message);
+      next(error);
+    }
+  };
+
+
+  const getAllListings = async (req, res, next) => {
+    try {
+      const userId = req.userId; 
+      const listings = await Listing.find();
       if (!listings.length) {
         return res.status(404).json({ success: false, msg: 'No listings found for this user.' });
       }
