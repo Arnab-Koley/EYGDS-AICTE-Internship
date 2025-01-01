@@ -4,49 +4,45 @@ const User = require('../models/user-model');
 // Create a new listing
 const createListing = async (req, res, next) => {
   try {
-    const userId = req.userId; // User ID from verified token
+    const userId = req.userId;
     const {
-      title,
-      description,
       geography,
       propertyType,
       accommodationType,
       address,
+      title, 
+      description,
+      coverPhoto, 
       basics,
       amenities,
       standoutAmenities,
       safetyItems,
-      coverPhoto,
-      photos,
+      guestType,
       price,
-      discount,
       safetyDetails,
     } = req.body;
 
-    // Check if user exists
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ msg: 'User not found.' });
     }
 
-    // Create new listing
     const newListing = new Listing({
       owner: userId,
-      title,
-      description,
       geography,
       propertyType,
       accommodationType,
       address,
+      title, 
+      description,
+      coverPhoto, 
       basics,
       amenities,
       standoutAmenities,
       safetyItems,
-      coverPhoto,
-      photos,
+      guestType,
       price,
-      discount,
-      safetyDetails,
+      safetyDetails
     });
 
     await newListing.save();
@@ -65,7 +61,7 @@ const createListing = async (req, res, next) => {
 
 const getAllListings = async (req, res, next) => {
     try {
-      const userId = req.userId; // User ID from verified token
+      const userId = req.userId; 
   
       const listings = await Listing.find({ owner: userId });
   

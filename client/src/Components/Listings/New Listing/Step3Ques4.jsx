@@ -1,24 +1,159 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { MdCurrencyRupee } from "react-icons/md";
 
-const Step3Ques4 = ({ handleNavigation }) => {
+const Step3Ques4 = ({ data, updateData, handleNavigation }) => {
+  const [price, setPrice] = useState(data.price);
+
+  const handlePriceChange = (guestType, value) => {
+    // Ensure the value is a number or empty string and is not negative
+    let numericValue = value.trim(); // Trim to remove extra spaces
+    
+    // If value is empty, set to '0', otherwise, parse the number correctly
+    if (numericValue === "") {
+      numericValue = "0";
+    } else {
+      // Remove leading zeros
+      numericValue = numericValue.replace(/^0+/, "");
+    }
+  
+    // Update the state with the final value
+    setPrice((prevPrice) => {
+      const updatedPrice = { ...prevPrice, [guestType]: numericValue };
+      updateData('price', updatedPrice); // Update parent state with new price
+      return updatedPrice;
+    });
+  };
+  
+  
+
   return (
-    <div>Step3Ques4
-      <div className="flex justify-between">
+    <div className="flex flex-col lg:px-80 px-20 max-md:px-5">
+      <h1 className="text-3xl max-md:text-2xl font-semibold text-center">
+      Now, set your price
+      </h1>
+      <p className="text-center mt-2">You can change it anytime.</p>
+
+      <div className="space-y-5 mt-10 text-xl max-sm:text-base font-medium">
+        
+
+        {/* Adult Price Input */}
+        <div className="flex items-center justify-between">
+          <div className='w-2/5'>Adult <span className="text-base font-normal">(Age 18+)</span></div>
+          <div className='flex items-center w-3/5 space-x-1'>
+            <div className='border-2 rounded-md flex items-center'>
+              <div className='flex items-center justify-center  rounded-l-md p-2 bg-gray-300'>
+                <MdCurrencyRupee size={25} />
+              </div>
+              <input
+                type="number"
+                value={price.adult}
+                onChange={(e) => handlePriceChange('adult', e.target.value)}
+                className="outline-none w-full pl-3"
+              />
+            </div>
+            <span className='text-sm'>/night</span>
+          </div>
+        </div>
+
+        {/* Teen Price Input */}
+        <div className="flex items-center justify-between">
+          <div className='w-2/5'>Teen <span className="text-base font-normal">(13-17)</span></div>
+          <div className='flex items-center w-3/5 space-x-1'>
+            <div className='border-2 rounded-md flex items-center'>
+              <div className='flex items-center justify-center  rounded-l-md p-2 bg-gray-300'>
+                <MdCurrencyRupee size={25} />
+              </div>
+              <input
+                type="number"
+                value={price.teen}
+                onChange={(e) => handlePriceChange('teen', e.target.value)}
+                className="outline-none w-full pl-3"
+              />
+            </div>
+            <span className='text-sm'>/night</span>
+          </div>
+        </div>
+
+        {/* Child Price Input */}
+        <div className="flex items-center justify-between">
+          <div className='w-2/5'>Child <span className="text-base font-normal">(2-12)</span></div>
+          <div className='flex items-center w-3/5 space-x-1'>
+            <div className='border-2 rounded-md flex items-center'>
+              <div className='flex items-center justify-center  rounded-l-md p-2 bg-gray-300'>
+                <MdCurrencyRupee size={25} />
+              </div>
+              <input
+                type="number"
+                value={price.child}
+                onChange={(e) => handlePriceChange('child', e.target.value)}
+                className="outline-none w-full pl-3"
+              />
+            </div>
+            <span className='text-sm'>/night</span>
+          </div>
+        </div>
+
+        {/* Infant Price Input */}
+        <div className="flex items-center justify-between">
+          <div className='w-2/5'>Infant <span className="text-base font-normal">(Under 2)</span></div>
+          <div className='flex items-center w-3/5 space-x-1'>
+            <div className='border-2 rounded-md flex items-center'>
+              <div className='flex items-center justify-center  rounded-l-md p-2 bg-gray-300'>
+                <MdCurrencyRupee size={25} />
+              </div>
+              <input
+                type="number"
+                value={price.infant}
+                onChange={(e) => handlePriceChange('infant', e.target.value)}
+                className="outline-none w-full pl-3"
+              />
+            </div>
+            <span className='text-sm'>/night</span>
+          </div>
+        </div>
+
+        {/* Pet Price Input */}
+        <div className="flex items-center justify-between">
+          <div className='w-2/5'>Pet</div>
+          <div className='flex items-center w-3/5 space-x-1'>
+            <div className='border-2 rounded-md flex items-center'>
+              <div className='flex items-center justify-center  rounded-l-md p-2 bg-gray-300'>
+                <MdCurrencyRupee size={25} />
+              </div>
+              <input
+                type="number"
+                value={price.pet}
+                onChange={(e) => handlePriceChange('pet', e.target.value)}
+                className="outline-none w-full pl-3"
+              />
+            </div>
+            <span className='text-sm'>/night</span>
+          </div>
+        </div>
+     
+
+
+      </div>
+
+      <div className="flex justify-between items-center py-10">
+        {/* Back Button */}
         <button
-          onClick={() => handleNavigation(-1)} // Back button
-          className="bg-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-400 transition duration-300"
+          onClick={() => handleNavigation(-1)}
+          className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
         >
           Back
         </button>
+
+        {/* Next Button */}
         <button
-          onClick={() => handleNavigation(1)} // Next button
-          className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300"
+          onClick={() => handleNavigation(1)}
+          className="bg-primarycolor text-white px-10 py-3 rounded-lg text-2xl"
         >
-          Finish
+          Next
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Step3Ques4
+export default Step3Ques4;

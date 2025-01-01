@@ -11,10 +11,10 @@ const Step1Ques1 = ({ data, updateData, handleNavigation }) => {
 
   return (
     <div className="px-20 max-md:px-5">
-      <h1 className="text-3xl maxmd:text-2xl font-semibold">
+      <h1 className="text-3xl max-md:text-2xl font-semibold">
         Select the appropriate geography of the place
       </h1>
-      <div className="grid lg:grid-cols-6 grid-cols-4 gap-3 max-md:gap-1 max-md:grid-cols-3 max-sm:grid-cols-2 mt-10 items-center justify-center">
+      <div className="grid  lg:grid-cols-9 md:grid-cols-5 max-md:grid-cols-4 max-sm:grid-cols-3 gap-2 mt-10 items-center justify-center">
         {geographyOptions.map((option) => (
           <div
             key={option.name}
@@ -28,7 +28,7 @@ const Step1Ques1 = ({ data, updateData, handleNavigation }) => {
             <img
               src={option.imgSrc}
               alt={option.name}
-              className="h-56 max-md:h-44 object-cover"
+              className="h-36 max-sm:h-28 object-cover"
             />
             <p className="text-center p-2">{option.name}</p>
           </div>

@@ -1,10 +1,9 @@
-
-
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import NewListingIntro from "./NewListingIntro";
 import { useNavigate } from "react-router-dom";
-
+import toast from 'react-hot-toast';
+import { AuthContext } from "../../../Context/AuthContext";
 
 import Step1Intro from "./Step1Intro";
 import Step2Intro from "./Step2Intro";
@@ -23,11 +22,14 @@ import Step3Ques1 from "./Step3Ques1";
 import Step3Ques2 from "./Step3Ques2";
 import Step3Ques3 from "./Step3Ques3";
 import Step3Ques4 from "./Step3Ques4";
+import Step3Ques5 from "./Step3Ques5";
 
 const NewListing = () => {
+  const {auth} = useContext(AuthContext);
   const [currentScreen, setCurrentScreen] = useState(0);
   const [direction, setDirection] = useState(1); // Direction for animation (1 for next, -1 for previous)
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleNavigation = (stepDirection) => {
     setDirection(stepDirection); // Set direction for animation (next or prev)
@@ -36,13 +38,11 @@ const NewListing = () => {
 
   // Listing data state (used for updating across components)
   const [listingData, setListingData] = useState({
-    owner: "",
     geography: "",
     propertyType: "",
     accommodationType: "",
     address: {
       country: "India",
-      region: "",
       flatHouse: "",
       streetAddress: "",
       landmark: "",
@@ -54,8 +54,8 @@ const NewListing = () => {
     },
     title: "",
     description: "",
+    coverPhoto: "",
     basics: {
-      guests: 1,
       bedrooms: 1,
       beds: 1,
       bathrooms: 1,
@@ -63,12 +63,19 @@ const NewListing = () => {
     amenities: [],
     standoutAmenities: [],
     safetyItems: [],
-    coverPhoto: "",
-    photos: [],
-    price: 0,
-    discount: {
-      percentage: 0,
-      discountMsg: "",
+    guestType: {
+      adult: true,
+      teen: true,
+      child: true,
+      infant: true,
+      pet: true,
+    },
+    price: {
+      adult: 300,
+      teen: 200,
+      child: 100,
+      infant: 0,
+      pet: 0,
     },
     safetyDetails: {
       exteriorSecurityCamera: false,
@@ -83,6 +90,103 @@ const NewListing = () => {
       ...prev,
       [field]: value,
     }));
+  };
+
+
+  const handleSubmit = async () => {
+    if (isSubmitting) return;
+  setIsSubmitting(true);
+    const loadingToastId = toast.loading("Creating Listing...");
+    const start = Date.now();
+    try {
+      const serverUrl =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:5000/api/listing/createlisting"
+          : "https://link2me-server.vercel.app/api/listing/createlisting";
+  
+      const token = localStorage.getItem("token");
+  
+      const response = await fetch(serverUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(listingData),
+      });
+  
+      const responseData = await response.json();
+  
+      if (response.ok) {
+        const elapsed = Date.now() - start;
+        if (elapsed < 2000) {
+          await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
+        }
+        toast.success(responseData.msg);
+  
+        // Reset listingData to initial state
+        setListingData({
+          geography: "",
+          propertyType: "",
+          accommodationType: "",
+          address: {
+            country: "India",
+            flatHouse: "",
+            streetAddress: "",
+            landmark: "",
+            districtLocality: "",
+            city: "",
+            state: "",
+            pinCode: "",
+            specificLocation: "",
+          },
+          title: "",
+          description: "",
+          coverPhoto: "",
+          basics: {
+            bedrooms: 1,
+            beds: 1,
+            bathrooms: 1,
+          },
+          amenities: [],
+          standoutAmenities: [],
+          safetyItems: [],
+          guestType: {
+            adult: true,
+            teen: true,
+            child: true,
+            infant: true,
+            pet: true,
+          },
+          price: {
+            adult: 300,
+            teen: 200,
+            child: 100,
+            infant: 0,
+            pet: 0,
+          },
+          safetyDetails: {
+            exteriorSecurityCamera: false,
+            noiseDecibelMonitor: false,
+            weaponsOnProperty: false,
+            safetyInfo: "",
+          },
+        });
+  
+        navigate(-1); // Navigate back after success
+      } else {
+        throw new Error(responseData.message || "Something went wrong");
+      }
+    } catch (error) {
+      toast.error(error.message, { id: loadingToastId, duration: 5000 });
+    } finally {
+      const elapsed = Date.now() - start;
+      if (elapsed < 2000) {
+        await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
+      }
+      toast.dismiss(loadingToastId);
+      setIsSubmitting(false);
+    }
   };
 
   const screens = [
@@ -145,9 +249,14 @@ const NewListing = () => {
       updateData={updateListingData}
       handleNavigation={handleNavigation}
     />,
+    <Step3Ques5
+      data={listingData}
+      updateData={updateListingData}
+      handleNavigation={handleNavigation}
+      handleSubmit={handleSubmit}
+      isSubmitting={isSubmitting}
+    />,
   ];
-
-  const totalSteps = 11;
 
   const progressStep1 =
     currentScreen <= 2
@@ -164,14 +273,21 @@ const NewListing = () => {
   const progressStep3 =
     currentScreen <= 11
       ? 0
-      : currentScreen > 11 && currentScreen <= 13
-      ? ((currentScreen - 11) / 3) * 100
+      : currentScreen > 11 && currentScreen <= 14
+      ? ((currentScreen - 11) / 4) * 100
       : 100;
+
+  
+     
+      
 
   return (
     <div className=" overflow-x-hidden">
       <div className="w-full flex">
-        <button onClick={() => navigate(-1)} className="flex items-center border-dark-1 text-dark-1 rounded-full border-2 mt-10 ml-10 py-1 px-5">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center border-dark-1 text-dark-1 rounded-full border-2 mt-10 ml-10 py-1 px-5"
+        >
           <span className="text-xl">Exit</span>
         </button>
       </div>

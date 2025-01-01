@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "chat-arnab",
+    "staging": "chat-arnab"
+  },
+  "targets": {},
+  "etags": {}
+}

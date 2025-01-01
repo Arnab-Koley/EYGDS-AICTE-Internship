@@ -6,7 +6,6 @@ const listingSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-
     geography: {
         type: String,
         required: true,
@@ -21,10 +20,6 @@ const listingSchema = new mongoose.Schema({
     },
     address: {
         country: {
-            type: String,
-            required: true,
-        },
-        region: {
             type: String,
             required: true,
         },
@@ -61,13 +56,21 @@ const listingSchema = new mongoose.Schema({
             default: '',
         },
     },
+    title: {
+        type: String,
+        required: true,
+        maxlength: 32,
+    },
+    description: {
+        type: String,
+        required: true,
+        maxlength: 500,
+    },
+    coverPhoto: {
+        type: String,
+        required: true,
+    },
     basics: {
-        guests: {
-            type: Number,
-            required: true,
-            min: 1,
-            default: 1,
-        },
         bedrooms: {
             type: Number,
             required: true,
@@ -99,41 +102,56 @@ const listingSchema = new mongoose.Schema({
         type: [String],
         default: [],
     },
-    title: {
-        type: String,
-        required: true,
-        maxlength: 32,
-    },
-    description: {
-        type: String,
-        required: true,
-        maxlength: 500,
-    },
-    coverPhoto: {
-        type: String,
-        required: true,
-    },
-    photos: {
-        type: [String],
-        default: [],
+    guestType:{
+        adult: {
+            type: Boolean,
+            default: true,
+        },
+        teen: {
+            type: Boolean,
+            default: true,
+        },
+        child: {
+            type: Boolean,
+            default: true,
+        },
+        infant: {
+            type: Boolean,
+            default: true,
+        },
+        pet: {
+            type: Boolean,
+            default: true,
+        }
     },
     price: {
-        type: Number,
-        required: true,
-        min: 0,
-    },
-    discount: {
-        percentage: {
+        adult: {
             type: Number,
-            min: 0,
-            max: 100,
             default: 0,
+            min: 0,
         },
-        discountMsg: {
-            type: String,
-            default: '',
+        teen: {
+            type: Number,
+            default: 0,
+            min: 0,
+        },
+        child: {
+            type: Number,
+            default: 0,
+            min: 0,
+        },
+        infant: {
+            type: Number,
+            default: 0,
+            min: 0,
+        },
+        pet: {
+            type: Number,
+            default: 0,
+            min: 0,
         },
     },
+
     safetyDetails: {
         exteriorSecurityCamera: {
             type: Boolean,
@@ -152,6 +170,17 @@ const listingSchema = new mongoose.Schema({
             default: '',
         },
     },
+      
+    photos: {
+        type: [String],
+        default: [],
+    },
+    rating: {
+        type: Number,
+        default: 0,
+    }
+
+    
 }, { timestamps: true });
 
 

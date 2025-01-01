@@ -1,9 +1,10 @@
 import React from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import Map from "../../../Utils/Map";
 
 
 const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
-  const address = data.address; // Use address from parent state
+  const address = data.address; 
 
   const handleInputChange = (field, value) => {
     const updatedAddress = { ...address, [field]: value };
@@ -122,6 +123,19 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
             placeholder="Enter pin code"
           />
         </div>
+
+         {/* Google Map API Needed */}
+        {/* <div>
+        <label className="block font-medium mb-1">Select Specific Location</label>
+        <Map
+          specificLocation={address.specificLocation}
+          updateSpecificLocation={(location) =>
+            handleInputChange("specificLocation", location)
+          }
+        />
+      </div> */}
+
+
       </div>
 
       <div className="flex justify-between items-center py-10">
@@ -136,7 +150,7 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
 
         {/* Next Button */}
         <button
-          onClick={() => handleNavigation(1)}
+          onClick={() => {handleNavigation(1)}}
           className={`px-10 py-3 rounded-lg text-2xl ${
             isNextEnabled
               ? "bg-primarycolor text-white cursor-pointer"

@@ -10,10 +10,10 @@ const NewListingIntro = ({ handleNavigation }) => {
     <div className="w-full">
       
       <div className=' flex max-md:flex-col'>
-      <div className='md:w-1/2  flex items-center p-10'>
+      <div className='md:w-1/2  flex items-center md:p-10 max-md:px-10 max-md:pt-5'>
           <h1 className='lg:text-5xl text-4xl max-md:text-2xl '>It's easy to get started on Desh Dekho</h1>
       </div>
-      <div className='md:w-1/2 p-10 '>
+      <div className='md:w-1/2 md:p-10 max-md:px-10 max-md:py-5 '>
           <div className='flex space-x-3'>
             <h2 className='text-2xl max-md:text-xl font-semibold'>1</h2>
             <div className='flex flex-col'>
@@ -42,7 +42,7 @@ const NewListingIntro = ({ handleNavigation }) => {
           </div>
       </div>
       </div>
-      <div className='w-full flex justify-end pr-16 pb-5'>
+      <div className='w-full flex justify-end pr-16 max-md:pr-10 pb-5'>
         <button
           onClick={() => handleNavigation(1)}
           className="bg-primarycolor text-white px-6 py-3 rounded-lg text-xl"
