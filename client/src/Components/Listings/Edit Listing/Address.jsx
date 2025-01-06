@@ -1,36 +1,20 @@
 import React from "react";
-import { IoIosArrowRoundBack } from "react-icons/io";
 import Map from "../../../Utils/Map";
 
-
-const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
-  const address = data.address; 
+const Address = ({ data, updateData }) => {
+  const address = data.address;
 
   const handleInputChange = (field, value) => {
     const updatedAddress = { ...address, [field]: value };
     updateData("address", updatedAddress); // Update parent state
   };
 
-  
-  const isNextEnabled =
-    address.country &&
-    address.streetAddress &&
-    address.city &&
-    address.state &&
-    address.pinCode &&
-    address.specificLocation.lat &&
-    address.specificLocation.lng;
-
   return (
-    <div className="flex flex-col lg:px-80 px-20 max-md:px-5">
-      <h1 className="text-3xl max-md:text-2xl font-semibold text-center">
-        Confirm your address
+    <div className="md:px-20 mt-5">
+      <h1 className="text-xl font-semibold ">
+        Address
       </h1>
-      <p className="text-center mt-2">
-        Your address is only shared with guests after they've made a reservation.
-      </p>
-
-      <div className="flex flex-col space-y-4 mt-5">
+      <div className="flex flex-col space-y-4 mt-2">
         {/* Country (Default) */}
         <div>
           <label className="block font-medium mb-1">Country *</label>
@@ -42,7 +26,7 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
           />
         </div>
 
-      
+        {/* Flat / House */}
         <div>
           <label className="block font-medium mb-1">Flat, house, etc.</label>
           <input
@@ -125,46 +109,14 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
             placeholder="Enter pin code"
           />
         </div>
-
-         {/* Google Map API Needed */}
-        <div>
-        <label className="block font-medium mb-1">Select Specific Location</label>
         <Map
-          specificLocation={address.specificLocation}
+          specificLocation={address.specificLocation || ""}
           updateSpecificLocation={(location) =>
             handleInputChange("specificLocation", location)
-          }
-        />
-      </div>
-
-
-      </div>
-
-      <div className="flex justify-between items-center py-10">
-        {/* Back Button */}
-        <button
-          onClick={() => handleNavigation(-1)}
-          className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
-        >
-          <IoIosArrowRoundBack size={25} />
-          <span>Back</span>
-        </button>
-
-        {/* Next Button */}
-        <button
-          onClick={() => {handleNavigation(1)}}
-          className={`px-10 py-3 rounded-lg text-2xl ${
-            isNextEnabled
-              ? "bg-primarycolor text-white cursor-pointer"
-              : "bg-gray-300 text-gray-500 cursor-not-allowed"
-          }`}
-          disabled={!isNextEnabled} // Disable if not all required fields are filled
-        >
-          Next
-        </button>
+        }/>
       </div>
     </div>
   );
 };
 
-export default Step1Ques4;
+export default Address;

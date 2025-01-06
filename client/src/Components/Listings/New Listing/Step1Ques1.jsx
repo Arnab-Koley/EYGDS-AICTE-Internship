@@ -3,10 +3,20 @@ import geographyOptions from "../../../assets/data/geographydData";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
 const Step1Ques1 = ({ data, updateData, handleNavigation }) => {
-  const selectedGeography = data.geography; // Use the persisted geography from the parent state
+  const selectedGeographies = data.geography || []; // Use the persisted geography from the parent state or an empty array
 
-  const handleSelectGeography = (geography) => {
-    updateData("geography", geography); // Update the parent state
+  const handleToggleGeography = (geography) => {
+    let updatedGeographies;
+
+    if (selectedGeographies.includes(geography)) {
+      // If geography is already selected, remove it
+      updatedGeographies = selectedGeographies.filter((item) => item !== geography);
+    } else {
+      // Otherwise, add it to the selected list
+      updatedGeographies = [...selectedGeographies, geography];
+    }
+
+    updateData("geography", updatedGeographies); // Update the parent state with the new array
   };
 
   return (
@@ -14,13 +24,13 @@ const Step1Ques1 = ({ data, updateData, handleNavigation }) => {
       <h1 className="text-3xl max-md:text-2xl font-semibold">
         Select the appropriate geography of the place
       </h1>
-      <div className="grid  lg:grid-cols-9 md:grid-cols-5 max-md:grid-cols-4 max-sm:grid-cols-3 gap-2 mt-10 items-center justify-center">
+      <div className="grid lg:grid-cols-9 md:grid-cols-5 max-md:grid-cols-4 max-sm:grid-cols-3 gap-2 mt-10 items-center justify-center">
         {geographyOptions.map((option) => (
           <div
             key={option.name}
-            onClick={() => handleSelectGeography(option.name)}
+            onClick={() => handleToggleGeography(option.name)}
             className={`border-2 rounded-lg cursor-pointer flex items-center justify-center flex-col ${
-              selectedGeography === option.name
+              selectedGeographies.includes(option.name)
                 ? "border-4 border-primarycolor"
                 : ""
             }`}
@@ -48,11 +58,11 @@ const Step1Ques1 = ({ data, updateData, handleNavigation }) => {
         <button
           onClick={() => handleNavigation(1)}
           className={`px-10 py-3 rounded-lg text-2xl ${
-            selectedGeography
+            selectedGeographies.length > 0
               ? "bg-primarycolor text-white cursor-pointer"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
-          disabled={!selectedGeography} // Disable button if no option is selected
+          disabled={selectedGeographies.length === 0} // Disable button if no option is selected
         >
           Next
         </button>

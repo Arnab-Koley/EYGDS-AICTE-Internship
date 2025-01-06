@@ -54,4 +54,29 @@ const completeProfile = async (req, res, next) => {
   }
 };
 
-module.exports = { getUserData, completeProfile };
+const getHost = async (req, res, next) => {
+  try {
+    const { hostId } = req.body;
+
+    const host = await User.findById(hostId);
+
+    if (!host) {
+      return res.status(404).json({ msg: "Host not found." });
+    }
+
+    res.status(200).json({
+      success: true,
+      host: {
+        name: host.name,
+        profileImg: host.profileImg,
+        createdAt: host.createdAt,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+};
+
+
+module.exports = { getUserData, completeProfile,getHost };

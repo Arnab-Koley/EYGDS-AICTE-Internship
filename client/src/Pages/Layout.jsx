@@ -3,7 +3,7 @@ import Navbar from "../Components/Nav/Navbar";
 import Home from "./Home";
 import Tour from "./Tour";
 import Footer from "../Components/Nav/Footer";
-import { useParams,Navigate } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import Sidebar from "../Components/Nav/Sidebar";
 import NavigationError from "./NavigationError";
 import Account from "./Account";
@@ -17,12 +17,14 @@ import { useHost } from "../Context/HostContext";
 import HostError from "./HostError";
 import Reservations from "./Reservations";
 import NewListing from "../Components/Listings/New Listing/NewListing";
+import EditListing from "../Components/Listings/Edit Listing/EditListing";
+import ViewTour from "../Components/Tour/ViewTour";
+import BookTour from "../Components/Tour/BookTour";
+import ManageListing from "../Components/Listings/Manage Listing/ManageListing";
 
 const Layout = ({ sidebarOpen, toggleSidebar }) => {
   const { section } = useParams();
   const [isLoading, setIsLoading] = useState(false);
- 
-
 
   const [user, setUser] = useState({
     email: "",
@@ -61,8 +63,6 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
 
         if (response.ok) {
           setUser(responseData.user);
-        
-       
         } else {
           console.error(
             "Error fetching data:",
@@ -80,19 +80,19 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
     fetchData();
   }, []); // Empty dependency array ensures this runs only once
 
-
-
-
   const renderComponent = () => {
     switch (section) {
       case "account":
         return <Account user={user} setUser={setUser} isLoading={isLoading} />;
-      case "newlisting":
+      case "booktour":
+        return <BookTour user={user} />;
+      case "editlisting":
         return (
           <ProtectedHost user={user}>
-            <NewListing />
+            <EditListing />
           </ProtectedHost>
         );
+
       case "home":
         return <Home />;
       case "host":
@@ -107,6 +107,18 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
             <Listings />
           </ProtectedHost>
         );
+        case "managelisting":
+          return (
+            <ProtectedHost user={user}>
+              <ManageListing />
+            </ProtectedHost>
+          );
+      case "newlisting":
+        return (
+          <ProtectedHost user={user}>
+            <NewListing />
+          </ProtectedHost>
+        );
       case "notification":
         return <Notification />;
       case "reservations":
@@ -117,6 +129,8 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
         );
       case "tour":
         return <Tour />;
+      case "viewtour":
+        return <ViewTour user={user} />;
       case "wishlist":
         return <Wishlist />;
 
@@ -136,12 +150,7 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
         ></div>
       )}
       <div className="w-full h-screen overflow-y-scroll">
-        <Navbar
-          toggleSidebar={toggleSidebar}
-          user={user}
-         
-    
-        />
+        <Navbar toggleSidebar={toggleSidebar} user={user} />
         {renderComponent()}
       </div>
     </div>

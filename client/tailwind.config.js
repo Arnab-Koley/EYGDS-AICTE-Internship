@@ -16,6 +16,8 @@ export default {
       },
       boxShadow: {
         'top-shadow': 'rgba(0, 0, 0, 0.2) 0px -3px 4px 0px',
+        'shadow-2': 'rgba(17, 17, 26, 0.1) 0px 0px 16px',
+
       },
 
     },

@@ -6,7 +6,6 @@ const Listings = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <button onClick={()=>navigate('/newlisting')}>Create New</button>
       <MyListings/>
     </div>
   )

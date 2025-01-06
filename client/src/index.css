@@ -17,9 +17,22 @@
 body{
 
     font-family: 'Poppins', sans-serif; /* Apply Poppins directly */
-    /* background-color: #FDFCF9; */
     background-color: #FFFFFF;
+}
 
+pre {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+select {
+  background-color: #4682B4;
+  color: #fff;
+}
+
+option {
+  background-color: #fff;
+  color: #000;
 }
 
 

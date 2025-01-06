@@ -1,7 +1,6 @@
 const Listing = require('../models/listing-model');
 const User = require('../models/user-model');
 
-// Create a new listing
 const createListing = async (req, res, next) => {
   try {
     const userId = req.userId;
@@ -59,6 +58,38 @@ const createListing = async (req, res, next) => {
 };
 
 
+const updateListing = async (req, res, next) => {
+  try {
+    const userId = req.userId; 
+    const { listingId, listing: updatedListingData } = req.body; 
+
+    const listing = await Listing.findById(listingId);
+
+    if (!listing) {
+      return res.status(404).json({ success: false, msg: 'Listing not found.' });
+    }
+
+    if (listing.owner.toString() !== userId) {
+      return res.status(403).json({ success: false, msg: 'You are not authorized to update this listing.' });
+    }
+    Object.assign(listing, updatedListingData);
+
+    await listing.save();
+
+    res.status(200).json({
+      success: true,
+      msg: 'Listing updated successfully.',
+      listing,
+    });
+  } catch (error) {
+    console.error('Error updating listing:', error.message);
+    next(error);
+  }
+};
+
+
+
+
 const getMyListings = async (req, res, next) => {
     try {
       const userId = req.userId; 
@@ -79,24 +110,54 @@ const getMyListings = async (req, res, next) => {
   };
 
 
-  const getAllListings = async (req, res, next) => {
+  const getListingById = async (req, res, next) => {
     try {
-      const userId = req.userId; 
-      const listings = await Listing.find();
-      if (!listings.length) {
-        return res.status(404).json({ success: false, msg: 'No listings found for this user.' });
+      const { listingId } = req.body;
+      const listing = await Listing.findById(listingId);
+  
+      if (!listing) {
+        return res.status(404).json({ success: false, msg: 'Listing not found.' });
       }
   
       res.status(200).json({
         success: true,
-        listings,
+        listing,
       });
     } catch (error) {
-      console.error('Error fetching user-specific listings:', error.message);
+      console.error('Error fetching listing by ID:', error.message);
       next(error);
     }
   };
 
+  const updateStatus = async (req, res, next) => {
+    try {
+      const { listingId, status, statusMsg } = req.body;
+      const userId = req.userId;
+  
+      const listing = await Listing.findById(listingId);
+  
+      if (!listing) {
+        return res.status(404).json({ success: false, msg: 'Listing not found.' });
+      }
+      if (listing.owner.toString() !== userId) {
+        return res.status(403).json({ success: false, msg: 'You are not authorized to update this listing.' });
+      }
+
+      listing.status = status;
+      listing.statusMsg = statusMsg || "";
+  
+      await listing.save();
+  
+      res.status(200).json({
+        success: true,
+        msg: 'Status updated',
+      });
+    } catch (error) {
+      console.error('Error updating listing status:', error.message);
+      next(error);
+    }
+  };
   
 
-module.exports = { createListing, getAllListings };
+
+module.exports = { createListing, updateListing, getMyListings, getListingById, updateStatus };

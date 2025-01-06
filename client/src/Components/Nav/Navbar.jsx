@@ -35,8 +35,6 @@ const Navbar = (props) => {
 
   const [loading, setLoading] = useState(false); 
 
-
-
   const handleImageError = () => {
     setProfileImg(fallbackimg);
   };
@@ -115,7 +113,7 @@ const Navbar = (props) => {
           <Link
             to="/listings"
             className={`${
-              isActive("/listings") || isActive("/newlisting") ? "font-semibold text-dark-1" : ""
+              isActive("/listings") || isActive("/newlisting") || isActive("/editlisting") ? "font-semibold text-dark-1" : ""
             }`}
           >
             Listings
@@ -142,7 +140,7 @@ const Navbar = (props) => {
           <Link
             to="/tour"
             className={`${
-              isActive("/tour") ? "font-semibold text-dark-1" : ""
+              isActive("/tour") || isActive("/viewtour") || isActive("/booktour") ? "font-semibold text-dark-1" : ""
             }`}
           >
             Tour

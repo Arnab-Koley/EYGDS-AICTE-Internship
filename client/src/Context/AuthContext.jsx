@@ -33,7 +33,7 @@ const AuthContextProvider = ({ children }) => {
     } else {
       // Redirect only for protected routes
       const isAuthRoute = window.location.pathname.startsWith('/auth');
-      const isPublicRoute = ['/home', '/tour'].includes(window.location.pathname); // Add your public routes here
+      const isPublicRoute = ['/home', '/tour', '/viewtour'].includes(window.location.pathname); // Add your public routes here
   
       if (!isAuthRoute && !isPublicRoute) {
         navigate('/auth/login');

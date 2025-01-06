@@ -1,3 +1,4 @@
+
 // import React, { useState, useEffect, useRef } from "react";
 // import { FaLocationCrosshairs } from "react-icons/fa6";
 // import { FaSearchLocation } from "react-icons/fa";
@@ -66,7 +67,8 @@
 //     const autocomplete = new window.google.maps.places.Autocomplete(
 //       searchInputRef.current,
 //       {
-//         fields: ["geometry"],
+//         types: ["geocode"], // Optional: Restrict suggestions to geographical locations
+//         fields: ["geometry", "name"], // Fields to fetch
 //       }
 //     );
 
@@ -129,19 +131,19 @@
 //       {/* Search Bar and Current Location Button */}
 //       <div className="flex md:items-center justify-between mb-5 max-md:flex-col max-md:space-y-2 ">
 //         <div className="flex items-center space-x-3 border-2 border-gray-300 rounded-lg p-3  shadow-md outline-none ">
-//         <FaSearchLocation size={25} />
-//         <input
-//           type="text"
-//           ref={searchInputRef}
-//           placeholder="Search for a place"
-//           className="outline-none max-md:w-full "
-//         />
+//           <FaSearchLocation size={25} />
+//           <input
+//             type="text"
+//             ref={searchInputRef}
+//             placeholder="Search for a place"
+//             className="outline-none max-md:w-full "
+//           />
 //         </div>
 //         <button
 //           onClick={handleUseCurrentLocation}
 //           className="px-4 py-2 bg-primarycolor space-x-2 text-white rounded-lg shadow-md flex items-center justify-center"
 //         >
-//             <FaLocationCrosshairs size={25} />
+//           <FaLocationCrosshairs size={25} />
 //           <span>Current Location</span>
 //         </button>
 //       </div>
@@ -152,10 +154,6 @@
 // };
 
 // export default Map;
-
-
-
-
 
 
 
@@ -290,13 +288,13 @@ const Map = ({ specificLocation, updateSpecificLocation }) => {
     <div className="w-full">
       {/* Search Bar and Current Location Button */}
       <div className="flex md:items-center justify-between mb-5 max-md:flex-col max-md:space-y-2 ">
-        <div className="flex items-center space-x-3 border-2 border-gray-300 rounded-lg p-3  shadow-md outline-none ">
+        <div className="flex items-center space-x-3 border-2 border-gray-300 rounded-lg p-3 shadow-md outline-none">
           <FaSearchLocation size={25} />
           <input
             type="text"
             ref={searchInputRef}
             placeholder="Search for a place"
-            className="outline-none max-md:w-full "
+            className="outline-none max-md:w-full"
           />
         </div>
         <button

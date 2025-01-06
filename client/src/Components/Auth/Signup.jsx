@@ -197,7 +197,7 @@ const Signup = () => {
             name="gender"
             value={user.gender}
             onChange={handleInput}
-            className="bg-gray-200 w-full p-2 outline-none mb-2"
+            className="bg-gray-200 w-full p-2 outline-none mb-2 text-black"
           >
             <option value="Male">Male</option>
             <option value="Female">Female</option>

@@ -38,7 +38,7 @@ const NewListing = () => {
 
   // Listing data state (used for updating across components)
   const [listingData, setListingData] = useState({
-    geography: "",
+    geography: [],
     propertyType: "",
     accommodationType: "",
     address: {
@@ -50,12 +50,16 @@ const NewListing = () => {
       city: "",
       state: "",
       pinCode: "",
-      specificLocation: "",
+      specificLocation: {
+        lat: 0,
+        lng: 0,
+      },
     },
     title: "",
     description: "",
     coverPhoto: "",
     basics: {
+      guests: 1,
       bedrooms: 1,
       beds: 1,
       bathrooms: 1,
@@ -126,7 +130,7 @@ const NewListing = () => {
   
         // Reset listingData to initial state
         setListingData({
-          geography: "",
+          geography: [],
           propertyType: "",
           accommodationType: "",
           address: {

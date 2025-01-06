@@ -24,7 +24,7 @@ const MyInfo = (props) => {
         <h3 className='font-semibold'>Email : <span className="font-normal">{user.email}</span></h3>
         <h3 className='font-semibold'>Phone : <span className="font-normal">{user.phone || "Not added"}</span></h3>
         <h3 className='font-semibold'>Gender : <span className="font-normal">{user.gender}</span></h3>
-        <h3 className='font-semibold'>Account Type : <span className="font-normal">{user.account==="google" ? "Google": "Email-Password"}</span></h3>
+        <h3 className='font-semibold'>Login Type : <span className="font-normal">{user.account==="google" ? "Google": "Email-Password"}</span></h3>
       </div>
 
   );
