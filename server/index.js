@@ -20,32 +20,33 @@ const PORT = 5000;
 //   next();
 // });
 
-// const corsOptions = {
-//   origin: ["http://localhost:5173", "https://deshdekho.vercel.app"],
-//   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
-//   credentials: true,
-// };
-
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (["http://localhost:5173", "https://deshdekho.vercel.app"].includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: ["http://localhost:5173", "https://deshdekho.vercel.app"],
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true,
 };
 
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (["http://localhost:5173", "https://deshdekho.vercel.app"].includes(origin) || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
+//   credentials: true,
+// };
+
 
 app.use(cors(corsOptions));
 
-app.use((req, res, next) => {
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');  // COOP Header
-  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');  // COEP Header
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin'); 
+//   res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp'); 
+//   next();
+// });
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
