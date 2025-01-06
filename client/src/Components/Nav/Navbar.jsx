@@ -113,7 +113,7 @@ const Navbar = (props) => {
           <Link
             to="/listings"
             className={`${
-              isActive("/listings") || isActive("/newlisting") || isActive("/editlisting") ? "font-semibold text-dark-1" : ""
+              isActive("/listings") || isActive("/newlisting") || isActive("/editlisting") || isActive("/managelisting") ? "font-semibold text-dark-1" : ""
             }`}
           >
             Listings

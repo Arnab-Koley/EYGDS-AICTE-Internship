@@ -40,6 +40,7 @@ const ViewTour = (props) => {
   const [popupType, setPopupType] = useState("");
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isPolicyExpanded, setIsPolicyExpanded] = useState(false);
 
   useEffect(() => {
     const fetchTour = async () => {
@@ -165,6 +166,10 @@ const ViewTour = (props) => {
     setIsExpanded(!isExpanded);
   };
 
+  const handlePolicyToggle = () => {
+    setIsPolicyExpanded(!isPolicyExpanded);
+  };
+
   const handleBooking = () => {
     if (auth.isLoggedIn) {
       let msg = "";
@@ -178,12 +183,12 @@ const ViewTour = (props) => {
         setPopupType("verification");
         setPopupMsg(msg);
         setShowPopup(true);
-      } else{
-        navigate(`/booktour?id=${tour._id}`)
+      } else {
+        navigate(`/booktour?id=${tour._id}`);
       }
     } else {
-      setPopupType("authentication")
-      setPopupMsg("Please login to your account before booking a tour")
+      setPopupType("authentication");
+      setPopupMsg("Please login to your account before booking a tour");
       setShowPopup(true);
     }
   };
@@ -468,9 +473,11 @@ const ViewTour = (props) => {
               {tour.safetyDetails.safetyInfo && (
                 <div>
                   <h3 className="mt-3">
-                    {isExpanded
-                      ? tour.safetyDetails.safetyInfo
-                      : `${tour.safetyDetails.safetyInfo.slice(0, 100)}...`}
+                    {tour.safetyDetails.safetyInfo.length > 100
+                      ? isExpanded
+                        ? tour.safetyDetails.safetyInfo
+                        : `${tour.safetyDetails.safetyInfo.slice(0, 100)}...`
+                      : tour.safetyDetails.safetyInfo}
                   </h3>
                   {tour.safetyDetails.safetyInfo.length > 100 && (
                     <button
@@ -486,9 +493,25 @@ const ViewTour = (props) => {
             <div className="lg:w-1/3">
               <h3 className="font-medium mb-3">Cancellation & Refund policy</h3>
               <p className="">
-                Free cancellation up to 7 days before check-in, 50% refund if
-                cancelled 3 day before, 30% refund if cancelled 3 day before,
-                and no refund within 1 day of check-in.
+                {tour.refundPolicy && (
+                  <div>
+                    <h3 className="mt-3">
+                      {tour.refundPolicy.length > 200
+                        ? isPolicyExpanded
+                          ? tour.refundPolicy
+                          : `${tour.refundPolicy.slice(0, 200)}...`
+                        : tour.refundPolicy}
+                    </h3>
+                    {tour.refundPolicy.length > 200 && (
+                      <button
+                        onClick={handlePolicyToggle}
+                        className="text-primarycolor mt-2"
+                      >
+                        {isPolicyExpanded ? "Show less" : "Show more"}
+                      </button>
+                    )}
+                  </div>
+                )}
               </p>
             </div>
           </div>

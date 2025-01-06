@@ -9,5 +9,8 @@ router.get('/getmylistings', verifyToken, listingController.getMyListings);
 router.post('/getlistingbyid', verifyToken, listingController.getListingById);
 
 router.post('/updatelistingstatus',verifyToken,listingController.updateStatus);
+router.post('/updatelistingtimes',verifyToken,listingController.updateListingTimes);
+router.post('/updatereservationtype',verifyToken,listingController.updateReservationType);
+router.post('/updaterefundpolicy',verifyToken,listingController.updateRefundPolicy);
 
 module.exports = router;

@@ -223,6 +223,14 @@ const listingSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    reservationType: {
+      type: String,
+      default: "Mannual"
+    },
+    refundPolicy: {
+      type: String,
+      default: "Free cancellation up to 7 days before check-in, 50% refund if cancelled 5 day before, 30% refund if cancelled 3 day before, and no refund within 1 day of check-in."
+    }
   },
   { timestamps: true }
 );
