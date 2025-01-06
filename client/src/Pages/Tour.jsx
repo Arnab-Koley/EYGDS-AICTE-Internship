@@ -17,7 +17,7 @@ const Tour = () => {
             : "https://link2me-server.vercel.app/api/tour/getalltour";
 
         const response = await fetch(serverUrl, {
-          method: "GET", // Correct HTTP method (GET doesn't require a body)
+          method: "GET", 
           headers: {
             "Content-Type": "application/json",
           },
@@ -25,8 +25,7 @@ const Tour = () => {
 
         const responseData = await response.json();
         if (responseData.success) {
-          // Use responseData, not response.data
-          setTours(responseData.tours); // Set the fetched tours data
+          setTours(responseData.tours); 
         }
       } catch (error) {
         console.error("Error fetching tours:", error.message);
