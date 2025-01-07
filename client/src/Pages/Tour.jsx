@@ -12,9 +12,9 @@ const Tour = () => {
     const fetchTours = async () => {
       try {
         const serverUrl =
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:5000/api/tour/getalltour"
-            : "https://link2me-server.vercel.app/api/tour/getalltour";
+            process.env.NODE_ENV === "development"
+            ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/tour/getalltour`
+            : `${import.meta.env.VITE_API_PRODUCTION_URL}/tour/getalltour`;
 
         const response = await fetch(serverUrl, {
           method: "GET", 

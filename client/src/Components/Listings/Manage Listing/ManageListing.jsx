@@ -31,8 +31,9 @@ const ManageListing = () => {
       try {
         const serverUrl =
           process.env.NODE_ENV === "development"
-            ? "http://localhost:5000/api/listing/getlistingbyid"
-            : "https://link2me-server.vercel.app/api/listing/getlistingbyid";
+            process.env.NODE_ENV === "development"
+            ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/listing/getlistingbyid`
+            : `${import.meta.env.VITE_API_PRODUCTION_URL}/listing/getlistingbyid`;
 
         const token = localStorage.getItem("token");
 
@@ -77,9 +78,9 @@ const ManageListing = () => {
       setIsStatusUpdating(true);
 
       const serverUrl =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5000/api/listing/updatelistingstatus"
-          : "https://link2me-server.vercel.app/api/listing/updatelistingstatus";
+          process.env.NODE_ENV === "development"
+          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/listing/updatelistingstatus`
+          : `${import.meta.env.VITE_API_PRODUCTION_URL}/listing/updatelistingstatus`;
 
       const token = localStorage.getItem("token");
 
@@ -128,9 +129,11 @@ const ManageListing = () => {
     try {
       setIsTimeUpdating(true);
       const serverUrl =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5000/api/listing/updatelistingtimes"
-          : "https://link2me-server.vercel.app/api/listing/updatelistingtimes";
+
+
+          process.env.NODE_ENV === "development"
+          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/listing/updatelistingtimes`
+          : `${import.meta.env.VITE_API_PRODUCTION_URL}/listing/updatelistingtimes`;
 
       const token = localStorage.getItem("token");
 
@@ -180,9 +183,9 @@ const ManageListing = () => {
       setIsReservationUpdating(true);
 
       const serverUrl =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5000/api/listing/updatereservationtype"
-          : "https://link2me-server.vercel.app/api/listing/updatereservationtype";
+          process.env.NODE_ENV === "development"
+          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/listing/updatereservationtype`
+          : `${import.meta.env.VITE_API_PRODUCTION_URL}/listing/updatereservationtype`;
 
       const token = localStorage.getItem("token");
 
@@ -231,9 +234,9 @@ const ManageListing = () => {
     try {
       setIsPolicyUpdating(true);
       const serverUrl =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5000/api/listing/updaterefundpolicy"
-          : "https://link2me-server.vercel.app/api/listing/updaterefundpolicy";
+          process.env.NODE_ENV === "development"
+          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/listing/updaterefundpolicy`
+          : `${import.meta.env.VITE_API_PRODUCTION_URL}/listing/updaterefundpolicy`;
 
       const token = localStorage.getItem("token");
 

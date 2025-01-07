@@ -50,9 +50,9 @@ const ViewTour = (props) => {
       try {
         setIsLoading(true);
         const serverUrl =
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:5000/api/tour/gettourbyid"
-            : "https://link2me-server.vercel.app/api/tour/gettourbyid";
+            process.env.NODE_ENV === "development"
+            ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/tour/gettourbyid`
+            : `${import.meta.env.VITE_API_PRODUCTION_URL}/tour/gettourbyid`;
 
         const response = await fetch(serverUrl, {
           method: "POST",
@@ -96,9 +96,9 @@ const ViewTour = (props) => {
       try {
         setIsReviewsLoading(true);
         const reviewsUrl =
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:5000/api/review/getreviewbyid"
-            : "https://link2me-server.vercel.app/api/review/getreviewbyid";
+            process.env.NODE_ENV === "development"
+            ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/review/getreviewbyid`
+            : `${import.meta.env.VITE_API_PRODUCTION_URL}/review/getreviewbyid`;
 
         const response = await fetch(reviewsUrl, {
           method: "POST",
@@ -132,9 +132,9 @@ const ViewTour = (props) => {
       try {
         setIsHostLoading(true);
         const reviewsUrl =
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:5000/api/user/gethost"
-            : "https://link2me-server.vercel.app/api/user/gethost";
+            process.env.NODE_ENV === "development"
+            ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/user/gethost`
+            : `${import.meta.env.VITE_API_PRODUCTION_URL}/user/gethost`;
 
         const response = await fetch(reviewsUrl, {
           method: "POST",

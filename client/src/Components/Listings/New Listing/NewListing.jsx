@@ -104,9 +104,9 @@ const NewListing = () => {
     const start = Date.now();
     try {
       const serverUrl =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5000/api/listing/createlisting"
-          : "https://link2me-server.vercel.app/api/listing/createlisting";
+          process.env.NODE_ENV === "development"
+          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/listing/createlisting`
+          : `${import.meta.env.VITE_API_PRODUCTION_URL}/listing/createlisting`;
   
       const token = localStorage.getItem("token");
   

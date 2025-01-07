@@ -17,9 +17,9 @@ const MyListings = () => {
     const fetchListings = async () => {
       try {
         const serverUrl =
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:5000/api/listing/getmylistings"
-            : "https://link2me-server.vercel.app/api/listing/getmylistings";
+            process.env.NODE_ENV === "development"
+            ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/listing/getmylistings`
+            : `${import.meta.env.VITE_API_PRODUCTION_URL}/listing/getmylistings`;
 
         const token = localStorage.getItem("token");
 
