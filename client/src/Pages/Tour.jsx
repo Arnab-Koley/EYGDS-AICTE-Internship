@@ -18,6 +18,9 @@ const Tour = () => {
 
         const response = await fetch(serverUrl, {
           method: "GET", 
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
 
         const responseData = await response.json();
