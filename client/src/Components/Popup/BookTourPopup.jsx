@@ -34,9 +34,10 @@ const BookTourPopup = ({ type, msg, onClose }) => {
         
         <button
           onClick={handleButtonClick}
-          className="mt-4 bg-primarycolor text-white py-2 px-4 rounded-full"
+          className={`mt-4 bg-primarycolor text-white py-2 px-4 rounded-full ${type==="unavailable"?"hidden":""} `}
         >
           {type === "authentication" ? "Sign in" : "Verify Now"}
+          
         </button>
       </div>
     </div>

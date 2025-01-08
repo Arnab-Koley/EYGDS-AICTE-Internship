@@ -30,7 +30,6 @@ const ManageListing = () => {
     const fetchListing = async () => {
       try {
         const serverUrl =
-          process.env.NODE_ENV === "development"
             process.env.NODE_ENV === "development"
             ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/listing/getlistingbyid`
             : `${import.meta.env.VITE_API_PRODUCTION_URL}/listing/getlistingbyid`;
@@ -280,7 +279,7 @@ const ManageListing = () => {
     return <div>Loading...</div>;
   }
 
-  const isButtonDisabled = newStatus === listing.status || isStatusUpdating;
+  const isButtonDisabled = (newStatus === listing.status && statusMsg === listing.statusMsg  ) || isStatusUpdating  ;
   const isTimesButtonDisabled = (checkInTime === listing.checkInTime && checkOutTime === listing.checkOutTime) || checkInTime === "" || checkOutTime === "";
   const isReservationButtonDisabled = reservationType === listing.reservationType || isReservationUpdating;
   const isPolicyButtonDisabled = refundPolicy === listing.refundPolicy || isPolicyUpdating;
@@ -343,7 +342,7 @@ const ManageListing = () => {
           {newStatus === "Unavailable" && (
             <div className="mt-4">
               <label className="block text-gray-700">
-                Do you want to give a message?
+                Give a message for users
               </label>
               <input
                 type="text"

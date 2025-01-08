@@ -297,7 +297,7 @@ const NewListing = () => {
       </div>
 
       <div
-        className={`flex my-10 space-x-5 px-10 ${
+        className={`flex my-10 space-x-5 max-md:space-x-2 px-10 ${
           currentScreen < 2 ? "hidden" : "block"
         }`}
       >

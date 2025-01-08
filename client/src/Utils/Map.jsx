@@ -251,7 +251,7 @@ const Map = ({ specificLocation, updateSpecificLocation }) => {
       mapInstance.setCenter(newPosition);
       markerInstance.setPosition(newPosition);
 
-      // Save the updated position
+
       updateSpecificLocation(newPosition);
     });
   };

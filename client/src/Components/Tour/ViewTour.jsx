@@ -172,19 +172,26 @@ const ViewTour = ({ user, updateWishlist }) => {
 
   const handleBooking = () => {
     if (auth.isLoggedIn) {
-      let msg = "";
-      if (!user.isMailVerified) {
-        msg += "Your email is not verified. ";
-      }
-      if (!user.isPhoneVerified) {
-        msg += "Your phone number is not verified.";
-      }
-      if (msg) {
-        setPopupType("verification");
-        setPopupMsg(msg);
-        setShowPopup(true);
+      if (tour.status === "Unavailable") {
+        let msg = tour.statusMsg;
+        setPopupType("unavailable");
+          setPopupMsg(msg);
+          setShowPopup(true);
       } else {
-        navigate(`/booktour?id=${tour._id}`);
+        let msg = "";
+        if (!user.isMailVerified) {
+          msg += "Your email is not verified. ";
+        }
+        if (!user.isPhoneVerified) {
+          msg += "Your phone number is not verified.";
+        }
+        if (msg) {
+          setPopupType("verification");
+          setPopupMsg(msg);
+          setShowPopup(true);
+        } else {
+          navigate(`/booktour?id=${tour._id}`);
+        }
       }
     } else {
       setPopupType("authentication");
@@ -203,7 +210,7 @@ const ViewTour = ({ user, updateWishlist }) => {
         <IoIosArrowRoundBack
           size={40}
           className="bg-primarycolor p-1 rounded-full text-white"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/tour")}
         />
       </div>
       {showPopup && (
@@ -253,17 +260,16 @@ const ViewTour = ({ user, updateWishlist }) => {
             </button>
           ) : (
             <button
-            onClick={(e) => {
-              e.stopPropagation();
-              updateWishlist(tour._id);
-            }}
-            className="flex items-center space-x-2 border-2 px-5 py-2 shadow-md rounded-full mt-3"
-          >
-            <h3>Add to Wishlist</h3>
-            <FaHeart size={25} className="text-black opacity-70" />
-          </button>
+              onClick={(e) => {
+                e.stopPropagation();
+                updateWishlist(tour._id);
+              }}
+              className="flex items-center space-x-2 border-2 px-5 py-2 shadow-md rounded-full mt-3"
+            >
+              <h3>Add to Wishlist</h3>
+              <FaHeart size={25} className="text-black opacity-70" />
+            </button>
           )}
-        
 
           <div className="flex md:space-x-14 max-md:flex-col">
             <div className="md:w-1/2">
@@ -539,16 +545,26 @@ const ViewTour = ({ user, updateWishlist }) => {
               </p>
             </div>
           </div>
+          {tour.status === "Available" ? (
+            <button
+              className="bg-primarycolor text-xl py-3 px-5 text-white font-semibold rounded-full shadow-md fixed bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-5"
+              onClick={handleBooking}
+            >
+              Book Tour
+            </button>
+          ) : (
+            <button
+              className="bg-gray-500 text-xl py-3 px-5 text-white font-semibold rounded-full shadow-md fixed bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-5 flex flex-col items-center justify-center"
+              onClick={handleBooking}
+            >
+              <h3>Unavailable</h3>
+              <h3 className="text-xs font-normal">Click for more info</h3>
+            </button>
+          )}
         </div>
       ) : (
         <div>No tour data available</div>
       )}
-      <button
-        className="bg-primarycolor text-xl py-3 px-5 text-white font-semibold rounded-full shadow-md fixed bottom-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-5"
-        onClick={handleBooking}
-      >
-        Book Tour
-      </button>
     </div>
   );
 };
