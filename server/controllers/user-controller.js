@@ -23,6 +23,7 @@ const getUserData = async (req, res, next) => {
         isMailVerified: user.isMailVerified,
         isPhoneVerified: user.isPhoneVerified,
         isCompleted: user.isCompleted,
+        wishlist: user.wishlist,
       },
     });
   } catch (error) {
@@ -79,4 +80,40 @@ const getHost = async (req, res, next) => {
 };
 
 
-module.exports = { getUserData, completeProfile,getHost };
+const updateWishlist = async (req, res, next) => {
+  try {
+    const userId = req.userId;
+    const { tourId } = req.body;
+
+    const existedUser = await User.findById(userId);
+
+    if (!existedUser) {
+      return res.status(404).json({ msg: "User not found." });
+    }
+
+    const wishlistIndex = existedUser.wishlist.indexOf(tourId);
+
+    if (wishlistIndex > -1) {
+      existedUser.wishlist.splice(wishlistIndex, 1);
+      res.status(200).json({
+        success: true,
+        msg: "Removed from wishlist",
+      });
+    } else {
+      existedUser.wishlist.push(tourId);
+      res.status(200).json({
+        success: true,
+        msg: "Added to wishlist",
+      });
+    }
+
+    await existedUser.save();
+  } catch (error) {
+    console.error("Error updating wishlist:", error.message);
+    next(error);
+  }
+};
+
+
+
+module.exports = { getUserData, completeProfile,getHost,updateWishlist };

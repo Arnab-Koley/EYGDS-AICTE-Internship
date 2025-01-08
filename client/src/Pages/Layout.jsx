@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import toast from "react-hot-toast";
+import { AuthContext } from "../Context/AuthContext";
 import Navbar from "../Components/Nav/Navbar";
 import Home from "./Home";
 import Tour from "./Tour";
@@ -23,8 +25,10 @@ import BookTour from "../Components/Tour/BookTour";
 import ManageListing from "../Components/Listings/Manage Listing/ManageListing";
 
 const Layout = ({ sidebarOpen, toggleSidebar }) => {
+  const {auth} = useContext(AuthContext);
   const { section } = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const [isWishlistUpdating,setIsWishlistUpdating] = useState(false);
 
   const [user, setUser] = useState({
     email: "",
@@ -36,13 +40,15 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
     isMailVerified: false,
     isPhoneVerified: false,
     isCompleted: false,
+    wishlist: [],
   });
 
   useEffect(() => {
-    // Define an async function inside useEffect
+
     const fetchData = async () => {
       try {
         setIsLoading(true);
+        console.log("fetching user...")
 
         const serverUrl =
           process.env.NODE_ENV === "development"
@@ -79,6 +85,63 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
     // Call the async function
     fetchData();
   }, []); // Empty dependency array ensures this runs only once
+
+  
+  const updateWishlist = async (tourId) => {
+    if(!auth.isLoggedIn){
+      toast.error("Please Sign in first");
+      return;
+    }
+    if (isWishlistUpdating) {
+      return;
+    }
+    const loadingToastId = toast.loading("Loading...");
+    const start = Date.now();
+    try {
+      setIsWishlistUpdating(true);
+      const serverUrl =
+        process.env.NODE_ENV === "development"
+          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/user/updatewishlist`
+          : `${import.meta.env.VITE_API_PRODUCTION_URL}/user/updatewishlist`;
+
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(serverUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ tourId }),
+      });
+
+      const responseData = await response.json();
+      if (responseData.success) {
+        const elapsed = Date.now() - start;
+        if (elapsed < 2000) {
+          await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
+        }
+        toast.success(responseData.msg);
+        setUser((prev) => ({
+          ...prev,
+          wishlist: prev.wishlist.includes(tourId)
+            ? prev.wishlist.filter((id) => id !== tourId)
+            : [...prev.wishlist, tourId],
+        }));
+      } else {
+        throw new Error(responseData.message || "Failed to update wishlist");
+      }
+    } catch (error) {
+      toast.error(error.message, { id: loadingToastId, duration: 5000 });
+    } finally {
+      const elapsed = Date.now() - start;
+      if (elapsed < 2000) {
+        await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
+      }
+      toast.dismiss(loadingToastId);
+      setIsWishlistUpdating(false);
+    }
+  };
 
   const renderComponent = () => {
     switch (section) {
@@ -128,11 +191,11 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
           </ProtectedHost>
         );
       case "tour":
-        return <Tour />;
+        return <Tour user={user} updateWishlist={updateWishlist} />;
       case "viewtour":
-        return <ViewTour user={user} />;
+        return <ViewTour user={user} updateWishlist={updateWishlist} />;
       case "wishlist":
-        return <Wishlist />;
+        return <Wishlist user={user} updateWishlist={updateWishlist} isLoading={isLoading} />;
 
       default:
         return <NavigationError />;

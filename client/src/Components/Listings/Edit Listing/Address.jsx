@@ -110,9 +110,12 @@ const Address = ({ data, updateData }) => {
           />
         </div>
         <Map
-          specificLocation={address.specificLocation || ""}
+          specificLocation={address.specificLocation}
           updateSpecificLocation={(location) =>
-            handleInputChange("specificLocation", location)
+            updateData("address", {
+              ...data.address,
+              specificLocation: location, 
+            })
         }/>
       </div>
     </div>

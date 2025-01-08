@@ -3,21 +3,29 @@ import { FaHeart } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa";
 import { MdCurrencyRupee } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
-const Tour = () => {
+
+const Tour = ({ user, updateWishlist }) => {
   const [tours, setTours] = useState([]);
   const navigate = useNavigate();
+  const [isToursLoading, setIsToursLoading] = useState(false);
+
 
   useEffect(() => {
     const fetchTours = async () => {
+      if (isToursLoading) {
+        return;
+      }
       try {
+        setIsToursLoading(true);
         const serverUrl =
-            process.env.NODE_ENV === "development"
+          process.env.NODE_ENV === "development"
             ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/tour/getalltour`
             : `${import.meta.env.VITE_API_PRODUCTION_URL}/tour/getalltour`;
 
         const response = await fetch(serverUrl, {
-          method: "GET", 
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
@@ -25,55 +33,39 @@ const Tour = () => {
 
         const responseData = await response.json();
         if (responseData.success) {
-          setTours(responseData.tours); 
+          setTours(responseData.tours);
         }
       } catch (error) {
         console.error("Error fetching tours:", error.message);
+      } finally {
+        setIsToursLoading(false);
       }
     };
 
     fetchTours();
   }, []);
 
-  return (
-    <div className="mt-5 p-5">
-      {/* <div className="">
-        {tours.map((tour) => (
-          <li
-            key={tour._id} 
-            className=" border-2 w-72 list-none"
-          >
-            <div className="w-full flex justify-between bg-green-400">
-              <div className="relative top-10 left-3 z-10 flex items-center justify-center space-x-1 bg-white rounded-full px-2">
-                <FaRegStar size={15} color="black" />
-                <span className="text-black text-sm">{tour.rating}</span>
-              </div>
-              <FaHeart
-                size={25}
-                className="text-black opacity-70 z-10 top-10 right-5 relative"
-              />
-            </div>
-            <img src={tour.coverPhoto} alt={tour.title} className="h-64 w-72 object-cover bg-gray-500" />
-            <h2 className="font-semibold text-dark-1  mt-2">{tour.title}</h2>
-            <h3 className="text-sm">{tour.address.city}, {tour.address.state}</h3>
-            <div className="flex items-center"><MdCurrencyRupee size={20} /><h3 className="font-semibold">{tour.price.adult}</h3><h3 className="ml-2">night</h3></div>
-          </li>
-        ))}
-      </div> */}
+  
 
-      <ul className=" grid grid-cols-5">
+  if (isToursLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="mt-5 p-5 flex justify-center">
+      <ul className="flex flex-wrap max-md:justify-center">
         {tours.map((tour) => (
           <li
             key={tour._id}
             onClick={() => navigate(`/viewtour?id=${tour._id}`)}
-            className="rounded-md w-72 list-none relative shadow-shadow-2 m-2"
+            className="rounded-md list-none relative shadow-shadow-2 m-2 cursor-pointer w-64"
           >
             <div className="relative">
               {/* Image */}
               <img
                 src={tour.coverPhoto}
                 alt={tour.title}
-                className="h-64 w-72 object-cover bg-gray-500 rounded-t-lg"
+                className="h-64 w-64 object-cover bg-gray-500 rounded-t-lg"
               />
 
               {/* Star and Heart Icons */}
@@ -94,14 +86,22 @@ const Tour = () => {
               </div>
               <FaHeart
                 size={25}
-                className="absolute top-2 right-2 text-black opacity-70 z-10"
+                className={`absolute shadow-inner top-2 right-2 z-10 ${
+                  user.wishlist.includes(tour._id)
+                    ? "text-red-600"
+                    : "text-black opacity-70"
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation(); 
+                  updateWishlist(tour._id);
+                }}
               />
             </div>
 
             {/* Content Below Image */}
             <div className="p-3">
-              <h2 className="font-semibold text-dark-1">{tour.title}</h2>
-              <h3 className="text-sm">
+              <h2 className="font-semibold text-dark-1 truncate">{tour.title}</h2>
+              <h3 className="text-sm truncate">
                 {tour.address.city}, {tour.address.state}
               </h3>
               <div className="flex items-center">
@@ -109,7 +109,6 @@ const Tour = () => {
                 <h3 className="font-semibold">{tour.price.adult}</h3>
                 <h3 className="ml-2">night</h3>
               </div>
-              
             </div>
           </li>
         ))}

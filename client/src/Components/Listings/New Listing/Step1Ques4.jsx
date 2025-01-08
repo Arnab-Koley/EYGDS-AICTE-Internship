@@ -132,7 +132,10 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
         <Map
           specificLocation={address.specificLocation}
           updateSpecificLocation={(location) =>
-            handleInputChange("specificLocation", location)
+            updateData("address", {
+              ...data.address,
+              specificLocation: location, 
+            })
           }
         />
       </div>

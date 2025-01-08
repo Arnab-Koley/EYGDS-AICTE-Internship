@@ -36,6 +36,29 @@ const getTourById = async (req, res, next) => {
     }
   };
 
+  const getToursByIds = async (req, res, next) => {
+    try {
+      const { tourIds } = req.body; 
+      if (!Array.isArray(tourIds) || tourIds.length === 0) {
+        return res.status(400).json({ success: false, msg: 'Invalid input, tourIds should be an array.' });
+      }
+  
+      const tours = await Listing.find({ '_id': { $in: tourIds } });
+  
+      if (!tours.length) {
+        return res.status(404).json({ success: false, msg: 'No tours found for the provided IDs.' });
+      }
+
+      res.status(200).json({
+        success: true,
+        tours,
+      });
+    } catch (error) {
+      console.error('Error fetching tours by IDs:', error.message);
+      next(error);
+    }
+  };
+
 module.exports = {
-    getAllTours, getTourById,
+    getAllTours, getTourById,getToursByIds
 };

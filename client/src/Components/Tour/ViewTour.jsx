@@ -9,6 +9,7 @@ import safetyItemsData from "../../assets/data/safetyItemsData";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { MdCurrencyRupee } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { PiBroomFill } from "react-icons/pi";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { IoChatboxOutline } from "react-icons/io5";
@@ -19,8 +20,7 @@ import timeAgo from "../../Utils/timeAgo";
 import ViewMap from "../../Utils/ViewMap";
 import BookTourPopup from "../Popup/BookTourPopup";
 
-const ViewTour = (props) => {
-  const user = props.user;
+const ViewTour = ({ user, updateWishlist }) => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const tourId = params.get("id");
@@ -50,7 +50,7 @@ const ViewTour = (props) => {
       try {
         setIsLoading(true);
         const serverUrl =
-            process.env.NODE_ENV === "development"
+          process.env.NODE_ENV === "development"
             ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/tour/gettourbyid`
             : `${import.meta.env.VITE_API_PRODUCTION_URL}/tour/gettourbyid`;
 
@@ -95,12 +95,12 @@ const ViewTour = (props) => {
 
       try {
         setIsReviewsLoading(true);
-        const reviewsUrl =
-            process.env.NODE_ENV === "development"
+        const serverUrl =
+          process.env.NODE_ENV === "development"
             ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/review/getreviewbyid`
             : `${import.meta.env.VITE_API_PRODUCTION_URL}/review/getreviewbyid`;
 
-        const response = await fetch(reviewsUrl, {
+        const response = await fetch(serverUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -131,12 +131,12 @@ const ViewTour = (props) => {
       if (isHostLoading) return;
       try {
         setIsHostLoading(true);
-        const reviewsUrl =
-            process.env.NODE_ENV === "development"
+        const serverUrl =
+          process.env.NODE_ENV === "development"
             ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/user/gethost`
             : `${import.meta.env.VITE_API_PRODUCTION_URL}/user/gethost`;
 
-        const response = await fetch(reviewsUrl, {
+        const response = await fetch(serverUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -203,7 +203,7 @@ const ViewTour = (props) => {
         <IoIosArrowRoundBack
           size={40}
           className="bg-primarycolor p-1 rounded-full text-white"
-          onClick={() => navigate("/tour")}
+          onClick={() => navigate(-1)}
         />
       </div>
       {showPopup && (
@@ -240,6 +240,30 @@ const ViewTour = (props) => {
               <h3 className="text-lg">{tour.price.adult}/night</h3>
             </div>
           </div>
+          {user.wishlist.includes(tour._id) ? (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                updateWishlist(tour._id);
+              }}
+              className="flex items-center space-x-2 border-2 px-5 py-2 shadow-md rounded-full mt-3"
+            >
+              <h3>Remove from Wishlist</h3>
+              <FaHeart size={25} className="text-red-600" />
+            </button>
+          ) : (
+            <button
+            onClick={(e) => {
+              e.stopPropagation();
+              updateWishlist(tour._id);
+            }}
+            className="flex items-center space-x-2 border-2 px-5 py-2 shadow-md rounded-full mt-3"
+          >
+            <h3>Add to Wishlist</h3>
+            <FaHeart size={25} className="text-black opacity-70" />
+          </button>
+          )}
+        
 
           <div className="flex md:space-x-14 max-md:flex-col">
             <div className="md:w-1/2">
