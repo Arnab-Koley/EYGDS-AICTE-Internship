@@ -17,13 +17,10 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
 
   const wishlist = Array.isArray(user?.wishlist) ? user.wishlist : [];
 
-  // Fetch wishlist tours
   useEffect(() => {
     const fetchWishlistTours = async () => {
       if (isToursLoading || wishlist.length === 0) return;
-
       setIsToursLoading(true);
-
       try {
         const serverUrl =
           process.env.NODE_ENV === "development"
@@ -38,9 +35,7 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
           },
           body: JSON.stringify({ tourIds: wishlist }),
         });
-
         const responseData = await response.json();
-
         if (responseData.success) {
           setWishlistTours(responseData.tours);
         } else {
@@ -54,14 +49,12 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
     };
 
     fetchWishlistTours();
-  }, [isLoading,wishlist]);
+  }, [isLoading, wishlist]);
 
-  // Search functionality
   const filteredTours = wishlistTours.filter((tour) =>
     tour.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Sort functionality
   const sortedTours = [...filteredTours].sort((a, b) => {
     if (sortOption === "Title (A-Z)") {
       return a.title.localeCompare(b.title);
@@ -70,10 +63,10 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
       return b.title.localeCompare(a.title);
     }
     if (sortOption === "Latest") {
-      return new Date(b.createdAt) - new Date(a.createdAt); // Assuming `createdAt` is a date field
+      return new Date(b.createdAt) - new Date(a.createdAt);
     }
     if (sortOption === "Oldest") {
-      return new Date(a.createdAt) - new Date(b.createdAt); // Assuming `createdAt` is a date field
+      return new Date(a.createdAt) - new Date(b.createdAt);
     }
     return 0;
   });
@@ -90,10 +83,8 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
 
       <div className="bg-primarycolor p-3 flex items-center justify-between">
         <div className="flex items-center text-white space-x-2 font-semibold text-lg">
-        <PiListHeart size={30} />
-        <h1 className="">
-          My Wishlist ({wishlist.length})
-        </h1>
+          <PiListHeart size={30} />
+          <h1 className="">My Wishlist ({wishlist.length})</h1>
         </div>
         <div className="flex items-center justify-center md:space-x-2 ">
           <IoFilter size={25} color="white" />
@@ -144,21 +135,26 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
                   <h1>{tour.title}</h1>
                   <div className="flex w-full justify-between">
                     <button
-                    onClick={(e) => {
-                      e.stopPropagation(); 
-                      updateWishlist(tour._id);
-                    }}
-                    className="bg-red-600 text-white flex items-center justify-center p-1 rounded-md">
-                      <div><MdDelete size={20} className="mr-1" /></div>
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        updateWishlist(tour._id);
+                      }}
+                      className="bg-red-600 text-white flex items-center justify-center p-1 rounded-md"
+                    >
+                      <div>
+                        <MdDelete size={20} className="mr-1" />
+                      </div>
                       Delete
                     </button>
                     <button
-                     onClick={() => navigate(`/viewtour?id=${tour._id}`)}
-                     className="border-primarycolor border-2 text-primarycolor flex items-center p-1 rounded-md">
-                      <div><IoMdOpen size={20} className="mr-1" /></div>
+                      onClick={() => navigate(`/viewtour?id=${tour._id}`)}
+                      className="border-primarycolor border-2 text-primarycolor flex items-center p-1 rounded-md"
+                    >
+                      <div>
+                        <IoMdOpen size={20} className="mr-1" />
+                      </div>
                       Open
                     </button>
-
                   </div>
                 </div>
               </li>

@@ -3,14 +3,11 @@ import { FaHeart } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa";
 import { MdCurrencyRupee } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
-
 
 const Tour = ({ user, updateWishlist }) => {
   const [tours, setTours] = useState([]);
   const navigate = useNavigate();
   const [isToursLoading, setIsToursLoading] = useState(false);
-
 
   useEffect(() => {
     const fetchTours = async () => {
@@ -30,7 +27,6 @@ const Tour = ({ user, updateWishlist }) => {
             "Content-Type": "application/json",
           },
         });
-
         const responseData = await response.json();
         if (responseData.success) {
           setTours(responseData.tours);
@@ -44,8 +40,6 @@ const Tour = ({ user, updateWishlist }) => {
 
     fetchTours();
   }, []);
-
-  
 
   if (isToursLoading) {
     return <div>Loading...</div>;
@@ -61,14 +55,11 @@ const Tour = ({ user, updateWishlist }) => {
             className="rounded-md list-none relative shadow-shadow-2 m-2 cursor-pointer w-64"
           >
             <div className="relative">
-              {/* Image */}
               <img
                 src={tour.coverPhoto}
                 alt={tour.title}
                 className="h-64 w-64 object-cover bg-gray-500 rounded-t-lg"
               />
-
-              {/* Star and Heart Icons */}
               <div className="absolute top-2 left-2 flex items-center space-x-1 bg-white rounded-full px-2 py-1 z-10">
                 <FaRegStar size={15} color="black" />
                 <span className="text-black text-sm">
@@ -92,15 +83,15 @@ const Tour = ({ user, updateWishlist }) => {
                     : "text-black opacity-70"
                 }`}
                 onClick={(e) => {
-                  e.stopPropagation(); 
+                  e.stopPropagation();
                   updateWishlist(tour._id);
                 }}
               />
             </div>
-
-            {/* Content Below Image */}
             <div className="p-3">
-              <h2 className="font-semibold text-dark-1 truncate">{tour.title}</h2>
+              <h2 className="font-semibold text-dark-1 truncate">
+                {tour.title}
+              </h2>
               <h3 className="text-sm truncate">
                 {tour.address.city}, {tour.address.state}
               </h3>

@@ -1,13 +1,12 @@
-
-import React, { useContext } from 'react';
-import { AuthContext } from '../Context/AuthContext';
-import Login from '../Components/Auth/Login';
-import Signup from '../Components/Auth/Signup';
-import ForgotPassword from '../Components/Auth/ForgotPassword';
-import ResetPassword from '../Components/Auth/ResetPassword';
-import NavigationError from './NavigationError';
-import { useParams,Navigate } from 'react-router-dom';
-import Verify from '../Components/Auth/Verify';
+import React, { useContext } from "react";
+import { useParams, Navigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
+import Login from "../Components/Auth/Login";
+import Signup from "../Components/Auth/Signup";
+import ForgotPassword from "../Components/Auth/ForgotPassword";
+import ResetPassword from "../Components/Auth/ResetPassword";
+import NavigationError from "../Errors/NavigationError";
+import Verify from "../Components/Auth/Verify";
 
 const Auth = () => {
   const { section } = useParams();
@@ -19,27 +18,22 @@ const Auth = () => {
 
   const renderComponent = () => {
     switch (section) {
-      case 'login':
+      case "login":
         return <Login />;
-      case 'signup':
+      case "signup":
         return <Signup />;
-      case 'verify':
-        return <Verify/>
-      case 'forgotpassword':
+      case "verify":
+        return <Verify />;
+      case "forgotpassword":
         return <ForgotPassword />;
-      case 'resetpassword':
+      case "resetpassword":
         return <ResetPassword />;
       default:
         return <NavigationError />;
     }
   };
 
-  return (
-    <div>
-    {renderComponent()}
-    </div>
-
-  )
+  return <div>{renderComponent()}</div>;
 };
 
 export default Auth;

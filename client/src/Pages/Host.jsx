@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Host = () => {
-  return (
-    <div>Host</div>
-  )
-}
+  return <div>Host</div>;
+};
 
-export default Host
+export default Host;

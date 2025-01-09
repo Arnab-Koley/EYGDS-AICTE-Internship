@@ -1,22 +1,15 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
-import { useActionData, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
+import React, { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
-
 import { MdVerifiedUser } from "react-icons/md";
-import { MdErrorOutline } from "react-icons/md";
 import { MdError } from "react-icons/md";
 
 const EmailVerification = (props) => {
   const user = props.user;
-  const { auth, logout } = useContext(AuthContext);
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [initialOtp, setinitialOtp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [timer, setTimer] = useState(60);
   const otpRefs = useRef([]);
-  const navigate = useNavigate();
-
   const [mailVerified, setMailVerified] = useState(user.isMailVerified);
 
   useEffect(() => {
@@ -28,7 +21,7 @@ const EmailVerification = (props) => {
     } else if (timer === 0) {
       clearInterval(interval);
     }
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
+    return () => clearInterval(interval);
   }, [timer]);
 
   const handleOtpInput = (e, index) => {
@@ -51,13 +44,11 @@ const EmailVerification = (props) => {
     const pastedData = e.clipboardData.getData("Text");
 
     if (/^\d{6}$/.test(pastedData)) {
-      // If pasted data is exactly 6 digits
       const newOtp = pastedData.split("");
       setOtp(newOtp);
 
-      // Automatically focus the last input
       otpRefs.current[5]?.focus();
-      e.preventDefault(); // Prevent default paste behavior
+      e.preventDefault();
     }
   };
 
@@ -157,7 +148,6 @@ const EmailVerification = (props) => {
         props.setUser((prev) => ({ ...prev, isMailVerified: true }));
         setOtp(new Array(6).fill(""));
         setMailVerified(true);
-
       } else {
         const errorMessages = Array.isArray(responseData.message)
           ? responseData.message
@@ -183,7 +173,7 @@ const EmailVerification = (props) => {
     <div>
       {mailVerified ? (
         <div className="flex items-center space-x-1">
-          <MdVerifiedUser className="text-green-600" size={25}/>
+          <MdVerifiedUser className="text-green-600" size={25} />
           <span>Your Email is verified</span>
         </div>
       ) : (

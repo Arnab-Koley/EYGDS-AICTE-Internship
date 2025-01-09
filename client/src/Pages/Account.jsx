@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import MyInfo from "../Components/Account/MyInfo";
 import Verify from "../Components/Account/Verify";
@@ -6,14 +6,11 @@ import Verify from "../Components/Account/Verify";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
 const Account = (props) => {
-  // Define state for user
   const user = props.user;
   const setUser = props.setUser;
   const isLoading = props.isLoading;
 
   const navigate = useNavigate();
-
-  
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -32,7 +29,6 @@ const Account = (props) => {
         <div>
           <MyInfo user={user} />
         </div>
-        {/* Render user information */}
         <div>
           <Verify user={user} setUser={setUser} />
         </div>

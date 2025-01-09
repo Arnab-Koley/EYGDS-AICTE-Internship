@@ -79,10 +79,14 @@ const PhoneVerification = (props) => {
     try {
       const serverUrl =
         process.env.NODE_ENV === "development"
-          ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/auth/verifyphonerequest`
-          : `${import.meta.env.VITE_API_PRODUCTION_URL}/auth/verifyphonerequest`;
-        
-          const token = localStorage.getItem("token");
+          ? `${
+              import.meta.env.VITE_API_DEVELOPMENT_URL
+            }/auth/verifyphonerequest`
+          : `${
+              import.meta.env.VITE_API_PRODUCTION_URL
+            }/auth/verifyphonerequest`;
+
+      const token = localStorage.getItem("token");
 
       const response = await fetch(serverUrl, {
         method: "POST",
@@ -131,11 +135,9 @@ const PhoneVerification = (props) => {
           ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/auth/verifyphone`
           : `${import.meta.env.VITE_API_PRODUCTION_URL}/auth/verifyphone`;
 
-        const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
       const otpString = otp.join("");
-
-
 
       const response = await fetch(serverUrl, {
         method: "PUT",
@@ -154,10 +156,13 @@ const PhoneVerification = (props) => {
           await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
         }
         toast.success(responseData.msg);
-        props.setUser((prev) => ({ ...prev, phone: `+91${phone}`, isPhoneVerified: true }));
+        props.setUser((prev) => ({
+          ...prev,
+          phone: `+91${phone}`,
+          isPhoneVerified: true,
+        }));
         setOtp(new Array(6).fill(""));
         setPhoneVerified(true);
-
       } else {
         const errorMessages = Array.isArray(responseData.message)
           ? responseData.message
@@ -194,7 +199,9 @@ const PhoneVerification = (props) => {
                 <label htmlFor="otp" className="">
                   Enter the OTP sent to your phone
                 </label>
-                <h3 className="text-sm text-gray-500">*(Check Email For OTP)</h3>
+                <h3 className="text-sm text-gray-500">
+                  *(Check Email For OTP)
+                </h3>
                 <div className="flex justify-between my-2">
                   {otp.map((value, index) => (
                     <input
@@ -233,7 +240,7 @@ const PhoneVerification = (props) => {
             </div>
           ) : (
             <div className="">
-               <div className="flex items-center space-x-1 text-red-600 my-1">
+              <div className="flex items-center space-x-1 text-red-600 my-1">
                 <MdError className="text-red-600" size={25} />
                 <span>Your Phone is not verified yet</span>
               </div>
@@ -241,7 +248,9 @@ const PhoneVerification = (props) => {
                 Enter your 10-digit mobile number
               </label>
               <div className="flex items-center mb-2">
-                <span className="bg-gray-300 p-2 border border-gray-300 rounded-l">+91</span>
+                <span className="bg-gray-300 p-2 border border-gray-300 rounded-l">
+                  +91
+                </span>
                 <input
                   type="text"
                   value={phone}
@@ -250,7 +259,6 @@ const PhoneVerification = (props) => {
                   placeholder="Enter mobile number"
                 />
               </div>
-             
 
               <form onSubmit={handleOtpRequest} className="w-full">
                 <button

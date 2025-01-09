@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,25 +7,23 @@
   --swiper-theme-color: #fff !important;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{
-
-    font-family: 'Poppins', sans-serif; /* Apply Poppins directly */
-    background-color: #FFFFFF;
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #ffffff;
 }
 
 pre {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-
 select {
-  background-color: #4682B4;
+  background-color: #4682b4;
   color: #fff;
 }
 
@@ -35,25 +32,24 @@ option {
   color: #000;
 }
 
-
 .swiper-button-prev {
   background-image: url(./assets/svg/left-arrow.svg) !important;
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center;
-  }
-  
-  .swiper-button-next {
+}
+
+.swiper-button-next {
   background-image: url(./assets/svg/right-arrow.svg) !important;
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center;
-  }
-  
-  .swiper-button-next::after {
+}
+
+.swiper-button-next::after {
   display: none;
-  }
-  
-  .swiper-button-prev::after {
+}
+
+.swiper-button-prev::after {
   display: none;
-  }
+}

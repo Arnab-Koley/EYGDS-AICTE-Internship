@@ -1,14 +1,12 @@
-import React from 'react'
-import MyListings from '../Components/Listings/MyListings'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import MyListings from "../Components/Listings/My Listing/MyListings";
 
 const Listings = () => {
-  const navigate = useNavigate();
   return (
     <div>
-      <MyListings/>
+      <MyListings />
     </div>
-  )
-}
+  );
+};
 
-export default Listings
+export default Listings;

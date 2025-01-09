@@ -1,6 +1,6 @@
-import React from 'react'
-import EmailVerification from './EmailVerification'
-import PhoneVerification from './PhoneVerification'
+import React from "react";
+import EmailVerification from "./EmailVerification";
+import PhoneVerification from "./PhoneVerification";
 
 const Verify = (props) => {
   return (
@@ -10,7 +10,7 @@ const Verify = (props) => {
       <h1 className="font-semibold text-xl mt-3">Phone Verification</h1>
       <PhoneVerification user={props.user} setUser={props.setUser} />
     </div>
-  )
-}
+  );
+};
 
-export default Verify
+export default Verify;

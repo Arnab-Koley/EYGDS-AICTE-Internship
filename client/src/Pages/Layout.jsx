@@ -1,35 +1,30 @@
 import React, { useState, useEffect, useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../Context/AuthContext";
+import { useParams } from "react-router-dom";
 import Navbar from "../Components/Nav/Navbar";
-import Home from "./Home";
-import Tour from "./Tour";
-import Footer from "../Components/Nav/Footer";
-import { useParams, Navigate } from "react-router-dom";
 import Sidebar from "../Components/Nav/Sidebar";
-import NavigationError from "./NavigationError";
+import Home from "./Home";
 import Account from "./Account";
 import Wishlist from "./Wishlist";
 import Notification from "./Notification";
 import Host from "./Host";
 import ProtectedHost from "../Context/ProtectedHost";
+import NavigationError from "../Errors/NavigationError";
 import Listings from "./Listings";
-
-import { useHost } from "../Context/HostContext";
-import HostError from "./HostError";
-import Reservations from "./Reservations";
 import NewListing from "../Components/Listings/New Listing/NewListing";
 import EditListing from "../Components/Listings/Edit Listing/EditListing";
+import ManageListing from "../Components/Listings/Manage Listing/ManageListing";
+import Reservations from "./Reservations";
+import Tour from "./Tour";
 import ViewTour from "../Components/Tour/ViewTour";
 import BookTour from "../Components/Tour/BookTour";
-import ManageListing from "../Components/Listings/Manage Listing/ManageListing";
 
 const Layout = ({ sidebarOpen, toggleSidebar }) => {
-  const {auth} = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   const { section } = useParams();
   const [isLoading, setIsLoading] = useState(false);
-  const [isWishlistUpdating,setIsWishlistUpdating] = useState(false);
-
+  const [isWishlistUpdating, setIsWishlistUpdating] = useState(false);
   const [user, setUser] = useState({
     email: "",
     name: "",
@@ -44,11 +39,10 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
   });
 
   useEffect(() => {
-
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        console.log("fetching user...")
+        console.log("fetching user...");
 
         const serverUrl =
           process.env.NODE_ENV === "development"
@@ -82,13 +76,11 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
       }
     };
 
-    // Call the async function
     fetchData();
-  }, []); // Empty dependency array ensures this runs only once
+  }, []);
 
-  
   const updateWishlist = async (tourId) => {
-    if(!auth.isLoggedIn){
+    if (!auth.isLoggedIn) {
       toast.error("Please Sign in first");
       return;
     }
@@ -145,10 +137,45 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
 
   const renderComponent = () => {
     switch (section) {
+      case "home":
+        return <Home />;
+
+      case "host":
+        return (
+          <ProtectedHost user={user}>
+            <Host />
+          </ProtectedHost>
+        );
+
       case "account":
         return <Account user={user} setUser={setUser} isLoading={isLoading} />;
-      case "booktour":
-        return <BookTour user={user} />;
+
+      case "wishlist":
+        return (
+          <Wishlist
+            user={user}
+            updateWishlist={updateWishlist}
+            isLoading={isLoading}
+          />
+        );
+
+      case "notification":
+        return <Notification />;
+
+      case "listings":
+        return (
+          <ProtectedHost user={user}>
+            <Listings />
+          </ProtectedHost>
+        );
+
+      case "newlisting":
+        return (
+          <ProtectedHost user={user}>
+            <NewListing />
+          </ProtectedHost>
+        );
+
       case "editlisting":
         return (
           <ProtectedHost user={user}>
@@ -156,46 +183,28 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
           </ProtectedHost>
         );
 
-      case "home":
-        return <Home />;
-      case "host":
+      case "managelisting":
         return (
           <ProtectedHost user={user}>
-            <Host />
+            <ManageListing />
           </ProtectedHost>
         );
-      case "listings":
-        return (
-          <ProtectedHost user={user}>
-            <Listings />
-          </ProtectedHost>
-        );
-        case "managelisting":
-          return (
-            <ProtectedHost user={user}>
-              <ManageListing />
-            </ProtectedHost>
-          );
-      case "newlisting":
-        return (
-          <ProtectedHost user={user}>
-            <NewListing />
-          </ProtectedHost>
-        );
-      case "notification":
-        return <Notification />;
+
       case "reservations":
         return (
           <ProtectedHost user={user}>
             <Reservations />
           </ProtectedHost>
         );
+
       case "tour":
         return <Tour user={user} updateWishlist={updateWishlist} />;
+
       case "viewtour":
         return <ViewTour user={user} updateWishlist={updateWishlist} />;
-      case "wishlist":
-        return <Wishlist user={user} updateWishlist={updateWishlist} isLoading={isLoading} />;
+
+      case "booktour":
+        return <BookTour user={user} />;
 
       default:
         return <NavigationError />;
@@ -205,7 +214,6 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
   return (
     <div className="flex relative">
       <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 w-full z-30"
