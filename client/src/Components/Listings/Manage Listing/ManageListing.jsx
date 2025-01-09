@@ -275,7 +275,7 @@ const ManageListing = () => {
   };
 
 
-  if (!listing) {
+  if (!listing || !newStatus || !statusMsg || !checkInTime || !checkOutTime || !reservationType || !refundPolicy) {
     return <div>Loading...</div>;
   }
 
@@ -423,8 +423,8 @@ const ManageListing = () => {
               onChange={(e) => setReservationType(e.target.value)}
               className="p-1 border-none outline-none rounded"
             >
-              <option value="Automatic">Automatic</option>
               <option value="Manual">Manual</option>
+              <option value="Automatic">Automatic</option>
             </select>
           </div>
 

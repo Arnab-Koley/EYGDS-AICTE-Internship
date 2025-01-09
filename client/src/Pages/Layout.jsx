@@ -19,6 +19,7 @@ import Reservations from "./Reservations";
 import Tour from "./Tour";
 import ViewTour from "../Components/Tour/ViewTour";
 import BookTour from "../Components/Tour/BookTour";
+import MyTour from "../Components/Tour/MyTour";
 
 const Layout = ({ sidebarOpen, toggleSidebar }) => {
   const { auth } = useContext(AuthContext);
@@ -205,6 +206,9 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
 
       case "booktour":
         return <BookTour user={user} />;
+      
+      case "mytour":
+        return <MyTour />;
 
       default:
         return <NavigationError />;

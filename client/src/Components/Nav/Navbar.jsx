@@ -1,5 +1,3 @@
-
-
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/fulllogo.png";
@@ -33,12 +31,11 @@ const Navbar = (props) => {
   const [showHostPopup, setShowHostPopup] = useState(false);
   const [popupMsg, setPopupMsg] = useState("");
 
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const handleImageError = () => {
     setProfileImg(fallbackimg);
   };
-
 
   const handleHostClick = () => {
     let msg = "";
@@ -53,15 +50,15 @@ const Navbar = (props) => {
       setPopupMsg(msg);
       setShowHostPopup(true);
     } else {
-     if(!isHost){
-      setIsHost(true); 
-      navigate("/host");
-     }
+      if (!isHost) {
+        setIsHost(true);
+        navigate("/host");
+      }
     }
   };
 
   const handleGuestClick = () => {
-    if(isHost){
+    if (isHost) {
       setIsHost(false);
       navigate("/home");
     }
@@ -92,7 +89,6 @@ const Navbar = (props) => {
 
   return (
     <div className="h-16 shadow-md flex items-center justify-between w-full px-5 bg-white top-0 sticky z-20">
-     
       {showHostPopup && (
         <HostPopup msg={popupMsg} onClose={() => setShowHostPopup(false)} />
       )}
@@ -101,7 +97,7 @@ const Navbar = (props) => {
         <img src={logo} className="h-10" />
       </div>
       {isHost ? (
-        <div className="w-1/3 flex justify-center  space-x-7 text-gray-1 max-md:hidden flex-wrap">
+        <div className="w-1/3 flex justify-center  space-x-7 text-gray-1 max-md:hidden flex-wrap ">
           <Link
             to="/host"
             className={`${
@@ -113,7 +109,12 @@ const Navbar = (props) => {
           <Link
             to="/listings"
             className={`${
-              isActive("/listings") || isActive("/newlisting") || isActive("/editlisting") || isActive("/managelisting") ? "font-semibold text-dark-1" : ""
+              isActive("/listings") ||
+              isActive("/newlisting") ||
+              isActive("/editlisting") ||
+              isActive("/managelisting")
+                ? "font-semibold text-dark-1"
+                : ""
             }`}
           >
             Listings
@@ -128,7 +129,7 @@ const Navbar = (props) => {
           </Link>
         </div>
       ) : (
-        <div className="w-1/3 flex justify-center text-xl space-x-10 text-gray-1 max-md:hidden">
+        <div className={`w-1/3 flex flex-wrap items-center justify-center ${auth.isLoggedIn ? "" : "text-xl"} space-x-10 text-gray-1 max-md:hidden `}>
           <Link
             to="/home"
             className={`${
@@ -140,10 +141,23 @@ const Navbar = (props) => {
           <Link
             to="/tour"
             className={`${
-              isActive("/tour") || isActive("/viewtour") || isActive("/booktour") ? "font-semibold text-dark-1" : ""
+              isActive("/tour") ||
+              isActive("/viewtour") ||
+              isActive("/booktour")
+                ? "font-semibold text-dark-1"
+                : ""
             }`}
           >
             Tour
+          </Link>
+          <Link
+          to="/mytour"
+          className={`
+            ${isActive("/mytour") ? "font-semibold text-dark-1": ""}
+            ${auth.isLoggedIn ? "": "hidden"}
+            `}
+           >
+            My Tours
           </Link>
         </div>
       )}
@@ -153,26 +167,29 @@ const Navbar = (props) => {
           <div className="flex items-center justify-center space-x-5">
             {isHost ? (
               <button
-              className="flex items-center space-x-1 text-dark-1 font-semibold"
-              onClick={handleGuestClick}
-            >
-              <GoArrowSwitch size={18} />
-              <span className="text-sm">Switch to Guest</span>
-            </button>
-            ):(
-              <button
-              className="flex items-center space-x-1 text-dark-1 font-semibold"
-              onClick={handleHostClick}
-            >
-              <GoArrowSwitch size={18} />
-              <span className="text-sm">Switch to Host</span>
-            </button>
-            )}
-            <FaHeart
+                className="flex items-center space-x-1 text-dark-1 font-semibold"
+                onClick={handleGuestClick}
+              >
+                <GoArrowSwitch size={18} />
+                <span className="text-sm">Switch to Guest</span>
+              </button>
+            ) : (
+              <div className="flex items-center space-x-5">
+                <button
+                className="flex items-center space-x-1 text-dark-1 font-semibold"
+                onClick={handleHostClick}
+              >
+                <GoArrowSwitch size={18} />
+                <span className="text-sm ">Switch to Host</span>
+              </button>
+              <FaHeart
               size={25}
               className="text-red-600"
               onClick={() => navigate("/wishlist")}
             />
+              </div>
+            )}
+            
             <div className="relative">
               <div
                 ref={profileButtonRef}

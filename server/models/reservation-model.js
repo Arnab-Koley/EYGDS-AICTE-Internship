@@ -70,32 +70,27 @@ const reservationSchema = new mongoose.Schema(
       adult: {
         type: Number,
         required: true,
-        min: 0,
-        default: 0,
+        min: 1,
       },
       teen: {
         type: Number,
         required: true,
         min: 0,
-        default: 0,
       },
       child: {
         type: Number,
         required: true,
         min: 0,
-        default: 0,
       },
       infant: {
         type: Number,
         required: true,
         min: 0,
-        default: 0,
       },
       pet: {
         type: Number,
         required: true,
         min: 0,
-        default: 0,
       },
     },
     checkInDate: {

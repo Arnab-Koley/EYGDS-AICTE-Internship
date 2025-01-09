@@ -42,6 +42,19 @@ const ViewTour = ({ user, updateWishlist }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isPolicyExpanded, setIsPolicyExpanded] = useState(false);
 
+
+
+  useEffect(() => {
+    const hash = location.hash;
+    console.log(hash)
+    if (hash === '#house-rule-policy') {
+      const element = document.getElementById('house-rule-policy');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [isLoading]);
+
   useEffect(() => {
     const fetchTour = async () => {
       if (isLoading) {
@@ -73,7 +86,7 @@ const ViewTour = ({ user, updateWishlist }) => {
             5
           ).toFixed(1);
 
-          setRating(avgRating); // Ensure avgRating is a number
+          setRating(avgRating);
         } else {
           toast.error("Failed to fetch tour: " + responseData.msg);
         }
@@ -162,6 +175,8 @@ const ViewTour = ({ user, updateWishlist }) => {
     }
   }, [hostId]);
 
+
+
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
   };
@@ -171,13 +186,13 @@ const ViewTour = ({ user, updateWishlist }) => {
   };
 
   const handleBooking = () => {
-    if (auth.isLoggedIn) {
-      if (tour.status === "Unavailable") {
-        let msg = tour.statusMsg;
-        setPopupType("unavailable");
-          setPopupMsg(msg);
-          setShowPopup(true);
-      } else {
+    if (tour.status === "Unavailable") {
+      let msg = tour.statusMsg;
+      setPopupType("unavailable");
+      setPopupMsg(msg);
+      setShowPopup(true);
+    } else {
+      if (auth.isLoggedIn) {
         let msg = "";
         if (!user.isMailVerified) {
           msg += "Your email is not verified. ";
@@ -192,11 +207,11 @@ const ViewTour = ({ user, updateWishlist }) => {
         } else {
           navigate(`/booktour?id=${tour._id}`);
         }
+      } else {
+        setPopupType("authentication");
+        setPopupMsg("Please login to your account before booking a tour");
+        setShowPopup(true);
       }
-    } else {
-      setPopupType("authentication");
-      setPopupMsg("Please login to your account before booking a tour");
-      setShowPopup(true);
     }
   };
 
@@ -461,7 +476,7 @@ const ViewTour = ({ user, updateWishlist }) => {
             )}
           </div>
           <div className="h-[1px] bg-gray-400 mt-10 mb-5"></div>
-          <h1 className="text-xl font-semibold">Things to know</h1>
+          <div id="house-rule-policy" className="text-xl font-semibold">Things to know</div>
           <div className="mt-3 flex w-full lg:space-x-3 max-lg:space-y-3 max-lg:flex-col">
             <div className="lg:w-1/3">
               <h3 className="font-medium mb-3">House Rules</h3>

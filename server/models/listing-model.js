@@ -215,6 +215,10 @@ const listingSchema = new mongoose.Schema(
       type: String,
       default: "08:AM - 04:00 PM",
     },
+    checkInDay: {
+      type: Number,
+      default: 10,
+    },
     status: {
       type: String,
       default: "hidden",
