@@ -19,7 +19,8 @@ import Reservations from "./Reservations";
 import Tour from "./Tour";
 import ViewTour from "../Components/Tour/ViewTour";
 import BookTour from "../Components/Tour/BookTour";
-import MyTour from "../Components/Tour/MyTour";
+import MyTours from "../Components/Tour/MyTours";
+import ViewMyTour from "../Components/Tour/ViewMyTour";
 
 const Layout = ({ sidebarOpen, toggleSidebar }) => {
   const { auth } = useContext(AuthContext);
@@ -140,17 +141,14 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
     switch (section) {
       case "home":
         return <Home />;
-
       case "host":
         return (
           <ProtectedHost user={user}>
             <Host />
           </ProtectedHost>
         );
-
       case "account":
         return <Account user={user} setUser={setUser} isLoading={isLoading} />;
-
       case "wishlist":
         return (
           <Wishlist
@@ -159,57 +157,48 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
             isLoading={isLoading}
           />
         );
-
       case "notification":
         return <Notification />;
-
       case "listings":
         return (
           <ProtectedHost user={user}>
             <Listings />
           </ProtectedHost>
         );
-
       case "newlisting":
         return (
           <ProtectedHost user={user}>
             <NewListing />
           </ProtectedHost>
         );
-
       case "editlisting":
         return (
           <ProtectedHost user={user}>
             <EditListing />
           </ProtectedHost>
         );
-
       case "managelisting":
         return (
           <ProtectedHost user={user}>
             <ManageListing />
           </ProtectedHost>
         );
-
       case "reservations":
         return (
           <ProtectedHost user={user}>
             <Reservations />
           </ProtectedHost>
         );
-
       case "tour":
         return <Tour user={user} updateWishlist={updateWishlist} />;
-
       case "viewtour":
         return <ViewTour user={user} updateWishlist={updateWishlist} />;
-
       case "booktour":
         return <BookTour user={user} />;
-      
-      case "mytour":
-        return <MyTour />;
-
+      case "mytours":
+        return <MyTours />;
+      case "viewmytour":
+        return <ViewMyTour />;
       default:
         return <NavigationError />;
     }

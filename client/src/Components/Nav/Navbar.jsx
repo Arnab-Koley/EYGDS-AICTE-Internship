@@ -151,9 +151,9 @@ const Navbar = (props) => {
             Tour
           </Link>
           <Link
-          to="/mytour"
+          to="/mytours"
           className={`
-            ${isActive("/mytour") ? "font-semibold text-dark-1": ""}
+            ${isActive("/mytours") ? "font-semibold text-dark-1": ""}
             ${auth.isLoggedIn ? "": "hidden"}
             `}
            >

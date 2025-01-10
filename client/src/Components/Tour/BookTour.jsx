@@ -20,6 +20,7 @@ const BookTour = ({ user }) => {
 
   const [formData, setFormData] = useState({
     tourId: tourId,
+    title: "",
     name: "",
     primaryPhoneNo: "",
     secondaryPhoneNo: "",
@@ -217,6 +218,7 @@ const BookTour = ({ user }) => {
     const updatedFormData = {
       ...formData,
       price: totalPrice,
+      title: `Trip to ${tour.address.state}`
     };
 
     const loadingToastId = toast.loading("Submitting...");
@@ -242,8 +244,15 @@ const BookTour = ({ user }) => {
 
       const responseData = await response.json();
       if (responseData.success) {
+        const elapsed = Date.now() - start;
+        if (elapsed < 2000) {
+          await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
+        }
+        toast.success(responseData.msg);
+        navigate('/mytours');
         setFormData({
           tourId: tourId,
+          title: "",
           name: "",
           primaryPhoneNo: "",
           secondaryPhoneNo: "",
@@ -270,12 +279,6 @@ const BookTour = ({ user }) => {
           checkOutDate: "",
           price: 0,
         });
-        const elapsed = Date.now() - start;
-        if (elapsed < 2000) {
-          await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
-        }
-        toast.success(responseData.msg);
-        navigate('/mytour');
       } else {
         toast.error("Failed to booking tour: " + responseData.msg);
       }

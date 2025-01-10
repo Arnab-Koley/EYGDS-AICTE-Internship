@@ -8,6 +8,7 @@ const createReservation = async (req, res, next) => {
     const userId = req.userId;
     const {
       tourId,
+      title,
       name,
       primaryPhoneNo,
       secondaryPhoneNo,
@@ -47,6 +48,7 @@ const createReservation = async (req, res, next) => {
     const newReservation = new Reservation({
       reserverId: userId,
       tourId,
+      title,
       name,
       primaryPhoneNo,
       secondaryPhoneNo,

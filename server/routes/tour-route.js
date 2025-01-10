@@ -6,5 +6,7 @@ const verifyToken = require('../middlewares/verifyToken');
 router.get('/getalltour', tourcontroller.getAllTours);
 router.post('/gettourbyid',tourcontroller.getTourById);
 router.post('/gettoursbyids',verifyToken,tourcontroller.getToursByIds);
+router.get('/getmytours',verifyToken,tourcontroller.getMyTours);
+router.post('/getmytourbyid',verifyToken,tourcontroller.getMyTourById);
 
 module.exports = router;

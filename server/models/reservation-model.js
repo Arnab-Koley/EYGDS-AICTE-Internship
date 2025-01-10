@@ -12,6 +12,10 @@ const reservationSchema = new mongoose.Schema(
       ref: "Listing",
       required: true,
     },
+    title: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
