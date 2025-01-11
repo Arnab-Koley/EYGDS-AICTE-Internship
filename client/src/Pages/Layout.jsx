@@ -52,7 +52,7 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
         const serverUrl =
           process.env.NODE_ENV === "development"
             ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/user/getuser`
-            : `${import.meta.env.VITE_API_PRODUCTION_URL}/auth/getuser`;
+            : `${import.meta.env.VITE_API_PRODUCTION_URL}/user/getuser`;
 
         const token = localStorage.getItem("token");
 
