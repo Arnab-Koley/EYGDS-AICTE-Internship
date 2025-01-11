@@ -3,11 +3,16 @@ import fallbackimg from "../../assets/icon/profile.png";
 
 const MyInfo = (props) => {
   const user = props.user;
+  const isLoading = props.isLoading;
 
   const [profileImg, setProfileImg] = useState(user.profileImg);
   const handleImageError = () => {
     setProfileImg(fallbackimg);
   };
+
+  if(isLoading){
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="bg-white flex flex-col shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] rounded-lg p-5 max-w-96">

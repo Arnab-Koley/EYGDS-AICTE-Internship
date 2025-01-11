@@ -30,10 +30,10 @@ const Account = (props) => {
       </div>
       <div className="flex max-md:flex-col gap-3">
         <div>
-          <MyInfo user={user} />
+          <MyInfo user={user}  isLoading={isLoading} />
         </div>
         <div>
-          <Verify user={user} setUser={setUser} />
+          <Verify user={user} setUser={setUser}  isLoading={isLoading} />
         </div>
       </div>
 
