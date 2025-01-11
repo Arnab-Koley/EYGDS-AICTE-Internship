@@ -73,7 +73,7 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
 
   return (
     <div className="p-5">
-      <div className="w-full mb-5">
+      <div className="w-full mb-5 max-md:hidden">
         <IoIosArrowRoundBack
           size={40}
           className="bg-primarycolor p-1 rounded-full text-white"

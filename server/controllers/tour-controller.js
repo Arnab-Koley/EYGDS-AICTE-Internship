@@ -5,10 +5,6 @@ const getAllTours = async (req, res, next) => {
   try {
     const tours = await Listing.find({ status: { $ne: "hidden" } });
 
-    if (!tours.length) {
-      return res.status(404).json({ success: false, msg: "No tours found." });
-    }
-
     res.status(200).json({
       success: true,
       tours,

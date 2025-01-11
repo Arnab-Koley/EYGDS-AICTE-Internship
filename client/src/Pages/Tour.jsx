@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaHeart } from "react-icons/fa";
-import { FaRegStar } from "react-icons/fa";
+import { FaHeart, FaRegStar } from "react-icons/fa";
 import { MdCurrencyRupee } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
@@ -47,63 +46,66 @@ const Tour = ({ user, updateWishlist }) => {
 
   return (
     <div className="mt-5 p-5 flex justify-center">
-      <ul className="flex flex-wrap max-md:justify-center">
-        {tours.map((tour) => (
-          <li
-            key={tour._id}
-            onClick={() => navigate(`/viewtour?id=${tour._id}`)}
-            className="rounded-md list-none relative shadow-shadow-2 m-2 cursor-pointer w-64"
-          >
-            <div className="relative">
-              <img
-                src={tour.coverPhoto}
-                alt={tour.title}
-                className="h-64 w-64 object-cover bg-gray-500 rounded-t-lg"
-              />
-              <div className="absolute top-2 left-2 flex items-center space-x-1 bg-white rounded-full px-2 py-1 z-10">
-                <FaRegStar size={15} color="black" />
-                <span className="text-black text-sm">
-                  {tour.rating
-                    ? (
-                        (tour.rating.cleanliness +
-                          tour.rating.accuracy +
-                          tour.rating.communication +
-                          tour.rating.location +
-                          tour.rating.value) /
-                        5
-                      ).toFixed(1)
-                    : "N/A"}
-                </span>
+      {tours.length === 0 ? (
+        <h1 className="text-xl">No tours available</h1>
+      ) : (
+        <ul className="flex flex-wrap max-md:justify-center">
+          {tours.map((tour) => (
+            <li
+              key={tour._id}
+              onClick={() => navigate(`/viewtour?id=${tour._id}`)}
+              className="rounded-md list-none relative shadow-shadow-2 m-2 cursor-pointer w-64"
+            >
+              <div className="relative">
+                <img
+                  src={tour.coverPhoto}
+                  alt={tour.title}
+                  className="h-64 w-64 object-cover bg-gray-500 rounded-t-lg"
+                />
+                <div className="absolute top-2 left-2 flex items-center space-x-1 bg-white rounded-full px-2 py-1 z-10">
+                  <FaRegStar size={15} color="black" />
+                  <span className="text-black text-sm">
+                    {tour.rating
+                      ? (
+                          (tour.rating.cleanliness +
+                            tour.rating.accuracy +
+                            tour.rating.communication +
+                            tour.rating.location +
+                            tour.rating.value) / 5
+                        ).toFixed(1)
+                      : "N/A"}
+                  </span>
+                </div>
+                <FaHeart
+                  size={25}
+                  className={`absolute shadow-inner top-2 right-2 z-10 ${
+                    user.wishlist.includes(tour._id)
+                      ? "text-red-600"
+                      : "text-black opacity-70"
+                  }`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    updateWishlist(tour._id);
+                  }}
+                />
               </div>
-              <FaHeart
-                size={25}
-                className={`absolute shadow-inner top-2 right-2 z-10 ${
-                  user.wishlist.includes(tour._id)
-                    ? "text-red-600"
-                    : "text-black opacity-70"
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  updateWishlist(tour._id);
-                }}
-              />
-            </div>
-            <div className="p-3">
-              <h2 className="font-semibold text-dark-1 truncate">
-                {tour.title}
-              </h2>
-              <h3 className="text-sm truncate">
-                {tour.address.city}, {tour.address.state}
-              </h3>
-              <div className="flex items-center">
-                <MdCurrencyRupee size={20} />
-                <h3 className="font-semibold">{tour.price.adult}</h3>
-                <h3 className="ml-2">night</h3>
+              <div className="p-3">
+                <h2 className="font-semibold text-dark-1 truncate">
+                  {tour.title}
+                </h2>
+                <h3 className="text-sm truncate">
+                  {tour.address.city}, {tour.address.state}
+                </h3>
+                <div className="flex items-center">
+                  <MdCurrencyRupee size={20} />
+                  <h3 className="font-semibold">{tour.price.adult}</h3>
+                  <h3 className="ml-2">night</h3>
+                </div>
               </div>
-            </div>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

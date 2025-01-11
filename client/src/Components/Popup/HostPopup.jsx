@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const HostPopup = ({ msg, onClose }) => {
   const navigate = useNavigate();
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 cursor-pointer">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 cursor-pointer px-5">
       <div className="bg-white rounded-lg p-6 w-96 relative shadow-lg">
         <IoClose
           size={25}
@@ -15,7 +15,7 @@ const HostPopup = ({ msg, onClose }) => {
           className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
         />
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 mt-3">
           <TiInfoOutline size={25} />
           <h2 className="text-lg font-semibold">
             Host access can't be possible

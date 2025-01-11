@@ -21,12 +21,15 @@ import ViewTour from "../Components/Tour/ViewTour";
 import BookTour from "../Components/Tour/BookTour";
 import MyTours from "../Components/Tour/MyTours";
 import ViewMyTour from "../Components/Tour/ViewMyTour";
+import Help from "./Help";
 
 const Layout = ({ sidebarOpen, toggleSidebar }) => {
   const { auth } = useContext(AuthContext);
   const { section } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [isWishlistUpdating, setIsWishlistUpdating] = useState(false);
+  const [showHostPopup, setShowHostPopup] = useState(false);
+  const [popupMsg, setPopupMsg] = useState("");
   const [user, setUser] = useState({
     email: "",
     name: "",
@@ -199,6 +202,8 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
         return <MyTours />;
       case "viewmytour":
         return <ViewMyTour />;
+      case "help":
+        return <Help/>;
       default:
         return <NavigationError />;
     }
@@ -206,7 +211,13 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
 
   return (
     <div className="flex relative">
-      <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <Sidebar
+      sidebarOpen={sidebarOpen}
+      toggleSidebar={toggleSidebar}
+      user={user}
+      setShowHostPopup={setShowHostPopup}
+      setPopupMsg={setPopupMsg}
+      />
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 w-full z-30"
@@ -214,7 +225,14 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
         ></div>
       )}
       <div className="w-full h-screen overflow-y-scroll">
-        <Navbar toggleSidebar={toggleSidebar} user={user} />
+        <Navbar 
+        toggleSidebar={toggleSidebar}
+        user={user}
+        showHostPopup={showHostPopup}
+        setShowHostPopup={setShowHostPopup}
+        popupMsg={popupMsg}
+        setPopupMsg={setPopupMsg}
+        />
         {renderComponent()}
       </div>
     </div>

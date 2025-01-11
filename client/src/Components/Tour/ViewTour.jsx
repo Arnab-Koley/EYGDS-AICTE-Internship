@@ -225,7 +225,7 @@ const ViewTour = ({ user, updateWishlist }) => {
         <IoIosArrowRoundBack
           size={40}
           className="bg-primarycolor p-1 rounded-full text-white"
-          onClick={() => navigate("/tour")}
+          onClick={() => navigate(-1)}
         />
       </div>
       {showPopup && (

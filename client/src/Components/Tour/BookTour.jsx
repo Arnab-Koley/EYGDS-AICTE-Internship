@@ -310,7 +310,7 @@ const BookTour = ({ user }) => {
       </div>
 
       <div className="flex justify-center">
-        <div className="shadow-md w-1/2 rounded-md">
+        <div className="shadow-md  rounded-md">
           <div className="bg-primarycolor relative rounded-t-md">
             <h1 className="text-2xl w-full text-center text-white font-semibold py-2">
               Booking Form
@@ -343,7 +343,7 @@ const BookTour = ({ user }) => {
               )}
             </div>
           </div>
-          <div className="px-10 pb-10">
+          <div className="px-10 max-sm:px-5 pb-10">
             <h1 className="text-center text-xl mt-10 font-semibold">
               Basic Details
             </h1>

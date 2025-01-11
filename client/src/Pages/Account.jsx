@@ -1,14 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 import MyInfo from "../Components/Account/MyInfo";
 import Verify from "../Components/Account/Verify";
 
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 const Account = (props) => {
   const user = props.user;
   const setUser = props.setUser;
   const isLoading = props.isLoading;
+   const {logout } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -25,7 +28,7 @@ const Account = (props) => {
           onClick={() => navigate(-1)}
         />
       </div>
-      <div className="flex md:space-x-3 max-md:flex-col max-md:space-y-3">
+      <div className="flex max-md:flex-col gap-3">
         <div>
           <MyInfo user={user} />
         </div>
@@ -33,6 +36,8 @@ const Account = (props) => {
           <Verify user={user} setUser={setUser} />
         </div>
       </div>
+
+      
     </div>
   );
 };

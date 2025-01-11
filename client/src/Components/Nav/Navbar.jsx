@@ -8,16 +8,21 @@ import ProfilePopup from "../Popup/ProfilePopup";
 import fallbackimg from "../../assets/icon/profile.png";
 
 import { FaHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 import { IoIosNotifications } from "react-icons/io";
 import HostPopup from "../Popup/HostPopup";
 
 import { useHost } from "../../Context/HostContext";
 
-const Navbar = (props) => {
+const Navbar = ({
+  toggleSidebar,
+  user,
+  showHostPopup,
+  setShowHostPopup,
+  popupMsg,
+  setPopupMsg,
+}) => {
   const { isHost, setIsHost } = useHost();
-  const toggleSidebar = props.toggleSidebar;
-  const user = props.user;
-
   const { auth } = useContext(AuthContext);
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
@@ -28,8 +33,6 @@ const Navbar = (props) => {
   const profileButtonRef = useRef(null);
 
   const [profileImg, setProfileImg] = useState(auth.profileImg);
-  const [showHostPopup, setShowHostPopup] = useState(false);
-  const [popupMsg, setPopupMsg] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -129,7 +132,11 @@ const Navbar = (props) => {
           </Link>
         </div>
       ) : (
-        <div className={`w-1/3 flex flex-wrap items-center justify-center ${auth.isLoggedIn ? "" : "text-xl"} space-x-10 text-gray-1 max-md:hidden `}>
+        <div
+          className={`w-1/3 flex flex-wrap  justify-center ${
+            auth.isLoggedIn ? "" : "text-xl"
+          } space-x-10 text-gray-1 max-md:hidden `}
+        >
           <Link
             to="/home"
             className={`${
@@ -151,12 +158,16 @@ const Navbar = (props) => {
             Tour
           </Link>
           <Link
-          to="/mytours"
-          className={`
-            ${isActive("/mytours") ? "font-semibold text-dark-1": ""}
-            ${auth.isLoggedIn ? "": "hidden"}
+            to="/mytours"
+            className={`
+            ${
+              isActive("/mytours") || isActive("/viewmytour")
+                ? "font-semibold text-dark-1"
+                : ""
+            }
+            ${auth.isLoggedIn ? "" : "hidden"}
             `}
-           >
+          >
             My Tours
           </Link>
         </div>
@@ -176,20 +187,21 @@ const Navbar = (props) => {
             ) : (
               <div className="flex items-center space-x-5">
                 <button
-                className="flex items-center space-x-1 text-dark-1 font-semibold"
-                onClick={handleHostClick}
-              >
-                <GoArrowSwitch size={18} />
-                <span className="text-sm ">Switch to Host</span>
-              </button>
-              <FaHeart
-              size={25}
-              className="text-red-600"
-              onClick={() => navigate("/wishlist")}
-            />
+                  className="flex items-center space-x-1 text-dark-1 font-semibold"
+                  onClick={handleHostClick}
+                >
+                  <GoArrowSwitch size={18} />
+                  <span className="text-sm max-lg:hidden">Switch to Host</span>
+                  <span className="text-sm lg:hidden">Host</span>
+                </button>
+                <FaHeart
+                  size={25}
+                  className="text-red-600"
+                  onClick={() => navigate("/wishlist")}
+                />
               </div>
             )}
-            
+
             <div className="relative">
               <div
                 ref={profileButtonRef}
@@ -226,11 +238,27 @@ const Navbar = (props) => {
           </button>
         )}
       </div>
-      <IoIosNotifications
-        size={30}
-        className="md:hidden"
-        onClick={() => navigate("/notification")}
-      />
+      <div className={`flex items-center ${auth.isLoggedIn ? "" : "hidden"}`}>
+        {isActive("/wishlist") ? (
+          <FaHeart
+            size={25}
+            className="text-red-600 mr-3 md:hidden"
+            onClick={() => navigate("/wishlist")}
+          />
+        ) : (
+          <FaRegHeart
+            size={25}
+            className="text-red-600 mr-3 md:hidden"
+            onClick={() => navigate("/wishlist")}
+          />
+        )}
+
+        <IoIosNotifications
+          size={30}
+          className="md:hidden"
+          onClick={() => navigate("/notification")}
+        />
+      </div>
     </div>
   );
 };

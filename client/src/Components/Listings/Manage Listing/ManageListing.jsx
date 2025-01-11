@@ -275,7 +275,7 @@ const ManageListing = () => {
   };
 
 
-  if (!listing || !newStatus || !statusMsg || !checkInTime || !checkOutTime || !reservationType || !refundPolicy) {
+  if (!listing || !newStatus || !checkInTime || !checkOutTime || !reservationType || !refundPolicy) {
     return <div>Loading...</div>;
   }
 

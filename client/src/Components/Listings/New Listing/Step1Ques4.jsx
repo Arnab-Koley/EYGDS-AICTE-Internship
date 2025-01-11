@@ -8,7 +8,7 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
 
   const handleInputChange = (field, value) => {
     const updatedAddress = { ...address, [field]: value };
-    updateData("address", updatedAddress); // Update parent state
+    updateData("address", updatedAddress); 
   };
 
   
@@ -17,10 +17,9 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
     address.streetAddress &&
     address.city &&
     address.state &&
-    address.pinCode;
-    //  &&
-    // address.specificLocation.lat &&
-    // address.specificLocation.lng;
+    address.pinCode &&
+    address.specificLocation.lat &&
+    address.specificLocation.lng;
 
   return (
     <div className="flex flex-col lg:px-80 px-20 max-md:px-5">
@@ -32,12 +31,11 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
       </p>
 
       <div className="flex flex-col space-y-4 mt-5">
-        {/* Country (Default) */}
         <div>
           <label className="block font-medium mb-1">Country *</label>
           <input
             type="text"
-            value={address.country || "India"} // Default to "India"
+            value={address.country || "India"}
             readOnly
             className="border-2 border-gray-300 rounded-lg p-3 w-full bg-gray-100 cursor-not-allowed"
           />
@@ -128,7 +126,7 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
         </div>
 
          {/* Google Map API Needed */}
-        {/* <div>
+        <div>
         <label className="block font-medium mb-1">Select Specific Location</label>
         <Map
           specificLocation={address.specificLocation}
@@ -139,7 +137,7 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
             })
           }
         />
-      </div> */}
+      </div>
 
 
       </div>
