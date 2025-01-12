@@ -1,7 +1,9 @@
 import React from "react";
 import img1 from "../../assets/img/img1.png";
 import img2 from "../../assets/img/img2.png";
-import img3 from '../../assets/img/img3.png'
+import img3 from '../../assets/img/img3.png';
+import img4 from '../../assets/img/img4.png'
+import img5 from '../../assets/img/img5.png'
 import {useNavigate} from "react-router-dom"
 
 import { MdOutlineTravelExplore } from "react-icons/md";
@@ -54,13 +56,10 @@ const Intro = () => {
               <img src={img3} alt="Destination 2" className="rounded-lg"/>
           </SwiperSlide>
           <SwiperSlide className="flex items-center justify-center">
-              <img src={img3} alt="Destination 2" className="rounded-lg"/>
+              <img src={img4} alt="Destination 2" className="rounded-lg"/>
           </SwiperSlide>
           <SwiperSlide className="flex items-center justify-center">
-              <img src={img3} alt="Destination 2" className="rounded-lg"/>
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center">
-              <img src={img3} alt="Destination 2" className="rounded-lg"/>
+              <img src={img5} alt="Destination 2" className="rounded-lg"/>
           </SwiperSlide>
           
         </Swiper>
