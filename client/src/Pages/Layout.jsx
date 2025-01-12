@@ -23,6 +23,7 @@ import BookTour from "../Components/Tour/BookTour";
 import MyTours from "../Components/Tour/MyTours";
 import ViewMyTour from "../Components/Tour/ViewMyTour";
 import Help from "./Help";
+import ViewMyReservation from "../Components/Reservations/ViewMyReservation";
 
 const Layout = ({ sidebarOpen, toggleSidebar }) => {
   const { auth } = useContext(AuthContext);
@@ -191,6 +192,12 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
         return (
           <ProtectedHost user={user}>
             <Reservations />
+          </ProtectedHost>
+        );
+      case "viewmyreservation":
+        return (
+          <ProtectedHost user={user}>
+            <ViewMyReservation />
           </ProtectedHost>
         );
       case "tour":

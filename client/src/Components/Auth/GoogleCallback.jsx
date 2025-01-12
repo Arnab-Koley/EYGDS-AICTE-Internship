@@ -1,4 +1,4 @@
-// src/Components/Auth/GoogleCallback.jsx
+
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
@@ -21,9 +21,9 @@ const GoogleCallback = () => {
       toast.error('Google login failed');
       navigate('/auth/login');
     } else if (token) {
-      // Save token to your state or localStorage for authentication
-      login(token); // Assuming you have a login function that accepts the token
-      navigate('/home'); // Redirect to home after successful login
+
+      login(token); 
+      navigate('/home'); 
     }
   }, [search, navigate, login]);
 

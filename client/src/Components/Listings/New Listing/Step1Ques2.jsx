@@ -3,10 +3,10 @@ import propertyTypeOptions from "../../../assets/data/propertyTypeData";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
 const Step1Ques2 = ({ data, updateData, handleNavigation }) => {
-  const selectedPropertyType = data.propertyType; // Use the persisted propertyType from the parent state
+  const selectedPropertyType = data.propertyType;
 
   const handleSelectGeography = (propertyType) => {
-    updateData("propertyType", propertyType); // Update the parent state
+    updateData("propertyType", propertyType);
   };
 
   return (
@@ -35,7 +35,7 @@ const Step1Ques2 = ({ data, updateData, handleNavigation }) => {
         ))}
       </div>
       <div className="flex justify-between items-center py-10">
-        {/* Back button */}
+  
         <button
           onClick={() => handleNavigation(-1)}
           className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
@@ -44,7 +44,7 @@ const Step1Ques2 = ({ data, updateData, handleNavigation }) => {
           <span>Back</span>
         </button>
 
-        {/* Next button */}
+    
         <button
           onClick={() => handleNavigation(1)}
           className={`px-10 py-3 rounded-lg text-2xl ${
@@ -52,7 +52,7 @@ const Step1Ques2 = ({ data, updateData, handleNavigation }) => {
               ? "bg-primarycolor text-white cursor-pointer"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
-          disabled={!selectedPropertyType} // Disable button if no option is selected
+          disabled={!selectedPropertyType} 
         >
           Next
         </button>

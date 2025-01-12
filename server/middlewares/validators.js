@@ -43,7 +43,7 @@ const passwordValidator = (password) => {
 };
 
 
-// Name Validator
+
 const nameValidator = (name) => {
     if (!name) {
         return 'Name is required.';

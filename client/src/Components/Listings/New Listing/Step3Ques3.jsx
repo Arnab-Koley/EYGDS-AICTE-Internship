@@ -1,6 +1,6 @@
 import React from "react";
 import Toggle from "react-toggle";
-import "react-toggle/style.css"; // Import toggle styles (if needed)
+import "react-toggle/style.css"; 
 
 const Step3Ques3 = ({ data, updateData, handleNavigation }) => {
   const { guestType } = data;
@@ -21,7 +21,7 @@ const Step3Ques3 = ({ data, updateData, handleNavigation }) => {
       <p className="text-center mt-2">Specify the guest you are allowing. You can can change it later.</p>
 
       <div className="space-y-5 mt-10 text-xl font-medium">
-        {/* Adult Toggle (disabled and default true) */}
+     
         <div className="flex items-center justify-between">
           <div>Adult <span className="text-base font-normal">(Age 18+)</span></div>
           <Toggle defaultChecked={true} disabled />
@@ -51,7 +51,7 @@ const Step3Ques3 = ({ data, updateData, handleNavigation }) => {
           />
         </div>
 
-        {/* Pet Toggle */}
+      
         <div className="flex items-center justify-between">
         <div>Pet</div>
           <Toggle
@@ -62,7 +62,7 @@ const Step3Ques3 = ({ data, updateData, handleNavigation }) => {
       </div>
 
       <div className="flex justify-between items-center py-10">
-        {/* Back Button */}
+     
         <button
           onClick={() => handleNavigation(-1)}
           className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
@@ -70,7 +70,7 @@ const Step3Ques3 = ({ data, updateData, handleNavigation }) => {
           Back
         </button>
 
-        {/* Next Button */}
+     
         <button
           onClick={() => handleNavigation(1)}
           className="bg-primarycolor text-white px-10 py-3 rounded-lg text-2xl"

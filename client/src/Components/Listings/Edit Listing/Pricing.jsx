@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Toggle from "react-toggle";
-import "react-toggle/style.css"; // Import toggle styles (if needed)
+import "react-toggle/style.css"; 
 import { MdCurrencyRupee } from "react-icons/md";
 
 const Pricing = ({ data, updateData }) => {
@@ -15,20 +15,16 @@ const Pricing = ({ data, updateData }) => {
   };
 
   const handlePriceChange = (guestType, value) => {
-    // Ensure the value is a number or empty string and is not negative
-    let numericValue = value.trim(); // Trim to remove extra spaces
-    
-    // If value is empty, set to '0', otherwise, parse the number correctly
+    let numericValue = value.trim(); 
+
     if (numericValue === "") {
       numericValue = "0";
     } else {
-      // Remove leading zeros
       numericValue = numericValue.replace(/^0+/, "");
     }
 
-    // Update the state with the final value
     const updatedPrice = { ...price, [guestType]: numericValue };
-    updateData('price', updatedPrice); // Update parent state with new price
+    updateData('price', updatedPrice); 
   };
 
   return (
@@ -37,13 +33,11 @@ const Pricing = ({ data, updateData }) => {
         Allowed Guest
       </h1>
       <div className="space-y-3 mt-2 font-medium w-60">
-        {/* Adult Toggle (disabled and default true) */}
         <div className="flex items-center justify-between">
           <div>Adult <span className=" text-sm font-normal">(Age 18+)</span></div>
           <Toggle defaultChecked={true} disabled />
         </div>
 
-        {/* Teen Toggle */}
         <div className="flex items-center justify-between">
           <div>Teen <span className="text-base font-normal">(13-17)</span></div>
           <Toggle
@@ -52,7 +46,6 @@ const Pricing = ({ data, updateData }) => {
           />
         </div>
 
-        {/* Child Toggle */}
         <div className="flex items-center justify-between">
           <div>Child <span className="text-base font-normal">(2-12)</span></div>
           <Toggle
@@ -61,7 +54,6 @@ const Pricing = ({ data, updateData }) => {
           />
         </div>
 
-        {/* Infant Toggle */}
         <div className="flex items-center justify-between">
           <div>Infant <span className="text-base font-normal">(Under 2)</span></div>
           <Toggle
@@ -70,7 +62,6 @@ const Pricing = ({ data, updateData }) => {
           />
         </div>
 
-        {/* Pet Toggle */}
         <div className="flex items-center justify-between">
           <div>Pet</div>
           <Toggle
@@ -102,7 +93,6 @@ const Pricing = ({ data, updateData }) => {
           </div>
         </div>
 
-        {/* Teen Price Input */}
         <div className="flex flex-col ">
           <div className=''>Teen <span className="text-sm font-normal">(13-17)</span></div>
           <div className='flex items-center  space-x-1'>
@@ -121,7 +111,6 @@ const Pricing = ({ data, updateData }) => {
           </div>
         </div>
 
-        {/* Child Price Input */}
         <div className="flex flex-col ">
           <div className=''>Child <span className="text-sm font-normal">(2-12)</span></div>
           <div className='flex items-center space-x-1'>
@@ -140,7 +129,6 @@ const Pricing = ({ data, updateData }) => {
           </div>
         </div>
 
-        {/* Infant Price Input */}
         <div className="flex  flex-col">
           <div className=''>Infant <span className="text-sm font-normal">(Under 2)</span></div>
           <div className='flex items-center  space-x-1'>
@@ -159,7 +147,6 @@ const Pricing = ({ data, updateData }) => {
           </div>
         </div>
 
-        {/* Pet Price Input */}
         <div className="flex  flex-col ">
           <div className=''>Pet</div>
           <div className='flex items-center  space-x-1'>

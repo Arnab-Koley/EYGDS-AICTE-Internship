@@ -27,16 +27,16 @@ import Step3Ques5 from "./Step3Ques5";
 const NewListing = () => {
   const {auth} = useContext(AuthContext);
   const [currentScreen, setCurrentScreen] = useState(0);
-  const [direction, setDirection] = useState(1); // Direction for animation (1 for next, -1 for previous)
+  const [direction, setDirection] = useState(1);
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleNavigation = (stepDirection) => {
-    setDirection(stepDirection); // Set direction for animation (next or prev)
+    setDirection(stepDirection); 
     setCurrentScreen((prev) => prev + stepDirection);
   };
 
-  // Listing data state (used for updating across components)
+
   const [listingData, setListingData] = useState({
     geography: [],
     propertyType: "",
@@ -127,8 +127,7 @@ const NewListing = () => {
           await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
         }
         toast.success(responseData.msg);
-  
-        // Reset listingData to initial state
+
         setListingData({
           geography: [],
           propertyType: "",
@@ -177,7 +176,7 @@ const NewListing = () => {
           },
         });
   
-        navigate(-1); // Navigate back after success
+        navigate(-1); 
       } else {
         throw new Error(responseData.message || "Something went wrong");
       }

@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
 const Step2Ques2 = ({ data, updateData, handleNavigation }) => {
-  const [description, setDescription] = useState(data.description || ""); // Initialize with existing data or empty string
-  const maxLength = 500; // Maximum characters for the description
+  const [description, setDescription] = useState(data.description || ""); 
+  const maxLength = 500;
 
-  // Handle input changes and limit input to maxLength
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     if (inputValue.length <= maxLength) {
@@ -13,7 +12,6 @@ const Step2Ques2 = ({ data, updateData, handleNavigation }) => {
     }
   };
 
-  // Update parent data whenever the description changes
   useEffect(() => {
     updateData("description", description);
   }, [description]);
@@ -27,7 +25,7 @@ const Step2Ques2 = ({ data, updateData, handleNavigation }) => {
       Share what makes your place special.
       </p>
 
-      {/* Input Box with Character Counter */}
+    
       <div className="mt-10 max-w-md w-full">
         <textarea
           type="text"
@@ -43,7 +41,7 @@ const Step2Ques2 = ({ data, updateData, handleNavigation }) => {
       </div>
 
       <div className="flex justify-between items-center py-10 w-full">
-        {/* Back Button */}
+   
         <button
           onClick={() => handleNavigation(-1)}
           className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
@@ -52,7 +50,7 @@ const Step2Ques2 = ({ data, updateData, handleNavigation }) => {
           <span>Back</span>
         </button>
 
-        {/* Next Button */}
+ 
         <button
           onClick={() => handleNavigation(1)}
           className={`px-10 py-3 rounded-lg text-2xl ${
@@ -60,7 +58,7 @@ const Step2Ques2 = ({ data, updateData, handleNavigation }) => {
               ? "bg-primarycolor text-white cursor-pointer"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
-          disabled={!description.trim()} // Disable if the description is empty or only whitespace
+          disabled={!description.trim()} 
         >
           Next
         </button>

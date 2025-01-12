@@ -35,7 +35,6 @@ const Verify = () => {
 
       if (response.ok) {
         toast.success(responseData.msg);
-        // Redirect to login page after successful verification
         navigate("/auth/login");
       } else {
         toast.error(responseData.message, { id: loadingToastId, duration: 5000, position: 'top-center' });

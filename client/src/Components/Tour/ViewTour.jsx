@@ -19,6 +19,7 @@ import { CiShoppingTag } from "react-icons/ci";
 import timeAgo from "../../Utils/timeAgo";
 import ViewMap from "../../Utils/ViewMap";
 import BookTourPopup from "../Popup/BookTourPopup";
+import BounceLoader from "../../Loaders/BounceLoader";
 
 const ViewTour = ({ user, updateWishlist }) => {
   const location = useLocation();
@@ -216,7 +217,7 @@ const ViewTour = ({ user, updateWishlist }) => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <BounceLoader/>;
   }
 
   return (

@@ -95,7 +95,7 @@ const Address = ({ data, updateData }) => {
           />
         </div>
 
-        {/* Pin Code */}
+    
         <div>
           <label className="block font-medium mb-1">Pin Code *</label>
           <input

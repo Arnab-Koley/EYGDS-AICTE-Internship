@@ -48,7 +48,7 @@ const validateLogin = async (req, res, next) => {
     }
 
     try {
-        // Check if the user exists first
+      
         const userExist = await User.findOne({ email });
         if (!userExist) {
             const error = {
@@ -58,7 +58,7 @@ const validateLogin = async (req, res, next) => {
             return next(error);
         }
 
-        // Now check if the password is provided
+ 
         if (!password) {
             const error = {
                 status: 400,
@@ -67,7 +67,7 @@ const validateLogin = async (req, res, next) => {
             return next(error);
         }
 
-        next(); // Pass control to the login controller if validation passes
+        next(); 
 
     } catch (error) {
         next(error);
@@ -88,7 +88,7 @@ const validateForgotPassword = async (req, res, next) => {
     }
 
     try {
-        // Check if the user exists first
+      
         const userExist = await User.findOne({ email });
         if (!userExist) {
             const error = {

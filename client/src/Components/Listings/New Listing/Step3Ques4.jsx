@@ -5,21 +5,17 @@ const Step3Ques4 = ({ data, updateData, handleNavigation }) => {
   const [price, setPrice] = useState(data.price);
 
   const handlePriceChange = (guestType, value) => {
-    // Ensure the value is a number or empty string and is not negative
-    let numericValue = value.trim(); // Trim to remove extra spaces
-    
-    // If value is empty, set to '0', otherwise, parse the number correctly
+   
+    let numericValue = value.trim(); 
     if (numericValue === "") {
       numericValue = "0";
     } else {
-      // Remove leading zeros
       numericValue = numericValue.replace(/^0+/, "");
     }
   
-    // Update the state with the final value
     setPrice((prevPrice) => {
       const updatedPrice = { ...prevPrice, [guestType]: numericValue };
-      updateData('price', updatedPrice); // Update parent state with new price
+      updateData('price', updatedPrice); 
       return updatedPrice;
     });
   };
@@ -36,7 +32,7 @@ const Step3Ques4 = ({ data, updateData, handleNavigation }) => {
       <div className="space-y-5 mt-10 text-xl max-sm:text-base font-medium">
         
 
-        {/* Adult Price Input */}
+
         <div className="flex items-center justify-between">
           <div className='w-2/5'>Adult <span className="text-base font-normal">(Age 18+)</span></div>
           <div className='flex items-center w-3/5 space-x-1'>
@@ -55,7 +51,6 @@ const Step3Ques4 = ({ data, updateData, handleNavigation }) => {
           </div>
         </div>
 
-        {/* Teen Price Input */}
         <div className="flex items-center justify-between">
           <div className='w-2/5'>Teen <span className="text-base font-normal">(13-17)</span></div>
           <div className='flex items-center w-3/5 space-x-1'>
@@ -74,7 +69,6 @@ const Step3Ques4 = ({ data, updateData, handleNavigation }) => {
           </div>
         </div>
 
-        {/* Child Price Input */}
         <div className="flex items-center justify-between">
           <div className='w-2/5'>Child <span className="text-base font-normal">(2-12)</span></div>
           <div className='flex items-center w-3/5 space-x-1'>
@@ -93,7 +87,7 @@ const Step3Ques4 = ({ data, updateData, handleNavigation }) => {
           </div>
         </div>
 
-        {/* Infant Price Input */}
+
         <div className="flex items-center justify-between">
           <div className='w-2/5'>Infant <span className="text-base font-normal">(Under 2)</span></div>
           <div className='flex items-center w-3/5 space-x-1'>
@@ -112,7 +106,7 @@ const Step3Ques4 = ({ data, updateData, handleNavigation }) => {
           </div>
         </div>
 
-        {/* Pet Price Input */}
+  
         <div className="flex items-center justify-between">
           <div className='w-2/5'>Pet</div>
           <div className='flex items-center w-3/5 space-x-1'>
@@ -136,7 +130,7 @@ const Step3Ques4 = ({ data, updateData, handleNavigation }) => {
       </div>
 
       <div className="flex justify-between items-center py-10">
-        {/* Back Button */}
+      
         <button
           onClick={() => handleNavigation(-1)}
           className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
@@ -144,7 +138,7 @@ const Step3Ques4 = ({ data, updateData, handleNavigation }) => {
           Back
         </button>
 
-        {/* Next Button */}
+   
         <button
           onClick={() => handleNavigation(1)}
           className="bg-primarycolor text-white px-10 py-3 rounded-lg text-2xl"

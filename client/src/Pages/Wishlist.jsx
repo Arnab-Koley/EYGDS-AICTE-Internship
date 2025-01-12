@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { PiListHeart } from "react-icons/pi";
 import { MdDelete } from "react-icons/md";
 import { IoMdOpen } from "react-icons/io";
+import BounceLoader from "../Loaders/BounceLoader";
 
 const Wishlist = ({ user, updateWishlist, isLoading }) => {
   const [wishlistTours, setWishlistTours] = useState([]);
@@ -47,7 +48,7 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
     };
 
     fetchWishlistTours();
-  }, [isLoading, wishlist]);
+  }, [isLoading,wishlist]);
 
   const filteredTours = wishlistTours.filter((tour) =>
     tour.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -69,17 +70,13 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
     return 0;
   });
 
+  if(isToursLoading || isLoading) {
+    return <BounceLoader />
+  }
+
   return (
     <div className="p-5">
-      <div className="w-full mb-5 max-md:hidden">
-        <IoIosArrowRoundBack
-          size={40}
-          className="bg-primarycolor p-1 rounded-full text-white"
-          onClick={() => navigate(-1)}
-        />
-      </div>
-
-      <div className="bg-primarycolor p-3 flex items-center justify-between">
+      <div className="bg-primarycolor p-3 flex items-center justify-between mt-5">
         <div className="flex items-center text-white space-x-2 font-semibold text-lg">
           <PiListHeart size={30} />
           <h1 className="">My Wishlist ({wishlist.length})</h1>
@@ -112,9 +109,6 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
         </div>
       </div>
 
-      {isToursLoading || isLoading ? (
-        <div>Loading...</div>
-      ) : (
         <ul className="flex flex-wrap mt-5">
           {sortedTours.length === 0 ? (
             <div>No tours in your wishlist</div>
@@ -159,7 +153,6 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
             ))
           )}
         </ul>
-      )}
     </div>
   );
 };

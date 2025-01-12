@@ -5,11 +5,11 @@ import { IoHome } from "react-icons/io5";
 import { FaPeopleRoof } from "react-icons/fa6";
 
 const Step1Ques3 = ({ data, updateData, handleNavigation }) => {
-  const [selectedAccommodationType, setSelectedAccommodationType] = useState(data.accommodationType); // Initialize with parent state
+  const [selectedAccommodationType, setSelectedAccommodationType] = useState(data.accommodationType); 
 
   const handleSelectAccommodationType = (accommodationType) => {
-    setSelectedAccommodationType(accommodationType); // Update local state
-    updateData("accommodationType", accommodationType); // Update parent state
+    setSelectedAccommodationType(accommodationType); 
+    updateData("accommodationType", accommodationType); 
   };
 
   return (
@@ -19,7 +19,7 @@ const Step1Ques3 = ({ data, updateData, handleNavigation }) => {
       </h1>
 
       <div className="flex flex-col lg:px-64 md:px-20 space-y-3 mt-5">
-        {/* Entire Place */}
+
         <div
           onClick={() => handleSelectAccommodationType("entire")}
           className={`flex justify-between items-center p-5 border-2 rounded-lg space-x-3 cursor-pointer ${
@@ -35,7 +35,7 @@ const Step1Ques3 = ({ data, updateData, handleNavigation }) => {
           </div>
         </div>
 
-        {/* Room */}
+
         <div
           onClick={() => handleSelectAccommodationType("room")}
           className={`flex justify-between items-center p-5 border-2 rounded-lg space-x-3 cursor-pointer ${
@@ -51,7 +51,7 @@ const Step1Ques3 = ({ data, updateData, handleNavigation }) => {
           </div>
         </div>
 
-        {/* Shared Room */}
+
         <div
           onClick={() => handleSelectAccommodationType("shared")}
           className={`flex justify-between items-center p-5 border-2 rounded-lg space-x-3 cursor-pointer ${
@@ -69,7 +69,7 @@ const Step1Ques3 = ({ data, updateData, handleNavigation }) => {
       </div>
 
       <div className="flex justify-between items-center py-10">
-        {/* Back Button */}
+
         <button
           onClick={() => handleNavigation(-1)}
           className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
@@ -78,7 +78,7 @@ const Step1Ques3 = ({ data, updateData, handleNavigation }) => {
           <span>Back</span>
         </button>
 
-        {/* Next Button */}
+ 
         <button
           onClick={() => handleNavigation(1)}
           className={`px-10 py-3 rounded-lg text-2xl ${
@@ -86,7 +86,7 @@ const Step1Ques3 = ({ data, updateData, handleNavigation }) => {
               ? "bg-primarycolor text-white cursor-pointer"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
-          disabled={!selectedAccommodationType} // Disable button if no option is selected
+          disabled={!selectedAccommodationType}
         >
           Next
         </button>

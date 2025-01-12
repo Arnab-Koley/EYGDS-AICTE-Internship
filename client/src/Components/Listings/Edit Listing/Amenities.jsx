@@ -58,7 +58,7 @@ const Amenities = ({ data, updateData }) => {
 
   return (
     <div className="flex flex-col md:px-20 mt-5">
-      {/* Basics Section */}
+
       <section>
         <h1 className="text-xl font-semibold">Basic Details</h1>
         <div className="flex md:space-x-3 mt-2 max-md:flex-col max-md:space-y-1">
@@ -93,7 +93,7 @@ const Amenities = ({ data, updateData }) => {
         </div>
       </section>
 
-      {/* Amenities Section */}
+ 
       <section >
         <h1 className="text-xl font-semibold mt-5">Select the amnities your place offers</h1>
 
@@ -139,7 +139,7 @@ const Amenities = ({ data, updateData }) => {
           ))}
         </div>
 
-        {/* Safety Items */}
+    
         <h3 className="text-xl font-semibold mt-5">Safety Items</h3>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 max-md:grid-cols-2 gap-3 mt-2">
           {safetyItemsData.map((item) => (
@@ -164,11 +164,11 @@ const Amenities = ({ data, updateData }) => {
 
       </section>
 
-      {/* Safety Details Section */}
+   
       <section>
         <h3 className="text-xl font-semibold mt-5">Safety Details</h3>
         <div className="space-y-4 mt-2">
-          {/* Exterior Security Camera Checkbox */}
+ 
           <div className="flex items-center justify-between w-80">
             <div>Exterior security camera present</div>
             <div className="relative w-6 h-6">
@@ -192,7 +192,7 @@ const Amenities = ({ data, updateData }) => {
             </div>
           </div>
 
-                  {/* Weapons on Property Checkbox */}
+                 
         <div className="flex items-center justify-between w-80">
           <div>Weapon(s) on the property</div>
           <div className="relative w-6 h-6">
@@ -214,7 +214,7 @@ const Amenities = ({ data, updateData }) => {
           </div>
         </div>
 
-          {/* Noise Decibel Monitor Checkbox */}
+      
           <div className="flex items-center justify-between w-80">
             <div>Noise decibel monitor present</div>
             <div className="relative w-6 h-6">
@@ -238,7 +238,7 @@ const Amenities = ({ data, updateData }) => {
             </div>
           </div>
 
-          {/* Safety Info Input */}
+      
           <div>
             <label htmlFor="safetyInfo" className="">
               Additional Safety Information :

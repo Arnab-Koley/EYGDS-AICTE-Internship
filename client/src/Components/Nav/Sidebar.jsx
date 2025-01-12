@@ -154,7 +154,7 @@ const Sidebar = ({
             to="/reservations"
             onClick={toggleSidebar}
             className={`${
-              isActive("/reservations") ? "font-semibold text-dark-1" : ""
+              isActive("/reservations") || isActive("/viewmyreservation") ? "font-semibold text-dark-1" : ""
             }`}
           >
             Reservations

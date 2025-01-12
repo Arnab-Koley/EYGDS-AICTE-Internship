@@ -201,7 +201,7 @@ const verifyEmailRequest = async (req, res, next) => {
       .createHash("sha256")
       .update(otp)
       .digest("hex");
-    user.emailVerificationExpire = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes expiry
+    user.emailVerificationExpire = new Date(Date.now() + 10 * 60 * 1000); 
 
     await user.save();
 
@@ -326,7 +326,7 @@ const verifyPhone = async (req, res, next) => {
       });
     }
 
-    // Verify profile
+  
     user.phone = phone;
     user.isPhoneVerified = true;
     user.phoneVerificationToken = undefined;

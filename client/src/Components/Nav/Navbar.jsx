@@ -125,7 +125,7 @@ const Navbar = ({
           <Link
             to="/reservations"
             className={`${
-              isActive("/reservations") ? "font-semibold text-dark-1" : ""
+              isActive("/reservations") || isActive("/viewmyreservation") ? "font-semibold text-dark-1" : ""
             }`}
           >
             Reservations

@@ -13,7 +13,7 @@ const Step3Ques5 = ({ data, updateData, handleNavigation, handleSubmit, isSubmit
   const handleCheckboxChange = (field) => {
     setSafetyDetails((prevDetails) => {
       const updatedDetails = { ...prevDetails, [field]: !prevDetails[field] };
-      updateData("safetyDetails", updatedDetails); // Update parent state
+      updateData("safetyDetails", updatedDetails); 
       return updatedDetails;
     });
   };
@@ -22,7 +22,7 @@ const Step3Ques5 = ({ data, updateData, handleNavigation, handleSubmit, isSubmit
     const { value } = e.target;
     setSafetyDetails((prevDetails) => {
       const updatedDetails = { ...prevDetails, safetyInfo: value };
-      updateData("safetyDetails", updatedDetails); // Update parent state
+      updateData("safetyDetails", updatedDetails); 
       return updatedDetails;
     });
   };
@@ -38,7 +38,7 @@ const Step3Ques5 = ({ data, updateData, handleNavigation, handleSubmit, isSubmit
       <p className="text-center mt-2">Does your place have any of these?</p>
 
       <div className="space-y-3 mt-10 text-xl max-md:text-lg">
-        {/* Exterior Security Camera Checkbox */}
+     
         <div className="flex items-center justify-between">
           <div>Exterior security camera present</div>
           <div className="relative w-8 h-8">
@@ -63,7 +63,7 @@ const Step3Ques5 = ({ data, updateData, handleNavigation, handleSubmit, isSubmit
           </div>
         </div>
 
-        {/* Noise Decibel Monitor Checkbox */}
+    
         <div className="flex items-center justify-between">
           <div>Noise decibel monitor present</div>
           <div className="relative w-8 h-8">
@@ -88,7 +88,7 @@ const Step3Ques5 = ({ data, updateData, handleNavigation, handleSubmit, isSubmit
           </div>
         </div>
 
-        {/* Weapons on Property Checkbox */}
+       
         <div className="flex items-center justify-between">
           <div>Weapon(s) on the property</div>
           <div className="relative w-8 h-8">
@@ -113,7 +113,7 @@ const Step3Ques5 = ({ data, updateData, handleNavigation, handleSubmit, isSubmit
           </div>
         </div>
 
-        {/* Safety Info Input */}
+     
         <div className="flex flex-col">
           <label htmlFor="safetyInfo" className="text-xl max-md:text-lg mt-5">
             Explain in details of your safety measures:
@@ -142,7 +142,7 @@ const Step3Ques5 = ({ data, updateData, handleNavigation, handleSubmit, isSubmit
       </div>
 
       <div className="flex justify-between items-center py-10">
-        {/* Back Button */}
+   
         <button
           onClick={() => handleNavigation(-1)}
           className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
@@ -150,7 +150,7 @@ const Step3Ques5 = ({ data, updateData, handleNavigation, handleSubmit, isSubmit
           Back
         </button>
 
-        {/* Next Button */}
+   
         <button
           onClick={() => handleSubmit()}
           disabled={isSubmitting}

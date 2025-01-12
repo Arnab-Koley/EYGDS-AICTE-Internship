@@ -1,15 +1,17 @@
 
 
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import toast from 'react-hot-toast';
 import { RxEyeOpen, RxEyeClosed } from "react-icons/rx";
-import { GoogleLogin } from '@react-oauth/google'; // Import GoogleLogin component
+import { GoogleLogin } from '@react-oauth/google'; 
+import { FaArrowCircleRight } from "react-icons/fa";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const [user, setUser] = useState({
         email: "",
@@ -74,8 +76,8 @@ const Login = () => {
     };
 
     const handleGoogleLogin = async (response) => {
-        const loadingToastId = toast.loading("Loading..."); // Define the toast
-        const start = Date.now(); // Start time to calculate the delay
+        const loadingToastId = toast.loading("Loading..."); 
+        const start = Date.now(); 
     
         try {
                 
@@ -104,19 +106,20 @@ const Login = () => {
             toast.error(error.message, { id: loadingToastId });
         } finally {
             const elapsed = Date.now() - start;
-            // Ensure at least 2 seconds of loading
+     
             if (elapsed < 2000) {
                 await new Promise(resolve => setTimeout(resolve, 2000 - elapsed));
             }
-            toast.dismiss(loadingToastId); // Dismiss the toast after 2 seconds
-            setIsLoading(false); // If applicable
+            toast.dismiss(loadingToastId); 
+            setIsLoading(false); 
         }
     };
 
 
     
     return (
-        <div className='flex w-full justify-center h-screen items-center'>
+        <div className='flex flex-col w-full justify-center h-screen items-center'>
+            <h1 className='text-2xl font-bold mb-5 text-primarycolor'>Welcome to Desh Dekho</h1>
             <div className='flex items-center justify-center p-5 flex-col shadow-md border-2 rounded-lg w-80 bg-white'>
                 <h1 className='w-full pb-5 flex items-center justify-center text-primarycolor text-2xl font-bold'>Login</h1>
                 <form onSubmit={handleSubmit} className='w-full'>
@@ -154,12 +157,11 @@ const Login = () => {
                     <button type='submit' className='bg-primarycolor w-full p-2 my-5 text-white font-semibold' disabled={isLoading}>Submit</button>
                 </form>
 
-                {/* Google Login Button */}
                 <div className="w-full mb-4">
                     <GoogleLogin
                         onSuccess={handleGoogleLogin}
                         onError={() => toast.error("Google login failed")}
-                        clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID} // Use the VITE_GOOGLE_CLIENT_ID environment variable here
+                        clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID} 
                     />
                 </div>
                 
@@ -167,6 +169,13 @@ const Login = () => {
                 <div>Don't have an account? <Link to="/auth/signup" className='font-semibold text-primarycolor text-sm'>Sign up</Link></div>
                 <div>Forgot password? <Link to="/auth/forgotpassword" className='font-semibold text-primarycolor text-sm'>Click Here</Link></div>
             </div>
+            <button
+            onClick={() => navigate('/home')}
+            className='bg-primarycolor rounded-full px-5 py-3 text-white flex items-center justify-center space-x-2 mt-5'
+            >
+            <h3>Continue as guest</h3>
+            <FaArrowCircleRight size={20} />
+            </button>
         </div>
     );
 };

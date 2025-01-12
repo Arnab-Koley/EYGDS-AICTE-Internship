@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
 const Step2Ques1 = ({ data, updateData, handleNavigation }) => {
-  const [title, setTitle] = useState(data.title || ""); // Initialize with existing data or empty string
-  const maxLength = 32; // Maximum characters for the title
+  const [title, setTitle] = useState(data.title || "");
+  const maxLength = 32;
 
-  // Handle input changes and limit input to maxLength
+
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     if (inputValue.length <= maxLength) {
@@ -13,7 +13,6 @@ const Step2Ques1 = ({ data, updateData, handleNavigation }) => {
     }
   };
 
-  // Update parent data whenever the title changes
   useEffect(() => {
     updateData("title", title);
   }, [title]);
@@ -27,7 +26,7 @@ const Step2Ques1 = ({ data, updateData, handleNavigation }) => {
         Short titles work best. Have fun with it - you can always change it later.
       </p>
 
-      {/* Input Box with Character Counter */}
+
       <div className="mt-10 max-w-md w-full">
         <textarea
           type="text"
@@ -43,7 +42,7 @@ const Step2Ques1 = ({ data, updateData, handleNavigation }) => {
       </div>
 
       <div className="flex justify-between items-center py-10 w-full">
-        {/* Back Button */}
+
         <button
           onClick={() => handleNavigation(-1)}
           className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
@@ -52,7 +51,7 @@ const Step2Ques1 = ({ data, updateData, handleNavigation }) => {
           <span>Back</span>
         </button>
 
-        {/* Next Button */}
+
         <button
           onClick={() => handleNavigation(1)}
           className={`px-10 py-3 rounded-lg text-2xl ${
@@ -60,7 +59,7 @@ const Step2Ques1 = ({ data, updateData, handleNavigation }) => {
               ? "bg-primarycolor text-white cursor-pointer"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
-          disabled={!title.trim()} // Disable if the title is empty or only whitespace
+          disabled={!title.trim()} 
         >
           Next
         </button>

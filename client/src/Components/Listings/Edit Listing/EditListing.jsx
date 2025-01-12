@@ -7,6 +7,7 @@ import Address from "./Address";
 import Amenities from "./Amenities";
 import Pricing from "./Pricing";
 import toast from "react-hot-toast";
+import BounceLoader from "../../../Loaders/BounceLoader";
 
 const EditListing = () => {
   const location = useLocation();
@@ -16,11 +17,16 @@ const EditListing = () => {
 
   const [listing, setListing] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [loading,setLoading] = useState(false);
 
-  // Fetch the listing data based on the listingId
+
   useEffect(() => {
     const fetchListing = async () => {
+      if(loading){
+        return;
+      }
       try {
+        setLoading(true);
         const serverUrl = 
         process.env.NODE_ENV === "development"
           ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/listing/getlistingbyid`
@@ -45,6 +51,8 @@ const EditListing = () => {
         }
       } catch (error) {
         toast.error("Error fetching listing: " + error.message);
+      } finally{
+        setLoading(false);
       }
     };
 
@@ -117,8 +125,8 @@ const EditListing = () => {
     }
   };
 
-  if (!listing) {
-    return <div>Loading...</div>;
+  if(loading || !listing){
+    return <BounceLoader/>;
   }
 
   return (

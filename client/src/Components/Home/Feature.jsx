@@ -51,7 +51,7 @@ const Feature = () => {
     <div className="px-10 mt-10 flex flex-col items-center">
       <div className="flex">
         <h1 className="text-3xl max-md:text-xl text-white px-5 py-3 rounded-lg bg-primarycolor flex">
-          Our Featured Tour
+          Our Featured Tours
         </h1>
       </div>
 

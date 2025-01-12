@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { RxEyeOpen, RxEyeClosed } from "react-icons/rx";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/AuthContext";
-import { GoogleLogin } from "@react-oauth/google"; // Import GoogleLogin component
+import { GoogleLogin } from "@react-oauth/google";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -116,8 +116,8 @@ const Signup = () => {
   };
 
   const handleGoogleLogin = async (response) => {
-    const loadingToastId = toast.loading("Loading..."); // Define the toast
-    const start = Date.now(); // Start time to calculate the delay
+    const loadingToastId = toast.loading("Loading..."); 
+    const start = Date.now(); 
 
     try {
 
@@ -146,12 +146,12 @@ const Signup = () => {
       toast.error(error.message, { id: loadingToastId });
     } finally {
       const elapsed = Date.now() - start;
-      // Ensure at least 2 seconds of loading
+
       if (elapsed < 2000) {
         await new Promise((resolve) => setTimeout(resolve, 2000 - elapsed));
       }
-      toast.dismiss(loadingToastId); // Dismiss the toast after 2 seconds
-      setIsLoading(false); // If applicable
+      toast.dismiss(loadingToastId); 
+      setIsLoading(false); 
     }
   };
 

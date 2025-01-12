@@ -27,7 +27,7 @@ const ResetPassword = () => {
     email: useremail,
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [timer, setTimer] = useState(60); // Timer state for OTP request
+  const [timer, setTimer] = useState(60);
   const otpRefs = useRef([]);
   const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ const ResetPassword = () => {
     } else if (timer === 0) {
       clearInterval(interval);
     }
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
+    return () => clearInterval(interval); 
   }, [timer]);
 
   const handleOtpInput = (e, index) => {
@@ -64,13 +64,11 @@ const ResetPassword = () => {
     const pastedData = e.clipboardData.getData("Text");
   
     if (/^\d{6}$/.test(pastedData)) {
-      // If pasted data is exactly 6 digits
       const newOtp = pastedData.split("");
       setOtp(newOtp);
   
-      // Automatically focus the last input
       otpRefs.current[5]?.focus();
-      e.preventDefault(); // Prevent default paste behavior
+      e.preventDefault(); 
     }
   };
   
@@ -183,7 +181,7 @@ const ResetPassword = () => {
           await new Promise(resolve => setTimeout(resolve, 2000 - elapsed));
         }
         toast.success(responseData.msg);
-        setTimer(60); // Reset the timer after requesting a new OTP
+        setTimer(60); 
       } else {
         throw new Error(responseData.message || 'Something went wrong');
       }
@@ -298,7 +296,7 @@ const ResetPassword = () => {
           <button
             onClick={handleNewOtpSubmit}
             className={`${timer>0 ? 'bg-gray-500': 'bg-primarycolor'} w-full p-2 text-white font-semibold`}
-            disabled={isLoading || timer > 0} // Disable the button while the timer is active
+            disabled={isLoading || timer > 0} 
           >
             Request New OTP {timer > 0 && `(${timer}s)`}
           </button>

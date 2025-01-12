@@ -13,21 +13,18 @@ const Location = ({ data, updateData }) => {
     let updatedGeographies;
 
     if (selectedGeographies.includes(geography)) {
-      // If geography is already selected, remove it
       updatedGeographies = selectedGeographies.filter((item) => item !== geography);
     } else {
-      // Otherwise, add it to the selected list
       updatedGeographies = [...selectedGeographies, geography];
     }
 
-    updateData("geography", updatedGeographies); // Update parent state
+    updateData("geography", updatedGeographies);
   };
 
 
   return (
     <div className="md:px-20">
-   
-      {/* Geography Selection */}
+
       <div className="mb-10">
         <h1 className="text-xl font-semibold">
           Select the appropriate geography of the place
@@ -52,8 +49,6 @@ const Location = ({ data, updateData }) => {
         </div>
       </div>
 
-
-      {/* Property Type Selection */}
       <div className="mb-10">
         <h1 className="text-xl font-semibold">
           Which of these best describes your place ?
@@ -78,7 +73,6 @@ const Location = ({ data, updateData }) => {
         </div>
       </div>
 
-      {/* Accommodation Type Selection */}
       <div>
         <h1 className="text-xl font-semibold">
           What type of place will guests have?
@@ -98,7 +92,6 @@ const Location = ({ data, updateData }) => {
             <div><IoHome size={30} /></div>
           </div>
 
-          {/* Room */}
           <div
             onClick={() => updateData("accommodationType", "room")}
             className={`flex justify-between items-center p-5 border-2 rounded-lg space-x-3 cursor-pointer lg:w-1/3 ${
@@ -112,7 +105,6 @@ const Location = ({ data, updateData }) => {
             <div><PiDoorOpen size={30} /></div>
           </div>
 
-          {/* Shared Room */}
           <div
             onClick={() => updateData("accommodationType", "shared")}
             className={`flex justify-between items-center p-5 border-2 rounded-lg space-x-3 cursor-pointer lg:w-1/3 ${

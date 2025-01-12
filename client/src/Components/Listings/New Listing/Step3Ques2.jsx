@@ -121,7 +121,7 @@ const Step3Ques2 = ({ data, updateData, handleNavigation }) => {
       </div>
 
       <div className="flex justify-between items-center py-10">
-        {/* Back Button */}
+   
         <button
           onClick={() => handleNavigation(-1)}
           className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
@@ -130,7 +130,7 @@ const Step3Ques2 = ({ data, updateData, handleNavigation }) => {
           <span>Back</span>
         </button>
 
-        {/* Next Button */}
+  
         <button
           onClick={() => handleNavigation(1)}
           className="px-10 py-3 rounded-lg text-2xl bg-primarycolor text-white cursor-pointer"

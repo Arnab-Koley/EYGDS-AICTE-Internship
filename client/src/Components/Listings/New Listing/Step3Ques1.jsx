@@ -30,7 +30,7 @@ const Step3Ques1 = ({ data, updateData, handleNavigation }) => {
           >
             <span className="capitalize">{field}</span>
             <div className="flex items-center space-x-3">
-              {/* Decrease Button */}
+            
               <button
                 onClick={() => handleDecrease(field)}
                 className={`w-10 h-10 border-2 flex items-center justify-center rounded-full ${
@@ -42,11 +42,11 @@ const Step3Ques1 = ({ data, updateData, handleNavigation }) => {
               >
                 -
               </button>
-              {/* Count */}
+        
               <span className="w-10 text-center font-semibold">
                 {basics[field]}
               </span>
-              {/* Increase Button */}
+          
               <button
                 onClick={() => handleIncrease(field)}
                 className="w-10 h-10 flex items-center justify-center rounded-full border-dark-1 border-2 text-dark-1"
@@ -59,7 +59,7 @@ const Step3Ques1 = ({ data, updateData, handleNavigation }) => {
       </div>
 
       <div className="flex justify-between items-center py-10">
-        {/* Back Button */}
+      
         <button
           onClick={() => handleNavigation(-1)}
           className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
@@ -67,7 +67,7 @@ const Step3Ques1 = ({ data, updateData, handleNavigation }) => {
           Back
         </button>
 
-        {/* Next Button */}
+    
         <button
           onClick={() => handleNavigation(1)}
           className="bg-primarycolor text-white px-10 py-3 rounded-lg text-2xl"

@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import BasicDetails from "./BasicDetails";
 import Address from "./Address";
 import TourDetails from "./TourDetails";
+import BounceLoader from "../../Loaders/BounceLoader";
 
 const BookTour = ({ user }) => {
   const location = useLocation();
@@ -129,7 +130,7 @@ const BookTour = ({ user }) => {
   const handleInputChange = (field, value) => {
     const updatedFormData = { ...formData, [field]: value };
     setFormData(updatedFormData);
-    setPricing(calculateTotalPrice(updatedFormData)); // Recalculate pricing
+    setPricing(calculateTotalPrice(updatedFormData)); 
   };
 
   const handleAddressChange = (field, value) => {
@@ -296,7 +297,7 @@ const BookTour = ({ user }) => {
 
       
   if (isLoading || isHostLoading) {
-    return <div>Loading...</div>;
+    return <BounceLoader/>;
   }
 
   return (

@@ -7,19 +7,31 @@ import { useNavigate } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
 import { IoFilter } from "react-icons/io5";
 
+import BounceLoader from "../../../Loaders/BounceLoader";
+
 const MyListings = () => {
   const [mylistings, setMyListing] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("Latest");
   const navigate = useNavigate();
+  const [loading,setLoading] = useState(false);
 
   useEffect(() => {
+
     const fetchListings = async () => {
+      if(loading){
+        return;
+      }
       try {
+        setLoading(true);
         const serverUrl =
-            process.env.NODE_ENV === "development"
-            ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/listing/getmylistings`
-            : `${import.meta.env.VITE_API_PRODUCTION_URL}/listing/getmylistings`;
+          process.env.NODE_ENV === "development"
+            ? `${
+                import.meta.env.VITE_API_DEVELOPMENT_URL
+              }/listing/getmylistings`
+            : `${
+                import.meta.env.VITE_API_PRODUCTION_URL
+              }/listing/getmylistings`;
 
         const token = localStorage.getItem("token");
 
@@ -37,13 +49,14 @@ const MyListings = () => {
         }
       } catch (error) {
         console.error("Error fetching listings:", error.message);
+      } finally{
+        setLoading(false);
       }
     };
 
     fetchListings();
   }, []);
 
-  // Filter and sort the listings
   const filteredAndSortedListings = [...mylistings]
     .filter((listing) =>
       listing.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -60,6 +73,10 @@ const MyListings = () => {
       }
       return 0;
     });
+
+    if(loading){
+      return <BounceLoader/>;
+    }
 
   return (
     <div className="px-5 mt-10">
@@ -96,7 +113,9 @@ const MyListings = () => {
       </div>
       {filteredAndSortedListings.length === 0 ? (
         <div className="flex flex-col items-center justify-center">
-          <h3 className="text-gray-500 text-center my-5 md:text-xl">No listings found. Create a new one.</h3>
+          <h3 className="text-gray-500 text-center my-5 md:text-xl">
+            No listings found. Create a new one.
+          </h3>
           <button
             onClick={() => navigate("/newlisting")}
             className="bg-white rounded-md flex flex-col items-center justify-center border-2 border-gray-400 h-32 w-64"
@@ -106,10 +125,10 @@ const MyListings = () => {
           </button>
         </div>
       ) : (
-        <ul className="gap-3 grid lg:grid-cols-4 grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 mt-3">
+        <ul className="mt-5 flex flex-wrap">
           <button
             onClick={() => navigate("/newlisting")}
-            className="bg-white rounded-md flex flex-col items-center justify-center border-2 border-gray-400 h-32"
+            className="bg-white border-2 w-40 rounded-md m-2 shadow-md flex flex-col justify-center items-center p-3"
           >
             <FaPlus size={40} className="text-slate-300" />
             <h1 className="text-xl text-slate-400">Create new</h1>
@@ -118,31 +137,43 @@ const MyListings = () => {
           {filteredAndSortedListings.map((listing) => (
             <li
               key={listing._id}
-              className="bg-white rounded-md flex border-2 border-gray-400"
+              className="bg-white border-2 w-40 rounded-md m-2 shadow-md"
             >
-              <img
-                src={listing.coverPhoto}
-                alt="cover photo"
-                className="h-32 w-32 object-cover bg-gray-500 rounded-l-md"
-              />
-              <div className="w-full p-2 flex flex-col justify-between overflow-auto">
+              <div className="">
+                <img
+                  src={listing.coverPhoto}
+                  alt="cover photo"
+                  className="h-32 w-40 object-cover rounded-t-md"
+                />
+              </div>
+              <div className="p-2 flex flex-col">
                 <h3 className="font-semibold text-dark-1 truncate">
                   {listing.title}
                 </h3>
-                <div className="flex flex-col space-y-1 text-white font-semibold">
-                  <button
-                    onClick={() => navigate(`/editlisting?id=${listing._id}`)}
-                    className="bg-primarycolor p-1 w-full"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => navigate(`/managelisting?id=${listing._id}`)}
-                    className="bg-primarycolor p-1 w-full"
-                  >
-                    Manage
-                  </button>
-                </div>
+
+                <h3
+                  className={` font-semibold ${
+                    listing.status === "Available"
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {listing.status}
+                </h3>
+
+                <button
+                  onClick={() => navigate(`/editlisting?id=${listing._id}`)}
+                  className="bg-primarycolor p-1 w-full text-white mb-1"
+                >
+                  Edit
+                </button>
+
+                <button
+                  onClick={() => navigate(`/managelisting?id=${listing._id}`)}
+                  className="bg-primarycolor p-1 w-full text-white"
+                >
+                  Manage
+                </button>
               </div>
             </li>
           ))}

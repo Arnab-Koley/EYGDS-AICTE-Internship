@@ -12,7 +12,7 @@ const Service = () => {
         What we serve
       </h1>
       <ul className="w-full flex flex-wrap items-center justify-center">
-        <li className=" shadow-md p-3 flex items-center justify-center flex-col text-center w-64  h-52 bg-white rounded-lg m-1 border-t-4 border-primarycolor hover:scale-110 hover:border-2 cursor-pointer">
+        <li className=" shadow-md p-3 flex items-center justify-center flex-col text-center w-64  h-52 bg-white rounded-lg m-1 border-2 hover:scale-110 hover:border-primarycolor cursor-pointer">
           <div className=" border-2 border-primarycolor p-3 rounded-full text-primarycolor">
             <RiRoadMapFill size={25} />
           </div>
@@ -26,7 +26,7 @@ const Service = () => {
           </p>
         </li>
 
-        <li className=" shadow-md p-3 flex items-center justify-center flex-col text-center w-64    h-52 bg-white rounded-lg m-1 border-t-4 border-primarycolor hover:scale-110 hover:border-2 cursor-pointer">
+        <li className="shadow-md p-3 flex items-center justify-center flex-col text-center w-64  h-52 bg-white rounded-lg m-1 border-2 hover:scale-110 hover:border-primarycolor cursor-pointer">
           <div className=" border-2 border-primarycolor p-3 rounded-full text-primarycolor">
             <IoTicketOutline size={25} />
           </div>
@@ -39,7 +39,7 @@ const Service = () => {
           </p>
         </li>
 
-        <li className=" shadow-md p-3 flex items-center justify-center flex-col text-center w-64    h-52 bg-white rounded-lg m-1 border-t-4 border-primarycolor hover:scale-110 hover:border-2 cursor-pointer">
+        <li className=" shadow-md p-3 flex items-center justify-center flex-col text-center w-64  h-52 bg-white rounded-lg m-1 border-2 hover:scale-110 hover:border-primarycolor cursor-pointer">
           <div className=" border-2 border-primarycolor p-3 rounded-full text-primarycolor">
             <FaMoneyBillWave size={25} />
           </div>
@@ -50,7 +50,7 @@ const Service = () => {
           </p>
         </li>
 
-        <li className=" shadow-md p-3 flex items-center justify-center flex-col text-center w-64    h-52 bg-white rounded-lg m-1 border-t-4 border-primarycolor hover:scale-110 hover:border-2 cursor-pointer">
+        <li className=" shadow-md p-3 flex items-center justify-center flex-col text-center w-64  h-52 bg-white rounded-lg m-1 border-2 hover:scale-110 hover:border-primarycolor cursor-pointer">
           <div className=" border-2 border-primarycolor p-3 rounded-full text-primarycolor">
             <RiCustomerService2Fill size={25} />
           </div>
@@ -61,7 +61,7 @@ const Service = () => {
           </p>
         </li>
 
-        <li className=" shadow-md p-3 flex items-center justify-center flex-col text-center w-64    h-52 bg-white rounded-lg m-1 border-t-4 border-primarycolor hover:scale-110 hover:border-2 cursor-pointer">
+        <li className=" shadow-md p-3 flex items-center justify-center flex-col text-center w-64  h-52 bg-white rounded-lg m-1 border-2 hover:scale-110 hover:border-primarycolor cursor-pointer">
           <div className=" border-2 border-primarycolor p-3 rounded-full text-primarycolor">
             <MdVerifiedUser size={25} />
           </div>

@@ -4,6 +4,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import toast from "react-hot-toast";
 import { GoAlertFill } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
+import BounceLoader from "../../../Loaders/BounceLoader";
 
 const ManageListing = () => {
   const location = useLocation();
@@ -276,7 +277,7 @@ const ManageListing = () => {
 
 
   if (!listing || !newStatus || !checkInTime || !checkOutTime || !reservationType || !refundPolicy) {
-    return <div>Loading...</div>;
+    return <BounceLoader/>;
   }
 
   const isButtonDisabled = (newStatus === listing.status && statusMsg === listing.statusMsg  ) || isStatusUpdating  ;
@@ -294,6 +295,7 @@ const ManageListing = () => {
         />
       </div>
       <div className="md:px-20">
+        <h1 className="text-center font-semibold text-primarycolor text-2xl my-5">{listing.title}</h1>
         <div className="flex flex-wrap items-center text-xl max-md:text-lg">
           For Basic details, Pricing update goto
           <span

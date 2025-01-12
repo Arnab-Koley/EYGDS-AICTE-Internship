@@ -98,4 +98,69 @@ const deleteReservation = async (req, res, next) => {
   }
 };
 
-module.exports = { createReservation, deleteReservation };
+
+const getMyReservations = async (req, res, next) => {
+  try {
+    const userId = req.userId;
+    const userOwnedListings = await Listing.find({ owner: userId }).select('_id');
+    const listingIds = userOwnedListings.map((listing) => listing._id);
+    const reservations = await Reservation.find({ tourId: { $in: listingIds } });
+
+    res.status(200).json({
+      success: true,
+      reservations,
+    });
+  } catch (error) {
+    console.error("Error fetching reservations:", error.message);
+    next(error);
+  }
+};
+
+const getMyReservationById = async (req, res, next) => {
+  try {
+    const { reservationId } = req.body;
+    const reservation = await Reservation.findById(reservationId);
+
+    if (!reservation) {
+      return res.status(404).json({ success: false, msg: "reservation not found." });
+    }
+
+    res.status(200).json({
+      success: true,
+      reservation,
+    });
+  } catch (error) {
+    console.error("Error fetching reservation by ID:", error.message);
+    next(error);
+  }
+};
+
+const updateStatus = async (req, res, next) => {
+  try {
+    const { reservationId, status } = req.body;
+
+    const reservation = await Reservation.findById(reservationId);
+
+    if (!reservation) {
+      return res.status(404).json({ msg: "Reservation not found." });
+    }
+
+    reservation.status = status;
+    await reservation.save();
+
+    res.status(200).json({
+      success: true,
+      msg: `Reservation ${status.toLowerCase()} successfully.`,
+      reservation,
+    });
+  } catch (error) {
+    console.error("Error updating reservation status:", error.message);
+    next(error);
+  }
+};
+
+
+
+
+
+module.exports = { createReservation, deleteReservation, getMyReservations, getMyReservationById, updateStatus };

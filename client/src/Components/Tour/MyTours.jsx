@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import BounceLoader from "../../Loaders/BounceLoader";
 
 const MyTours = () => {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ const MyTours = () => {
   });
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <BounceLoader/>;
   }
 
   return (

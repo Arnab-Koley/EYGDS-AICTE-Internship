@@ -53,7 +53,7 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
           />
         </div>
 
-        {/* Street Address */}
+
         <div>
           <label className="block font-medium mb-1">Street Address *</label>
           <input
@@ -65,7 +65,7 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
           />
         </div>
 
-        {/* Landmark */}
+
         <div>
           <label className="block font-medium mb-1">Nearby Landmark</label>
           <input
@@ -77,7 +77,6 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
           />
         </div>
 
-        {/* District/Locality */}
         <div>
           <label className="block font-medium mb-1">District / locality</label>
           <input
@@ -89,7 +88,6 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
           />
         </div>
 
-        {/* City */}
         <div>
           <label className="block font-medium mb-1">City / town *</label>
           <input
@@ -101,7 +99,6 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
           />
         </div>
 
-        {/* State */}
         <div>
           <label className="block font-medium mb-1">State / union territory *</label>
           <input
@@ -113,7 +110,6 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
           />
         </div>
 
-        {/* Pin Code */}
         <div>
           <label className="block font-medium mb-1">Pin Code *</label>
           <input
@@ -125,7 +121,6 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
           />
         </div>
 
-         {/* Google Map API Needed */}
         <div>
         <label className="block font-medium mb-1">Select Specific Location</label>
         <Map
@@ -143,7 +138,6 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
       </div>
 
       <div className="flex justify-between items-center py-10">
-        {/* Back Button */}
         <button
           onClick={() => handleNavigation(-1)}
           className="border-2 border-dark-1 rounded-full text-xl flex items-center justify-center px-3 py-1"
@@ -152,7 +146,6 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
           <span>Back</span>
         </button>
 
-        {/* Next Button */}
         <button
           onClick={() => {handleNavigation(1)}}
           className={`px-10 py-3 rounded-lg text-2xl ${
@@ -160,7 +153,7 @@ const Step1Ques4 = ({ data, updateData, handleNavigation }) => {
               ? "bg-primarycolor text-white cursor-pointer"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
-          disabled={!isNextEnabled} // Disable if not all required fields are filled
+          disabled={!isNextEnabled} 
         >
           Next
         </button>
