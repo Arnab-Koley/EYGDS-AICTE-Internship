@@ -26,12 +26,10 @@ const Wishlist = ({ user, updateWishlist, isLoading }) => {
           process.env.NODE_ENV === "development"
             ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/tour/gettoursbyids`
             : `${import.meta.env.VITE_API_PRODUCTION_URL}/tour/gettoursbyids`;
-        const token = localStorage.getItem("token");
         const response = await fetch(serverUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ tourIds: wishlist }),
         });

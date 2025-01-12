@@ -21,8 +21,7 @@ const EditListing = () => {
   useEffect(() => {
     const fetchListing = async () => {
       try {
-        const serverUrl = process.env.NODE_ENV === "development";
-
+        const serverUrl = 
         process.env.NODE_ENV === "development"
           ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/listing/getlistingbyid`
           : `${import.meta.env.VITE_API_PRODUCTION_URL}/listing/getlistingbyid`;

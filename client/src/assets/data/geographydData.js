@@ -8,6 +8,8 @@ import farm from "../img/farm.png";
 import countryside from "../img/countryside.png";
 import city from "../img/city.png";
 
+
+
 const geographyOptions = [
   { name: "Mountain", imgSrc: mountain },
   { name: "Forest", imgSrc: forest },

@@ -59,7 +59,7 @@ const Sidebar = ({
 
   return (
     <div
-      className={`fixed  cursor-pointer inset-0 z-40 bg-white md:hidden transform ${
+      className={`fixed  cursor-pointer inset-0 z-50 bg-white md:hidden transform ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform max-md:w-[40%] max-sm:w-[60%]`}
     >

@@ -6,7 +6,7 @@ const Address = ({ data, updateData }) => {
 
   const handleInputChange = (field, value) => {
     const updatedAddress = { ...address, [field]: value };
-    updateData("address", updatedAddress); // Update parent state
+    updateData("address", updatedAddress);
   };
 
   return (
@@ -15,18 +15,18 @@ const Address = ({ data, updateData }) => {
         Address
       </h1>
       <div className="flex flex-col space-y-4 mt-2">
-        {/* Country (Default) */}
+
         <div>
           <label className="block font-medium mb-1">Country *</label>
           <input
             type="text"
-            value={address.country || "India"} // Default to "India"
+            value={address.country || "India"} 
             readOnly
             className="border-2 border-gray-300 rounded-lg p-3 w-full bg-gray-100 cursor-not-allowed"
           />
         </div>
 
-        {/* Flat / House */}
+     
         <div>
           <label className="block font-medium mb-1">Flat, house, etc.</label>
           <input
@@ -38,7 +38,7 @@ const Address = ({ data, updateData }) => {
           />
         </div>
 
-        {/* Street Address */}
+
         <div>
           <label className="block font-medium mb-1">Street Address *</label>
           <input
@@ -50,7 +50,7 @@ const Address = ({ data, updateData }) => {
           />
         </div>
 
-        {/* Landmark */}
+  
         <div>
           <label className="block font-medium mb-1">Nearby Landmark</label>
           <input
@@ -62,7 +62,6 @@ const Address = ({ data, updateData }) => {
           />
         </div>
 
-        {/* District/Locality */}
         <div>
           <label className="block font-medium mb-1">District / locality</label>
           <input
@@ -74,7 +73,6 @@ const Address = ({ data, updateData }) => {
           />
         </div>
 
-        {/* City */}
         <div>
           <label className="block font-medium mb-1">City / town *</label>
           <input
@@ -86,7 +84,6 @@ const Address = ({ data, updateData }) => {
           />
         </div>
 
-        {/* State */}
         <div>
           <label className="block font-medium mb-1">State / union territory *</label>
           <input

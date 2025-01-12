@@ -1,25 +1,54 @@
-import React from "react";
-import f11 from "../../assets/img/featured/f1/11.avif";
-import f12 from "../../assets/img/featured/f1/12.avif";
-import f13 from "../../assets/img/featured/f1/13.avif";
-import f14 from "../../assets/img/featured/f1/14.avif";
-
-import { FaHeart } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
 import { FaRegStar } from "react-icons/fa";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/effect-flip";
-
-import { EffectFlip, Autoplay, Pagination, Navigation } from "swiper/modules";
+import { MdCurrencyRupee } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import featuredTourIds from "../../assets/data/featuredData";
 
 const Feature = () => {
-  return (
-    <div className="px-10 mt-10 flex flex-col items-center ">
+  const [tours, setTours] = useState([]);
+  const [isToursLoading, setIsToursLoading] = useState(false);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchFeaturedTours = async () => {
+      if (isToursLoading) {
+        return;
+      }
+      try {
+        setIsToursLoading(true);
+        const serverUrl =
+          process.env.NODE_ENV === "development"
+            ? `${import.meta.env.VITE_API_DEVELOPMENT_URL}/tour/gettoursbyids`
+            : `${import.meta.env.VITE_API_PRODUCTION_URL}/tour/gettoursbyids`;
+
+        const response = await fetch(serverUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ tourIds: featuredTourIds }),
+        });
+
+        const responseData = await response.json();
+        if (responseData.success) {
+          setTours(responseData.tours);
+        }
+      } catch (error) {
+        console.error("Error fetching featured tours:", error.message);
+      } finally {
+        setIsToursLoading(false);
+      }
+    };
+
+    fetchFeaturedTours();
+  }, []);
+
+  if (isToursLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="px-10 mt-10 flex flex-col items-center">
       <div className="flex">
         <h1 className="text-3xl max-md:text-xl text-white px-5 py-3 rounded-lg bg-primarycolor flex">
           Our Featured Tour
@@ -27,414 +56,53 @@ const Feature = () => {
       </div>
 
       <ul className="w-full flex flex-wrap items-center justify-center mt-5">
-      
-
-      <li className="bg-white px-3 m-2 cursor-pointer flex flex-col justify-center items-center shadow-md rounded-lg">
-       <div className="w-full flex justify-between ">
-        <div className="relative top-10 left-3  z-10 flex items-center justify-center space-x-1 bg-white rounded-full px-2"><FaRegStar size={15} color="black" /><span className="text-black text-sm">4.6</span></div>
-        <FaHeart size={25} className=" text-black opacity-70 z-10 top-10 right-5 relative" />
-        </div>
-        <Swiper
-          centeredSlides={true}
-          grabCursor={true}
-          slidesPerView={"auto"}
-          pagination={{
-            dynamicBullets: true,
-          }}
-          navigation={true}
-          effect={"flip"}
-          modules={[EffectFlip, Pagination, Navigation]}
-          className="flex h-64 w-72" // Define consistent height and width
-        >
-          <SwiperSlide className="flex items-center justify-center">
-            <img
-              src={f11}
-              alt="Destination 1"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f12}
-              alt="Destination 2"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f13}
-              alt="Destination 3"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f14}
-              alt="Destination 4"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-        </Swiper>
-        <h3 className="font-semibold text-dark-1">Guest house in Siridao</h3>
-        <h3 className="text-sm text-gray-500">Raia The Beach House</h3>
-      </li>
-
-      <li className="bg-white px-3 m-2 cursor-pointer flex flex-col justify-center items-center shadow-md rounded-lg">
-       <div className="w-full flex justify-between ">
-        <div className="relative top-10 left-3  z-10 flex items-center justify-center space-x-1 bg-white rounded-full px-2"><FaRegStar size={15} color="black" /><span className="text-black text-sm">4.6</span></div>
-        <FaHeart size={25} className=" text-black opacity-70 z-10 top-10 right-5 relative" />
-        </div>
-        <Swiper
-          centeredSlides={true}
-          grabCursor={true}
-          slidesPerView={"auto"}
-          pagination={{
-            dynamicBullets: true,
-          }}
-          navigation={true}
-          effect={"flip"}
-          modules={[EffectFlip, Pagination, Navigation]}
-          className="flex h-64 w-72" // Define consistent height and width
-        >
-          <SwiperSlide className="flex items-center justify-center">
-            <img
-              src={f11}
-              alt="Destination 1"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f12}
-              alt="Destination 2"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f13}
-              alt="Destination 3"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f14}
-              alt="Destination 4"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-        </Swiper>
-        <h3 className="font-semibold text-dark-1">Guest house in Siridao</h3>
-        <h3 className="text-sm text-gray-500">Raia The Beach House</h3>
-      </li>
-
-      <li className="bg-white px-3 m-2 cursor-pointer flex flex-col justify-center items-center shadow-md rounded-lg">
-       <div className="w-full flex justify-between ">
-        <div className="relative top-10 left-3  z-10 flex items-center justify-center space-x-1 bg-white rounded-full px-2"><FaRegStar size={15} color="black" /><span className="text-black text-sm">4.6</span></div>
-        <FaHeart size={25} className=" text-black opacity-70 z-10 top-10 right-5 relative" />
-        </div>
-        <Swiper
-          centeredSlides={true}
-          grabCursor={true}
-          slidesPerView={"auto"}
-          pagination={{
-            dynamicBullets: true,
-          }}
-          navigation={true}
-          effect={"flip"}
-          modules={[EffectFlip, Pagination, Navigation]}
-          className="flex h-64 w-72" // Define consistent height and width
-        >
-          <SwiperSlide className="flex items-center justify-center">
-            <img
-              src={f11}
-              alt="Destination 1"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f12}
-              alt="Destination 2"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f13}
-              alt="Destination 3"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f14}
-              alt="Destination 4"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-        </Swiper>
-        <h3 className="font-semibold text-dark-1">Guest house in Siridao</h3>
-        <h3 className="text-sm text-gray-500">Raia The Beach House</h3>
-      </li>
-
-      <li className="bg-white px-3 m-2 cursor-pointer flex flex-col justify-center items-center shadow-md rounded-lg">
-       <div className="w-full flex justify-between ">
-        <div className="relative top-10 left-3  z-10 flex items-center justify-center space-x-1 bg-white rounded-full px-2"><FaRegStar size={15} color="black" /><span className="text-black text-sm">4.6</span></div>
-        <FaHeart size={25} className=" text-black opacity-70 z-10 top-10 right-5 relative" />
-        </div>
-        <Swiper
-          centeredSlides={true}
-          grabCursor={true}
-          slidesPerView={"auto"}
-          pagination={{
-            dynamicBullets: true,
-          }}
-          navigation={true}
-          effect={"flip"}
-          modules={[EffectFlip, Pagination, Navigation]}
-          className="flex h-64 w-72" // Define consistent height and width
-        >
-          <SwiperSlide className="flex items-center justify-center">
-            <img
-              src={f11}
-              alt="Destination 1"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f12}
-              alt="Destination 2"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f13}
-              alt="Destination 3"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f14}
-              alt="Destination 4"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-        </Swiper>
-        <h3 className="font-semibold text-dark-1">Guest house in Siridao</h3>
-        <h3 className="text-sm text-gray-500">Raia The Beach House</h3>
-      </li>
-
-      <li className="bg-white px-3 m-2 cursor-pointer flex flex-col justify-center items-center shadow-md rounded-lg">
-       <div className="w-full flex justify-between ">
-        <div className="relative top-10 left-3  z-10 flex items-center justify-center space-x-1 bg-white rounded-full px-2"><FaRegStar size={15} color="black" /><span className="text-black text-sm">4.6</span></div>
-        <FaHeart size={25} className=" text-black opacity-70 z-10 top-10 right-5 relative" />
-        </div>
-        <Swiper
-          centeredSlides={true}
-          grabCursor={true}
-          slidesPerView={"auto"}
-          pagination={{
-            dynamicBullets: true,
-          }}
-          navigation={true}
-          effect={"flip"}
-          modules={[EffectFlip, Pagination, Navigation]}
-          className="flex h-64 w-72" // Define consistent height and width
-        >
-          <SwiperSlide className="flex items-center justify-center">
-            <img
-              src={f11}
-              alt="Destination 1"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f12}
-              alt="Destination 2"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f13}
-              alt="Destination 3"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f14}
-              alt="Destination 4"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-        </Swiper>
-        <h3 className="font-semibold text-dark-1">Guest house in Siridao</h3>
-        <h3 className="text-sm text-gray-500">Raia The Beach House</h3>
-      </li>
-
-      <li className="bg-white px-3 m-2 cursor-pointer flex flex-col justify-center items-center shadow-md rounded-lg">
-       <div className="w-full flex justify-between ">
-        <div className="relative top-10 left-3  z-10 flex items-center justify-center space-x-1 bg-white rounded-full px-2"><FaRegStar size={15} color="black" /><span className="text-black text-sm">4.6</span></div>
-        <FaHeart size={25} className=" text-black opacity-70 z-10 top-10 right-5 relative" />
-        </div>
-        <Swiper
-          centeredSlides={true}
-          grabCursor={true}
-          slidesPerView={"auto"}
-          pagination={{
-            dynamicBullets: true,
-          }}
-          navigation={true}
-          effect={"flip"}
-          modules={[EffectFlip, Pagination, Navigation]}
-          className="flex h-64 w-72" // Define consistent height and width
-        >
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f11}
-              alt="Destination 1"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f12}
-              alt="Destination 2"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f13}
-              alt="Destination 3"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f14}
-              alt="Destination 4"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-        </Swiper>
-        <h3 className="font-semibold text-dark-1">Guest house in Siridao</h3>
-        <h3 className="text-sm text-gray-500">Raia The Beach House</h3>
-      </li>
-
-      <li className="bg-white px-3 m-2 cursor-pointer flex flex-col justify-center items-center shadow-md rounded-lg">
-       <div className="w-full flex justify-between ">
-        <div className="relative top-10 left-3  z-10 flex items-center justify-center space-x-1 bg-white rounded-full px-2"><FaRegStar size={15} color="black" /><span className="text-black text-sm">4.6</span></div>
-        <FaHeart size={25} className=" text-black opacity-70 z-10 top-10 right-5 relative" />
-        </div>
-        <Swiper
-          centeredSlides={true}
-          grabCursor={true}
-          slidesPerView={"auto"}
-          pagination={{
-            dynamicBullets: true,
-          }}
-          navigation={true}
-          effect={"flip"}
-          modules={[EffectFlip, Pagination, Navigation]}
-          className="flex h-64 w-72" // Define consistent height and width
-        >
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f11}
-              alt="Destination 1"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f12}
-              alt="Destination 2"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f13}
-              alt="Destination 3"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f14}
-              alt="Destination 4"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-        </Swiper>
-        <h3 className="font-semibold text-dark-1">Guest house in Siridao</h3>
-        <h3 className="text-sm text-gray-500">Raia The Beach House</h3>
-      </li>
-
-      <li className="bg-white px-3 m-2 cursor-pointer flex flex-col justify-center items-center shadow-md rounded-lg">
-       <div className="w-full flex justify-between ">
-        <div className="relative top-10 left-3  z-10 flex items-center justify-center space-x-1 bg-white rounded-full px-2"><FaRegStar size={15} color="black" /><span className="text-black text-sm">4.6</span></div>
-        <FaHeart size={25} className=" text-black opacity-70 z-10 top-10 right-5 relative" />
-        </div>
-        <Swiper
-          centeredSlides={true}
-          grabCursor={true}
-          slidesPerView={"auto"}
-          pagination={{
-            dynamicBullets: true,
-          }}
-          navigation={true}
-          effect={"flip"}
-          modules={[EffectFlip, Pagination, Navigation]}
-          className="flex h-64 w-72" // Define consistent height and width
-        >
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f11}
-              alt="Destination 1"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f12}
-              alt="Destination 2"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f13}
-              alt="Destination 3"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-          <SwiperSlide className="flex items-center justify-center ">
-            <img
-              src={f14}
-              alt="Destination 4"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </SwiperSlide>
-        </Swiper>
-        <h3 className="font-semibold text-dark-1">Guest house in Siridao</h3>
-        <h3 className="text-sm text-gray-500">Raia The Beach House</h3>
-      </li>
-
-      
-      
-
+        {tours.length === 0 ? (
+          <h1 className="text-xl">No featured tours available</h1>
+        ) : (
+          tours.map((tour) => (
+            <li
+              key={tour._id}
+              onClick={() => navigate(`/viewtour?id=${tour._id}`)}
+              className="rounded-md list-none relative shadow-shadow-2 m-2 cursor-pointer w-64"
+            >
+              <div className="relative">
+                <img
+                  src={tour.coverPhoto}
+                  alt={tour.title}
+                  className="h-64 w-64 object-cover bg-gray-500 rounded-t-lg"
+                />
+                <div className="absolute top-2 left-2 flex items-center space-x-1 bg-white rounded-full px-2 py-1 z-10">
+                  <FaRegStar size={15} color="black" />
+                  <span className="text-black text-sm">
+                    {tour.rating
+                      ? (
+                          (tour.rating.cleanliness +
+                            tour.rating.accuracy +
+                            tour.rating.communication +
+                            tour.rating.location +
+                            tour.rating.value) / 5
+                        ).toFixed(1)
+                      : "N/A"}
+                  </span>
+                </div>
+              </div>
+              <div className="p-3">
+                <h2 className="font-semibold text-dark-1 truncate">
+                  {tour.title}
+                </h2>
+                <h3 className="text-sm truncate">
+                  {tour.address.city}, {tour.address.state}
+                </h3>
+                <div className="flex items-center">
+                  <MdCurrencyRupee size={20} />
+                  <h3 className="font-semibold">{tour.price.adult}</h3>
+                  <h3 className="ml-2">night</h3>
+                </div>
+              </div>
+            </li>
+          ))
+        )}
       </ul>
-
-      
     </div>
   );
 };

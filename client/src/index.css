@@ -18,6 +18,16 @@ body {
   background-color: #ffffff;
 }
 
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
 pre {
   font-family: "Poppins", sans-serif;
 }

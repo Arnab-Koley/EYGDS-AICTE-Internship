@@ -4,6 +4,7 @@ import { AuthContext } from "../Context/AuthContext";
 import { useParams } from "react-router-dom";
 import Navbar from "../Components/Nav/Navbar";
 import Sidebar from "../Components/Nav/Sidebar";
+import Footer from "../Components/Nav/Footer";
 import Home from "./Home";
 import Account from "./Account";
 import Wishlist from "./Wishlist";
@@ -220,7 +221,7 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
       />
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 w-full z-30"
+          className="fixed inset-0 bg-black bg-opacity-50 w-full z-40"
           onClick={toggleSidebar}
         ></div>
       )}
@@ -234,6 +235,7 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
         setPopupMsg={setPopupMsg}
         />
         {renderComponent()}
+        {/* <Footer/> */}
       </div>
     </div>
   );

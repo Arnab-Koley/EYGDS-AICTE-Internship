@@ -91,7 +91,7 @@ const Navbar = ({
   };
 
   return (
-    <div className="h-16 shadow-md flex items-center justify-between w-full px-5 bg-white top-0 sticky z-20">
+    <div className="h-16 shadow-md flex items-center justify-between w-full px-5 bg-white top-0 sticky z-30">
       {showHostPopup && (
         <HostPopup msg={popupMsg} onClose={() => setShowHostPopup(false)} />
       )}

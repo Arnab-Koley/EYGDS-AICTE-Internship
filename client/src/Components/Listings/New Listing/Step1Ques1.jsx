@@ -3,20 +3,18 @@ import geographyOptions from "../../../assets/data/geographydData";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
 const Step1Ques1 = ({ data, updateData, handleNavigation }) => {
-  const selectedGeographies = data.geography || []; // Use the persisted geography from the parent state or an empty array
+  const selectedGeographies = data.geography || []; 
 
   const handleToggleGeography = (geography) => {
     let updatedGeographies;
 
     if (selectedGeographies.includes(geography)) {
-      // If geography is already selected, remove it
       updatedGeographies = selectedGeographies.filter((item) => item !== geography);
     } else {
-      // Otherwise, add it to the selected list
       updatedGeographies = [...selectedGeographies, geography];
     }
 
-    updateData("geography", updatedGeographies); // Update the parent state with the new array
+    updateData("geography", updatedGeographies); 
   };
 
   return (
@@ -62,7 +60,7 @@ const Step1Ques1 = ({ data, updateData, handleNavigation }) => {
               ? "bg-primarycolor text-white cursor-pointer"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
-          disabled={selectedGeographies.length === 0} // Disable button if no option is selected
+          disabled={selectedGeographies.length === 0}
         >
           Next
         </button>
