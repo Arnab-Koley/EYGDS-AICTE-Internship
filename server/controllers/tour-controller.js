@@ -3,7 +3,7 @@ const Reservation = require("../models/reservation-model");
 
 const getAllTours = async (req, res, next) => {
   try {
-    const tours = await Listing.find({ status: { $ne: "hidden" } });
+    const tours = await Listing.find({ status: { $ne: "Hidden" } });
 
     res.status(200).json({
       success: true,
