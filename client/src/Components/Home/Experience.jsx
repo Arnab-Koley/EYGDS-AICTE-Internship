@@ -9,12 +9,12 @@ const Experience = () => {
 
     return (
         <div className="py-20">
-            <h1 className="text-4xl font-bold text-center mb-10">Our Achievements</h1>
+            <h1 className="text-4xl font-bold text-center text-dark-1 mb-10 max-sm:text-3xl">Our Achievements</h1>
             <div className="flex flex-col md:flex-row justify-around items-center max-w-4xl mx-auto space-y-10 md:space-y-0">
                 
                 <ScrollTrigger onEnter={() => setExperienceOn(true)} onExit={() => setExperienceOn(false)}>
                     <div className="text-center">
-                        <h2 className="text-5xl font-bold text-blue-500">
+                        <h2 className="text-4xl font-bold text-orange-500">
                             <CountUp start={0} end={10} duration={4} delay={0} />+
                         </h2>
                         <p className="text-xl text-gray-700 mt-2">Years of Experience</p>
@@ -23,7 +23,7 @@ const Experience = () => {
 
                 <ScrollTrigger onEnter={() => setCustomersOn(true)} onExit={() => setCustomersOn(false)}>
                     <div className="text-center">
-                        <h2 className="text-5xl font-bold text-green-500">
+                        <h2 className="text-4xl font-bold text-green-600">
                             <CountUp start={0} end={10000} duration={4} delay={0} />+
                         </h2>
                         <p className="text-xl text-gray-700 mt-2">Customers Served</p>
@@ -32,7 +32,7 @@ const Experience = () => {
 
                 <ScrollTrigger onEnter={() => setHostsOn(true)} onExit={() => setHostsOn(false)}>
                     <div className="text-center">
-                        <h2 className="text-5xl font-bold text-purple-500">
+                        <h2 className="text-4xl font-bold text-blue-600">
                             <CountUp start={0} end={5000} duration={4} delay={0} />+
                         </h2>
                         <p className="text-xl text-gray-700 mt-2">Hosts</p>
