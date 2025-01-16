@@ -42,10 +42,19 @@ const Contact = () => {
         />
       </div>
 
-      <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-8">
-        <h2 className="text-2xl font-bold text-primarycolor mb-6 text-center">
+      <h2 className="text-2xl font-bold text-primarycolor text-center">
           Contact Us
-        </h2>
+      </h2>
+
+      <p className="text-gray-700 font-semibold mt-2 text-center">
+          Email: deshdekho.contact@gmail.com
+        </p>
+        <p className="text-gray-700 font-semibold text-center">
+          Address: Sheakhala, Hooghly, West Bengal-712706
+        </p>
+
+      <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg border-2  p-8 mt-5">
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-700 font-semibold mb-2">
@@ -82,7 +91,7 @@ const Contact = () => {
               value={formData.message}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primarycolor"
-              rows="5"
+              rows="4"
               placeholder="Write your message"
             ></textarea>
           </div>

@@ -37,7 +37,7 @@ const AuthContextProvider = ({ children }) => {
       }
     } else {
       const isAuthRoute = window.location.pathname.startsWith("/auth");
-      const isPublicRoute = ["/home", "/tour", "/viewtour"].includes(
+      const isPublicRoute = ["/home", "/tour", "/viewtour", "/privacy-policy", "/terms&conditions", "/contact"].includes(
         window.location.pathname
       );
 

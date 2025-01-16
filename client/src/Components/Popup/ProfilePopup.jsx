@@ -7,14 +7,18 @@ const ProfilePopup = (props) => {
     const { auth, logout } = useContext(AuthContext);
     const navigate = useNavigate();
   return (
-    <div className="absolute right-0 mt-5 w-48 bg-white rounded-md text-sm z-10   shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px]">
+    <div className="absolute right-0 mt-5 w-48 rounded-md text-sm z-10 select-none">
       <ul>
+        <div className='bg-white rounded-md border-2 shadow-md'>
         <li className="p-3 hover:bg-gray-100 cursor-pointer flex" onClick={()=>{props.setShowProfileMenu(!props.showProfileMenu); navigate('/account')}}>
           Account
         </li>
         <li className="p-3 hover:bg-gray-100 cursor-pointer flex" onClick={()=>{props.setShowProfileMenu(!props.showProfileMenu); navigate('/notification')}}>
           Notification
         </li>
+        </div>
+
+        <div className="bg-white rounded-md border-2 shadow-md my-2">
         <li className="p-3 hover:bg-gray-100 cursor-pointer flex" onClick={()=>{props.setShowProfileMenu(!props.showProfileMenu); navigate('/contact')}}>
           Contact Us
         </li>
@@ -27,9 +31,9 @@ const ProfilePopup = (props) => {
         <li className="p-3 hover:bg-gray-100 cursor-pointer flex" onClick={()=>{props.setShowProfileMenu(!props.showProfileMenu); navigate('/help')}}>
           Help Center
         </li>
-      
-        <div className='w-full h-[1px] bg-gray-400'></div>
-        <li className="p-3 hover:bg-red-600 hover:text-white cursor-pointer text-red-600 font-semibold space-x-2 flex items-center rounded-b-md" onClick={logout}>
+        </div>
+
+        <li className="p-3 hover:bg-red-600 hover:border-red-600 bg-white hover:text-white cursor-pointer text-red-600 font-semibold space-x-2 flex items-center rounded-md border-2 shadow-md" onClick={logout}>
         <RiLogoutCircleLine size={20} />
           <span>Logout</span>
         </li>
