@@ -7,7 +7,7 @@ import Footer from "../Components/Nav/Footer"
 
 const Home = () => {
   return (
-    <div className="pb-10">
+    <div className="">
       <Intro />
       <Service />
       <Feature />
