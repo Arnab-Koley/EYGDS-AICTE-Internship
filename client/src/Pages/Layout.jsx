@@ -24,6 +24,7 @@ import MyTours from "../Components/Tour/MyTours";
 import ViewMyTour from "../Components/Tour/ViewMyTour";
 import Help from "./Help";
 import ViewMyReservation from "../Components/Reservations/ViewMyReservation";
+import Payment from "./Payment";
 
 const Layout = ({ sidebarOpen, toggleSidebar }) => {
   const { auth } = useContext(AuthContext);
@@ -210,6 +211,8 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
         return <MyTours />;
       case "viewmytour":
         return <ViewMyTour />;
+      case "payment":
+        return <Payment/>
       case "help":
         return <Help/>;
       default:

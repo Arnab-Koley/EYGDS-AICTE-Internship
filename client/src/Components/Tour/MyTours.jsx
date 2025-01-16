@@ -71,7 +71,7 @@ const MyTours = () => {
     <div className="p-5">
       <h1 className="text-2xl text-primarycolor text-center font-bold">My Tours</h1>
       <div className="flex justify-center gap-3 flex-wrap mt-5">
-        {["All", "Pending", "Approved", "Rejected", "Checked In", "Checked Out"].map((filter) => (
+        {["All", "Pending", "Approved", "Rejected", "Paid", "Checked In", "Checked Out"].map((filter) => (
           <div
             key={filter}
             className={`border-2 px-5 py-1 rounded-full cursor-pointer ${

@@ -10,6 +10,7 @@ const listingroute = require('./routes/listing-route')
 const tourroute = require('./routes/tour-route');
 const reviewroute = require('./routes/review-route');
 const reservationroute = require('./routes/reservation-route');
+const transactionroute = require('./routes/transaction-route')
 
 
 const app = express();
@@ -35,6 +36,7 @@ app.use('/api/listing',listingroute);
 app.use('/api/tour',tourroute);
 app.use('/api/review',reviewroute);
 app.use('/api/reservation',reservationroute);
+app.use('/api/transaction',transactionroute);
 
 
 app.use(errorHandler);

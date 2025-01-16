@@ -221,7 +221,7 @@ const listingSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "hidden",
+      default: "Hidden",
     },
     statusMsg: {
       type: String,
