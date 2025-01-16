@@ -15,6 +15,15 @@ const ProfilePopup = (props) => {
         <li className="p-3 hover:bg-gray-100 cursor-pointer flex" onClick={()=>{props.setShowProfileMenu(!props.showProfileMenu); navigate('/notification')}}>
           Notification
         </li>
+        <li className="p-3 hover:bg-gray-100 cursor-pointer flex" onClick={()=>{props.setShowProfileMenu(!props.showProfileMenu); navigate('/contact')}}>
+          Contact Us
+        </li>
+        <li className="p-3 hover:bg-gray-100 cursor-pointer flex" onClick={()=>{props.setShowProfileMenu(!props.showProfileMenu); navigate('/privacy-policy')}}>
+        Privacy
+        </li>
+        <li className="p-3 hover:bg-gray-100 cursor-pointer flex" onClick={()=>{props.setShowProfileMenu(!props.showProfileMenu); navigate('/terms&conditions')}}>
+        Terms
+        </li>
         <li className="p-3 hover:bg-gray-100 cursor-pointer flex" onClick={()=>{props.setShowProfileMenu(!props.showProfileMenu); navigate('/help')}}>
           Help Center
         </li>

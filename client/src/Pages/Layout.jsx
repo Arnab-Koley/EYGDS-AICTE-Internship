@@ -25,6 +25,9 @@ import ViewMyTour from "../Components/Tour/ViewMyTour";
 import Help from "./Help";
 import ViewMyReservation from "../Components/Reservations/ViewMyReservation";
 import Payment from "./Payment";
+import Contact from "./Contact";
+import PrivacyPolicy from "./PrivacyPolicy";
+import TermsAndConditions from "./TermsAndConditions";
 
 const Layout = ({ sidebarOpen, toggleSidebar }) => {
   const { auth } = useContext(AuthContext);
@@ -147,6 +150,12 @@ const Layout = ({ sidebarOpen, toggleSidebar }) => {
     switch (section) {
       case "home":
         return <Home />;
+      case "contact":
+        return <Contact />
+      case "privacy-policy":
+        return <PrivacyPolicy />
+      case "terms&conditions":
+        return <TermsAndConditions />
       case "host":
         return (
           <ProtectedHost user={user}>
