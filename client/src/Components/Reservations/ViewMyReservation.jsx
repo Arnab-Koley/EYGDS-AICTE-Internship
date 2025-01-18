@@ -212,6 +212,36 @@ const ViewMyReservation = () => {
               </button>
             </div>
           )}
+          {reservation.status === "Paid" && (
+            <div className="flex flex-col mt-5 justify-center items-center">
+              <h3>Please confirm if the guest has checked in</h3>
+              <h4 className="text-sm text-red-600 font-semibold">( NOTE: This action is irreversible )</h4>
+              <button
+                onClick={() => handleStatusChange("Checked In")}
+                className={`${
+                  isStatusChanging ? "bg-gray-400" : "bg-primarycolor"
+                } rounded-md p-3 text-white mt-2`}
+                disabled={isStatusChanging}
+              >
+                 Confirm Check-In
+              </button>
+            </div>
+          )}
+          {reservation.status === "Checked In" && (
+            <div className="flex flex-col mt-5 justify-center items-center">
+              <h3>Please confirm if the guest has checked out</h3>
+              <h4 className="text-sm text-red-600 font-semibold">( NOTE: This action is irreversible )</h4>
+              <button
+                onClick={() => handleStatusChange("Checked Out")}
+                className={`${
+                  isStatusChanging ? "bg-gray-400" : "bg-primarycolor"
+                } rounded-md p-3 text-white mt-2`}
+                disabled={isStatusChanging}
+              >
+                 Confirm Check-Out
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <p className="text-center text-lg text-gray-500">Reservation not found</p>

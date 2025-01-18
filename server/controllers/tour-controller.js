@@ -1,6 +1,7 @@
 const Listing = require("../models/listing-model");
 const Reservation = require("../models/reservation-model");
 
+
 const getAllTours = async (req, res, next) => {
   try {
     const tours = await Listing.find({ status: { $ne: "Hidden" } });
@@ -97,10 +98,13 @@ const getMyTourById = async (req, res, next) => {
   }
 };
 
+
+
 module.exports = {
   getAllTours,
   getTourById,
   getToursByIds,
   getMyTours,
   getMyTourById,
+
 };

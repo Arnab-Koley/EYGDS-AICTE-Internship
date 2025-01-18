@@ -6,6 +6,7 @@ import { formatDate } from "../../Utils/formatDate";
 
 import { MdDelete } from "react-icons/md";
 import { MdOutlinePayment } from "react-icons/md";
+import TourGuide from "./TourGuide";
 
 const ViewMyTour = () => {
   const location = useLocation();
@@ -513,6 +514,9 @@ const ViewMyTour = () => {
               )}
             </div>
           </div>
+
+
+            <TourGuide tourId={tour.tourId} checkInDate={tour.checkInDate} checkOutDate={tour.checkOutDate} />
 
           {tour.status === "Pending" && (
             <div className="flex mt-5 justify-center">

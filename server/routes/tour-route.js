@@ -9,4 +9,5 @@ router.post('/gettoursbyids',tourcontroller.getToursByIds);
 router.get('/getmytours',verifyToken,tourcontroller.getMyTours);
 router.post('/getmytourbyid',verifyToken,tourcontroller.getMyTourById);
 
+
 module.exports = router;
