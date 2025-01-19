@@ -222,6 +222,7 @@ const TourGuide = ({ tourId, checkInDate, checkOutDate }) => {
     return <div>Loading...</div>;
   }
 
+  
   if (!tour) {
     return <div>No tour data available.</div>;
   }
